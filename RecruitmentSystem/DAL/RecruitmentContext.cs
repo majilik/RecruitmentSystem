@@ -14,7 +14,7 @@ namespace RecruitmentSystem.DAL
         public DbSet<Role> Roles { get; set; }
         public DbSet<Person> Persons { get; set; }
         public DbSet<CompetenceProfile> CompetenceProfiles { get; set; }
-        public DbSet<Competence> Competencies { get; set; }
+        public DbSet<Competence> Competences { get; set; }
         public DbSet<Availability> Availabilites { get; set; }
 
         public RecruitmentContext() : base("RecruitmentContext")
