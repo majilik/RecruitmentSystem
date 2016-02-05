@@ -40,13 +40,13 @@ namespace RecruitmentSystem.DAL
                 new Competence{Name="Korvgrillning"},
                 new Competence{Name="Karuselldrift"}
             };
-            competence.ForEach(c => context.Competencies.Add(c));
+            competence.ForEach(c => context.Competences.Add(c));
             context.SaveChanges();
 
             var competenceProfile = new List<CompetenceProfile>
             {
-                new CompetenceProfile{Person=context.Persons.Where(p => p.Id == 2).Single(), Competence=context.Competencies.Where(c => c.Id == 1).Single(), YearsOfExperience=3.5M},
-                new CompetenceProfile{Person=context.Persons.Where(p => p.Id == 2).Single(), Competence=context.Competencies.Where(c => c.Id == 2).Single(), YearsOfExperience=2.0M},
+                new CompetenceProfile{Person=context.Persons.Where(p => p.Id == 2).Single(), Competence=context.Competences.Where(c => c.Id == 1).Single(), YearsOfExperience=3.5M},
+                new CompetenceProfile{Person=context.Persons.Where(p => p.Id == 2).Single(), Competence=context.Competences.Where(c => c.Id == 2).Single(), YearsOfExperience=2.0M},
             };
             competenceProfile.ForEach(cp => context.CompetenceProfiles.Add(cp));
             context.SaveChanges();
