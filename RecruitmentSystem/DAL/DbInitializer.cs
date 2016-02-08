@@ -3,10 +3,16 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 
 namespace RecruitmentSystem.DAL
 {
+    /// <summary>
+    /// DbInitializer is implicitly an implementation of IDatabaseInitializer
+    /// by extending DropCreateDatabaseIfModelChanges<TContext>, where TContext
+    /// is RecruitmentContext. This class overrides the Seed method of its
+    /// parent and provides the data that should replace the dropped data of
+    /// the database specified by RecruitmentContext.
+    /// </summary>
     public class DbInitializer : DropCreateDatabaseIfModelChanges<RecruitmentContext>
     {
         protected override void Seed(RecruitmentContext context)
