@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace RecruitmentSystem.Models
 {
@@ -13,6 +8,7 @@ namespace RecruitmentSystem.Models
         public virtual Person Person { get; set; }
         public virtual Competence Competence { get; set; }
         public decimal YearsOfExperience { get; set; }
+
         [Timestamp]
         public byte[] Timestamp { get; set; }
     }
