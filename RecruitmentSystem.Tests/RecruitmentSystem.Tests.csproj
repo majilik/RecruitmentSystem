@@ -97,7 +97,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AuthenticationControllerTest.cs" />
-    <Compile Include="DAL\PersonRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
     <Compile Include="Security\SecurityManagerTest.cs" />
@@ -113,6 +112,9 @@
       <Project>{5AEECBBA-2E1B-4921-9B8F-1471EEE90628}</Project>
       <Name>RecruitmentSystem</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DAL\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

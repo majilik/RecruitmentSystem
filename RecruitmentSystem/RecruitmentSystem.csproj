@@ -165,12 +165,7 @@
     <Compile Include="Security\PersonAuthorizationAttribute.cs" />
     <Compile Include="DAL\Authorization\UserManager.cs" />
     <Compile Include="DAL\DbInitializer.cs" />
-    <Compile Include="DAL\Repositories\GenericRepository.cs" />
-    <Compile Include="DAL\Interfaces\IGenericRepository.cs" />
-    <Compile Include="DAL\Interfaces\IPersonRepository.cs" />
     <Compile Include="DAL\RecruitmentContext.cs" />
-    <Compile Include="DAL\Repositories\PersonRepository.cs" />
-    <Compile Include="DAL\UnitOfWork.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -227,6 +222,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="DAL\Interfaces\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
