@@ -16,20 +16,19 @@ using RecruitmentSystem.Security;
 namespace RecruitmentSystem.Controllers
 {
     //TODO: Document this class in Architecture Document
-    [PersonAuthorization]
+    
     public class AuthenticationController : Controller
     {
+        //TODO: Is this needed here?
         private RecruitmentContext db = new RecruitmentContext();
 
         //TODO: Implement Login GET/POST here?
-
-        [AllowAnonymous]
+        
         public ActionResult Login()
         {
             return View();
         }
-
-        [AllowAnonymous]
+        
         [HttpPost]
         public ActionResult Login(LoginView loginView)
         {
@@ -49,31 +48,28 @@ namespace RecruitmentSystem.Controllers
             return View();
         }
 
-        [Authorize]
+        [PersonAuthorization]
         public ActionResult SignOut()
         {
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
         }
-
-        [AllowAnonymous]
+        
         public ActionResult Register()
         {
             return View();
         }
-
-        [AllowAnonymous]
+        
         [HttpPost]
-        public ActionResult Register(Person person)
+        public ActionResult Register(RegisterView registerView)
         {
             if (ModelState.IsValid)
             {
                 var um = new UserManager();
-                if (!um.IsUsernameInUse(person.Username))
+                if (!um.IsUsernameInUse(registerView.Username))
                 {
-                    um.AddUser(person);
-                    //TODO: When Login is implemented, redirect to login view here!
-                    return RedirectToAction("Index", "Home");
+                    um.AddUser(registerView);
+                    return RedirectToAction("Login", "Authentication");
                 }
                 else
                 {

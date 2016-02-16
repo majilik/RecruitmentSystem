@@ -18,12 +18,21 @@ namespace RecruitmentSystem.DAL.Authorization
         /// <summary>
         /// Adds a User to the system.
         /// </summary>
-        public void AddUser(Person person)
+        public void AddUser(RegisterView registerView)
         {
             using (RecruitmentContext db = new RecruitmentContext())
             {
-                person.Role = db.Roles.Where(role => role.Name.Equals(DEFAULT_ROLE_ON_CREATION)).Single();
-                person.Password = SecurityManager.HashPassword(person.Password);
+                Person person = new Person()
+                {
+                    Username = registerView.Username,
+                    Password = SecurityManager.HashPassword(registerView.Password),
+                    Email = registerView.Email,
+                    Name = registerView.Name,
+                    Surname = registerView.Surname,
+                    Ssn = registerView.Ssn,
+                    Role = db.Roles.Where(role => 
+                        role.Name.Equals(DEFAULT_ROLE_ON_CREATION)).Single()
+                };
                 db.Persons.Add(person);
                 db.SaveChanges();
             }
