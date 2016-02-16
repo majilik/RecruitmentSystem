@@ -1,4 +1,5 @@
 ﻿using RecruitmentSystem.Models;
+using RecruitmentSystem.Models.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,5 +58,17 @@ namespace RecruitmentSystem.DAL.Authorization
                     person.Role.Name.Equals(role)).Any();
             }
         }
+
+        public bool LoginCheck(LoginView loginView)
+        {
+            using(RecruitmentContext db = new RecruitmentContext())
+            {
+                string hash = db.Persons.Where(person => person.Username.Equals(loginView.Username)).Select(person => person.Password).Single();
+                return SecurityManager.checkPassword(loginView.Password, hash);
+
+            }
+        }
+
+
     }
 }
