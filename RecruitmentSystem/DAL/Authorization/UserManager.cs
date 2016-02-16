@@ -22,7 +22,7 @@ namespace RecruitmentSystem.DAL.Authorization
             using (RecruitmentContext db = new RecruitmentContext())
             {
                 person.Role = db.Roles.Where(role => role.Name.Equals(DEFAULT_ROLE_ON_CREATION)).Single();
-                person.Password = SecurityManager.PasswordHash(person.Password);
+                person.Password = SecurityManager.HashPassword(person.Password);
                 db.Persons.Add(person);
                 db.SaveChanges();
             }
@@ -57,7 +57,5 @@ namespace RecruitmentSystem.DAL.Authorization
                     person.Role.Name.Equals(role)).Any();
             }
         }
-
-
     }
 }

@@ -1,4 +1,5 @@
 ﻿using RecruitmentSystem.Models;
+using RecruitmentSystem.Security;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -27,7 +28,7 @@ namespace RecruitmentSystem.DAL
 
             var persons = new List<Person>
             {
-                new Person{Name="Greta", Surname="Borg", Username="borg", Password="w19nk23a", Role=context.Roles.Where(r => r.Id == 1).Single()},
+                new Person{Name="Greta", Surname="Borg", Username="borg", Password=SecurityManager.HashPassword("w19nk23a"), Role=context.Roles.Where(r => r.Id == 1).Single()},
                 new Person{Name="Per", Surname="Strand", Ssn="19671212-1211", Email="per@strand.kth.se", Role=context.Roles.Where(r => r.Id == 2).Single()}
             };
             persons.ForEach(p => context.Persons.Add(p));
