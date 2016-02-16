@@ -74,15 +74,19 @@ namespace RecruitmentSystem.Controllers
             if (ModelState.IsValid)
             {
                 var um = new UserManager();
-                if (!um.IsUsernameInUse(registerView.Username))
+                if(registerView.Password == registerView.PasswordVerify)
                 {
-                    um.AddUser(registerView);
-                    return RedirectToAction("Login", "Authentication");
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Username already in use.");
-                }
+                    if (!um.IsUsernameInUse(registerView.Username))
+                    {
+                        um.AddUser(registerView);
+                        return RedirectToAction("Login", "Authentication");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "Username already in use.");
+                    }
+                }else ModelState.AddModelError(string.Empty, "Passwords must be identical.");
+
             }
             return View();
         }

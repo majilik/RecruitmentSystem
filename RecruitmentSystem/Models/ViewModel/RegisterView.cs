@@ -8,14 +8,14 @@ namespace RecruitmentSystem.Models.ViewModel
     {
         public long Id { get; set; }
 
-        [Required(ErrorMessage = "*")]
+        [Required(ErrorMessage = "Name is required.")]
         [RegularExpression(@"^[\u00c0-\u01ffa-zA-Z'-]{2,}( [\u00c0-\u01ffa-zA-Z'-]{2,})*$",
             ErrorMessage = "Invalid characters in name!")]
         [StringLength(50, MinimumLength = 2,
             ErrorMessage = "Name must be between 2 and 50 characters!")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "*")]
+        [Required(ErrorMessage = "Surname is required.")]
         [RegularExpression(@"^[\u00c0-\u01ffa-zA-Z'-]{2,}$",
             ErrorMessage = "Invalid characters in surname!")]
         [StringLength(50, MinimumLength = 2,
@@ -35,11 +35,15 @@ namespace RecruitmentSystem.Models.ViewModel
         [Index(IsUnique = true)]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "*")]
+        [Required(ErrorMessage = "Password is required.")]
         [PasswordPropertyText]
         public string Password { get; set; }
 
-        [Required(ErrorMessage = "*")]
+        [Required(ErrorMessage = "Password must be verified.")]
+        [PasswordPropertyText]
+        public string PasswordVerify { get; set; }
+
+        [Required(ErrorMessage = "Username is required.")]
         [StringLength(30, MinimumLength = 1,
             ErrorMessage = "Please check that the entered username is between 1 and 30 characters long")]
         [Index(IsUnique = true)]
