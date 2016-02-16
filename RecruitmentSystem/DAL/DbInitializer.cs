@@ -14,7 +14,7 @@ namespace RecruitmentSystem.DAL
     /// parent and provides the data that should replace the dropped data of
     /// the database specified by RecruitmentContext.
     /// </summary>
-    public class DbInitializer : DropCreateDatabaseIfModelChanges<RecruitmentContext>
+    public class DbInitializer : DropCreateDatabaseAlways<RecruitmentContext>
     {
         protected override void Seed(RecruitmentContext context)
         {
