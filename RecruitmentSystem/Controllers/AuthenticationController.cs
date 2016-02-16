@@ -43,6 +43,14 @@ namespace RecruitmentSystem.Controllers
                         FormsAuthentication.SetAuthCookie(loginView.Username, false);
                         return RedirectToAction("Index", "Home");
                     }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "Wrong password.");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "User doesn't exist.");
                 }
             }
             return View();
@@ -73,7 +81,7 @@ namespace RecruitmentSystem.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Username already in use!");
+                    ModelState.AddModelError(string.Empty, "Username already in use.");
                 }
             }
             return View();

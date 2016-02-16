@@ -15,18 +15,18 @@ namespace RecruitmentSystem.Tests.Controllers
     public class SecurityManagerTest
     {
         [TestMethod]
-        public void PasswordHash()
+        public void HashPassword()
         {
             string test_one = "111";
             string test_two = "two2";
             string test_three = "three";
 
-            string result_one_a = SecurityManager.PasswordHash(test_one);
-            string result_one_b = SecurityManager.PasswordHash(test_one);
-            string result_two_a = SecurityManager.PasswordHash(test_two);
-            string result_two_b = SecurityManager.PasswordHash(test_two);
-            string result_three_a = SecurityManager.PasswordHash(test_three);
-            string result_three_b = SecurityManager.PasswordHash(test_three);
+            string result_one_a = SecurityManager.HashPassword(test_one);
+            string result_one_b = SecurityManager.HashPassword(test_one);
+            string result_two_a = SecurityManager.HashPassword(test_two);
+            string result_two_b = SecurityManager.HashPassword(test_two);
+            string result_three_a = SecurityManager.HashPassword(test_three);
+            string result_three_b = SecurityManager.HashPassword(test_three);
 
             Assert.AreNotEqual(result_one_a, test_one);
             Assert.AreEqual(result_one_a, result_one_b);

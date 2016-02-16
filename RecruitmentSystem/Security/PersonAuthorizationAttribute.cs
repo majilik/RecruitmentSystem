@@ -36,6 +36,7 @@ namespace RecruitmentSystem.Security
                     if (um.IsUserInRole(user, role))
                         return true;
                 }
+                return false;
             }
             return base.AuthorizeCore(httpContext);
         }
