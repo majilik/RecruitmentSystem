@@ -22,6 +22,14 @@ namespace RecruitmentSystem.Controllers
         //TODO: Implement Login GET/POST here?
 
         [AllowAnonymous]
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        
+
+        [AllowAnonymous]
         public ActionResult Register()
         {
             return View();
