@@ -192,6 +192,7 @@
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\ViewModel\LoginView.cs" />
+    <Compile Include="Models\ViewModel\RegisterView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\PasswordHash.cs" />
     <Compile Include="Security\PersonAuthenticationAttribute.cs" />

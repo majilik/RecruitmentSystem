@@ -37,7 +37,7 @@ namespace RecruitmentSystem.Security
                         return true;
                 }
             }
-            return httpContext.User.Identity.IsAuthenticated;
+            return base.AuthorizeCore(httpContext);
         }
 
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
