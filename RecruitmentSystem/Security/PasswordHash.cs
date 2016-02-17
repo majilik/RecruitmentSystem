@@ -8,13 +8,10 @@ using System.Security.Cryptography;
 namespace RecruitmentSystem.Security
 {
     /// <summary>
-    /// Salted password hashing with PBKDF2-SHA1.
-    /// Author: godtopus
-    /// Compatibility: TBD
+    /// Salted password hashing with PBKDF2-SHA56.
     /// </summary>
     public static class PasswordHash
     {
-        // The following constants may be changed without breaking existing hashes.
         private const int SaltByteSize = 32;
         private const int HashByteSize = 32;
         private const int Iterations = 10000;
@@ -23,7 +20,7 @@ namespace RecruitmentSystem.Security
         private const int SaltIndex = 1;
         private const int HashIndex = 2;
 
-        private static RNGCryptoServiceProvider CSPRNG = new RNGCryptoServiceProvider();
+        private static RNGCryptoServiceProvider _csprng = new RNGCryptoServiceProvider();
 
         /// <summary>
         /// Creates a salted PBKDF2 hash of the password, together with the
@@ -32,10 +29,16 @@ namespace RecruitmentSystem.Security
         /// </summary>
         /// <param name="password">The password to hash.</param>
         /// <returns>The hash of the password.</returns>
+        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="CryptographicException">
+        /// The system might not support this operation.</exception>
         public static string CreateHash(string password)
         {
+            if (string.IsNullOrWhiteSpace(password))
+                throw new ArgumentException("Argument must not be null or empty.");
+
             byte[] salt = new byte[SaltByteSize];
-            CSPRNG.GetBytes(salt);
+            _csprng.GetBytes(salt);
 
             byte[] hash = PBKDF2(password, salt, Iterations, HashByteSize);
 
@@ -50,12 +53,29 @@ namespace RecruitmentSystem.Security
         /// <param name="password">The password to check.</param>
         /// <param name="correctHash">A hash of the correct password.</param>
         /// <returns>True if the password is correct. False otherwise.</returns>
+        /// <exception cref="ArgumentException">Thrown if either argument is
+        /// null, empty or whitespace. Also thrown if <paramref name="correctHash"/>
+        /// is not on the form iterations$Base64.salt$Base64.hash.</exception>
         public static bool ValidatePassword(string password, string correctHash)
         {
+            if (string.IsNullOrWhiteSpace(password) | string.IsNullOrWhiteSpace(correctHash))
+                throw new ArgumentException("Argument must not be null or empty.");
+
             string[] split = correctHash.Split('$');
-            int iterations = Int32.Parse(split[IterationIndex]);
-            byte[] salt = Convert.FromBase64String(split[SaltIndex]);
-            byte[] hash = Convert.FromBase64String(split[HashIndex]);
+            if (split.Length != 3)
+                throw new ArgumentException("The hash was not properly formatted.");
+
+            uint iterations;
+            byte[] salt, hash;
+            try {
+                iterations = uint.Parse(split[IterationIndex]);
+                salt = Convert.FromBase64String(split[SaltIndex]);
+                hash = Convert.FromBase64String(split[HashIndex]);
+            } catch (Exception ex) when (ex is ArgumentException ||
+                ex is FormatException || ex is OverflowException)
+            {
+                throw new ArgumentException("Hash is not on the form iterations$Base64.salt$Base64.hash.", ex);
+            }
 
             byte[] testHash = PBKDF2(password, salt, iterations, hash.Length);
             return SlowEquals(hash, testHash);
@@ -66,15 +86,13 @@ namespace RecruitmentSystem.Security
         /// method is used so that password hashes cannot be extracted from
         /// on-line systems using a timing attack and then attacked off-line.
         /// </summary>
-        /// <param name="a">The first byte array.</param>
-        /// <param name="b">The second byte array.</param>
+        /// <param name="a">The first hash.</param>
+        /// <param name="b">The second hash.</param>
         /// <returns>True if both byte arrays are equal. False otherwise.</returns>
         private static bool SlowEquals(byte[] a, byte[] b)
         {
             uint diff = (uint) a.Length ^ (uint) b.Length;
             for (int i = 0; i < a.Length && i < b.Length; i++) diff |= (uint) (a[i] ^ b[i]);
-            Array.Clear(a, 0, a.Length);
-            Array.Clear(b, 0, b.Length);
             return diff == 0;
         }
 
@@ -86,7 +104,7 @@ namespace RecruitmentSystem.Security
         /// <param name="iterations">The PBKDF2 iteration count.</param>
         /// <param name="outputBytes">The length of the hash to generate, in bytes.</param>
         /// <returns>A hash of the password.</returns>
-        private static byte[] PBKDF2(string password, byte[] salt, int iterations, int outputBytes)
+        private static byte[] PBKDF2(string password, byte[] salt, uint iterations, int outputBytes)
         {
             Pkcs5S2ParametersGenerator gen = new Pkcs5S2ParametersGenerator(new Sha256Digest());
             gen.Init(PbeParametersGenerator.Pkcs5PasswordToBytes(password.ToCharArray()), salt, Iterations);
