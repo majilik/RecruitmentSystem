@@ -36,12 +36,12 @@ namespace RecruitmentSystem.Models.ViewModel
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Password is required.")]
-        [PasswordPropertyText]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
 
         [Required(ErrorMessage = "Password must be verified.")]
         [DisplayName("Verify Password")]
-        [PasswordPropertyText]
+        [DataType(DataType.Password)]
         public string PasswordVerify { get; set; }
 
         [Required(ErrorMessage = "Username is required.")]

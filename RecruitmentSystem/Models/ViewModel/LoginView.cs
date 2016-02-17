@@ -11,7 +11,7 @@ namespace RecruitmentSystem.Models.ViewModel
         public string Username{get; set;}
 
         [Required(ErrorMessage = "Please enter password.")]
-        [PasswordPropertyText]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
     }
 }
