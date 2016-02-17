@@ -1,6 +1,4 @@
-﻿
-
-namespace RecruitmentSystem.Security
+﻿namespace RecruitmentSystem.Security
 {
     //TODO: Document this class in Architecture Document
     public class SecurityManager
