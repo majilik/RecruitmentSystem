@@ -40,6 +40,7 @@ namespace RecruitmentSystem.Models.ViewModel
         public string Password { get; set; }
 
         [Required(ErrorMessage = "Password must be verified.")]
+        [DisplayName("Verify Password")]
         [PasswordPropertyText]
         public string PasswordVerify { get; set; }
 
