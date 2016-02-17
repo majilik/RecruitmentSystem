@@ -33,7 +33,7 @@ namespace RecruitmentSystem.Logging
         private bool _initialized = false;
 
         /// <summary>
-        /// 
+        /// A comma separated list of connection points. Not optional.
         /// </summary>
         [RequiredParameter]
         public string Node
@@ -43,50 +43,68 @@ namespace RecruitmentSystem.Logging
         }
 
         /// <summary>
-        /// 
+        /// The name of a Cassandra key space. Optional, default is "logging".
         /// </summary>
         [Advanced]
         public string KeySpace
         {
             get { return _keySpace; }
-            set { _keySpace = value.Trim(); }
+            set { _keySpace = string.IsNullOrEmpty(value.Trim()) ?
+                    "logging" : value.Trim() ;
+            }
         }
 
         /// <summary>
-        /// 
+        /// The name of a Cassandra column family. Optional, default is "log_entries".
         /// </summary>
         [Advanced]
         public string ColumnFamily
         {
             get { return _columnFamily; }
-            set { _columnFamily = value.Trim(); }
+            set { _columnFamily = string.IsNullOrEmpty(value.Trim()) ?
+                    "log_entries" : value.Trim();
+            }
         }
 
         /// <summary>
-        /// Determines how many copies of each record should be stored. Each
-        /// record is stored on a separate node.
+        /// Specifies how many copies of each record should be stored. Each
+        /// record is stored on a separate node. Optional, default is 1.
         /// </summary>
         [Advanced]
         public int Replication
         {
             get { return _replication; }
-            set { _replication = value; }
+            set { _replication = value < 0 ? 1 : value; }
         }
 
         /// <summary>
         /// Represents the time in seconds that a log entry should be
         /// persisted. A value of 0 will store the record indefinitely.
+        /// Optional, default is 0.
         /// </summary>
         [Advanced]
         public int Ttl
         {
             get { return _ttl; }
-            set { _ttl = value; }
+            set { _ttl = value < 0 ? 1 : value; }
         }
 
+        /// <summary>
+        /// Constructs an NLog Target, see
+        /// <see cref="https://github.com/NLog/NLog/wiki/Targets"/>. A connection
+        /// will be established to a Cassandra cluster specified by
+        /// <paramref name="nodes"/>. A session will be constructed to hold the
+        /// connections to the cluster nodes.
+        /// </summary>
+        /// <param name="nodes">A list of connection points.</param>
+        /// <param name="keySpace">The Cassandra key space name.</param>
+        /// <param name="columnFamily">The Cassandra column family name.</param>
+        /// <param name="replication">The number of nodes to replicate data on.</param>
+        /// <param name="ttl">The time in seconds that a log entry should be
+        /// persisted. A value of 0 stores it indefinitely.</param>
         public CassandraTarget(string[] nodes, string keySpace, string columnFamily, int replication, int? ttl)
         {
-            _nodes = nodes;
+            _nodes = Array.FindAll(nodes, s => !string.IsNullOrWhiteSpace(s));
             _keySpace = keySpace;
             _columnFamily = columnFamily;
             _replication = replication;
