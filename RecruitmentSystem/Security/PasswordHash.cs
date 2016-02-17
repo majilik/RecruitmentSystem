@@ -2,6 +2,7 @@
 using Org.BouncyCastle.Crypto.Digests;
 using Org.BouncyCastle.Crypto.Generators;
 using Org.BouncyCastle.Crypto.Parameters;
+using RecruitmentSystem.Extensions;
 using System;
 using System.Security.Cryptography;
 
@@ -34,8 +35,7 @@ namespace RecruitmentSystem.Security
         /// The system might not support this operation.</exception>
         public static string CreateHash(string password)
         {
-            if (string.IsNullOrWhiteSpace(password))
-                throw new ArgumentException("Argument must not be null or empty.");
+            password.ThrowIfNullOrWhiteSpace();
 
             byte[] salt = new byte[SaltByteSize];
             _csprng.GetBytes(salt);
@@ -58,8 +58,8 @@ namespace RecruitmentSystem.Security
         /// is not on the form iterations$Base64.salt$Base64.hash.</exception>
         public static bool ValidatePassword(string password, string correctHash)
         {
-            if (string.IsNullOrWhiteSpace(password) | string.IsNullOrWhiteSpace(correctHash))
-                throw new ArgumentException("Argument must not be null or empty.");
+            password.ThrowIfNullOrWhiteSpace();
+            correctHash.ThrowIfNullOrWhiteSpace();
 
             string[] split = correctHash.Split('$');
             if (split.Length != 3)
