@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace RecruitmentSystem.Models
 {
+    /// <summary>
+    /// Represents a time period during which a person is available.
+    /// </summary>
     public class Availability
     {
         public long Id { get; set; }

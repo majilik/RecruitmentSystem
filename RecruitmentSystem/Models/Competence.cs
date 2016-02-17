@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RecruitmentSystem.Models
 {
+    /// <summary>
+    /// Represents a competence area.
+    /// </summary>
     public class Competence
     {
         public long Id { get; set; }

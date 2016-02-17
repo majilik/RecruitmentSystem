@@ -2,6 +2,9 @@
 
 namespace RecruitmentSystem.Models
 {
+    /// <summary>
+    /// Represents a persons amount of experience for a specified competence area.
+    /// </summary>
     public class CompetenceProfile
     {
         public long Id { get; set; }

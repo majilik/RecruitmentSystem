@@ -4,10 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace RecruitmentSystem.Models
 {
     /// <summary>
-    /// This class represents a table in a database.
-    /// It is not dependent on any other entities.
-    /// The basic CRUD operations are supported via the class
-    /// RecruitmentContext.
+    /// Represents a role which gives certain privileges for this service.
     /// </summary>
     public class Role
     {
