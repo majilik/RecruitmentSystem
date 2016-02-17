@@ -19,12 +19,11 @@ namespace RecruitmentSystem
     public class MvcApplication : HttpApplication
     {
         private static NLog.Logger logger = LogManager.GetCurrentClassLogger();
-        private CassandraTarget _cassandraTarget =
-            new CassandraTarget(new string[] { "localhost" }, "logging", "log_entries", 1, null);
+        private CassandraTarget _cassandraTarget;
 
         protected void Application_Start()
         {
-            //CassandraLoggerSetup();
+            CassandraLoggerSetup();
 
             logger.Debug("Starting application");
             AreaRegistration.RegisterAllAreas();
@@ -35,12 +34,15 @@ namespace RecruitmentSystem
 
         protected void Application_Dispose()
         {
-            _cassandraTarget.Dispose();
+            if (_cassandraTarget != null) _cassandraTarget.Dispose();
         }
 
         private void CassandraLoggerSetup()
         {
             try {
+                _cassandraTarget = new CassandraTarget(
+                    new string[] { "localhost" }, "logging", "log_entries", 1, 0);
+
                 ConfigurationItemFactory.Default.Targets
                     .RegisterDefinition("Cassandra", typeof(CassandraTarget));
 
@@ -48,9 +50,14 @@ namespace RecruitmentSystem
                     .Add(new LoggingRule("*", LogLevel.Trace, _cassandraTarget));
 
                 LogManager.ReconfigExistingLoggers();
+            } catch (NoHostAvailableException ex)
+            {
+                logger.Error(ex, "Unable to connect to any of the provided"
+                    + " Cassandra nodes, proceeding with local file backup.");
             } catch (NotSupportedException ex)
             {
-                logger.Error(ex, "No Cassandra nodes available, proceeding with local file backup.");
+                logger.Error(ex, "Unable to add logging rule for Cassandra"
+                    + " target, proceeding with local file backup.");
             }
         }
     }

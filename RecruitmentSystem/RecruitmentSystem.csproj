@@ -178,6 +178,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Extensions\ArgumentCheck.cs" />
     <Compile Include="Logging\CassandraQueries.cs" />
     <Compile Include="Logging\CassandraTarget.cs" />
     <Compile Include="DAL\Authorization\UserManager.cs" />

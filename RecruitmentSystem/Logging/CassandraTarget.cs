@@ -3,6 +3,7 @@ using NLog;
 using NLog.Config;
 using NLog.Layouts;
 using NLog.Targets;
+using RecruitmentSystem.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,8 +24,8 @@ namespace RecruitmentSystem.Logging
         private string[] _nodes;
         private string _keySpace;
         private string _columnFamily;
-        private int _replication;
-        private int _ttl;
+        private uint _replication;
+        private uint _ttl;
 
         private readonly Lazy<Cluster> _cluster;
         private readonly Lazy<ISession> _session;
@@ -39,76 +40,79 @@ namespace RecruitmentSystem.Logging
         public string Node
         {
             get { return string.Join(",", _nodes); }
-            set { _nodes = value.Split(',').Select(s => s.Trim()).ToArray(); }
+            set
+            {   _nodes = value.Split(',')
+                    .Select(s => s.ThrowIfNullOrWhiteSpace()).ToArray();
+            }
         }
 
         /// <summary>
-        /// The name of a Cassandra key space. Optional, default is "logging".
+        /// The name of a Cassandra key space. Not optional.
         /// </summary>
-        [Advanced]
+        [RequiredParameter]
         public string KeySpace
         {
             get { return _keySpace; }
-            set { _keySpace = string.IsNullOrEmpty(value.Trim()) ?
-                    "logging" : value.Trim() ;
-            }
+            set { _keySpace = value.ThrowIfNullOrWhiteSpace().Trim(); }
         }
 
         /// <summary>
-        /// The name of a Cassandra column family. Optional, default is "log_entries".
+        /// The name of a Cassandra column family. Not optional.
         /// </summary>
-        [Advanced]
+        [RequiredParameter]
         public string ColumnFamily
         {
             get { return _columnFamily; }
-            set { _columnFamily = string.IsNullOrEmpty(value.Trim()) ?
-                    "log_entries" : value.Trim();
-            }
+            set { _columnFamily = value.ThrowIfNullOrWhiteSpace().Trim(); }
         }
 
         /// <summary>
         /// Specifies how many copies of each record should be stored. Each
-        /// record is stored on a separate node. Optional, default is 1.
+        /// record is stored on a separate node. Not optional.
         /// </summary>
-        [Advanced]
-        public int Replication
+        [RequiredParameter]
+        public uint Replication
         {
             get { return _replication; }
-            set { _replication = value < 0 ? 1 : value; }
+            set { _replication = value.ThrowIfLessThanOne(); }
         }
 
         /// <summary>
         /// Represents the time in seconds that a log entry should be
         /// persisted. A value of 0 will store the record indefinitely.
-        /// Optional, default is 0.
+        /// Not optional.
         /// </summary>
-        [Advanced]
-        public int Ttl
+        [RequiredParameter]
+        public uint Ttl
         {
             get { return _ttl; }
-            set { _ttl = value < 0 ? 1 : value; }
+            set { _ttl = value; }
         }
 
         /// <summary>
         /// Constructs an NLog Target, see
-        /// <see cref="https://github.com/NLog/NLog/wiki/Targets"/>. A connection
-        /// will be established to a Cassandra cluster specified by
-        /// <paramref name="nodes"/>. A session will be constructed to hold the
-        /// connections to the cluster nodes.
+        /// <see cref="https://github.com/NLog/NLog/wiki/Targets"/>. A
+        /// connection will be established to a Cassandra cluster specified by
+        /// <paramref name="nodes"/>. A session will be constructed to hold
+        /// the  connections to the cluster nodes.
         /// </summary>
         /// <param name="nodes">A list of connection points.</param>
         /// <param name="keySpace">The Cassandra key space name.</param>
-        /// <param name="columnFamily">The Cassandra column family name.</param>
-        /// <param name="replication">The number of nodes to replicate data on.</param>
+        /// <param name="columnFamily">The Cassandra column family name.
+        /// </param>
+        /// <param name="replication">The number of nodes to replicate data on.
+        /// </param>
         /// <param name="ttl">The time in seconds that a log entry should be
         /// persisted. A value of 0 stores it indefinitely.</param>
-        public CassandraTarget(string[] nodes, string keySpace, string columnFamily, int replication, int? ttl)
+        /// <exception cref="NoHostAvailableException"></exception>
+        public CassandraTarget(string[] nodes, string keySpace,
+            string columnFamily, uint replication, uint ttl)
         {
             _nodes = Array.FindAll(nodes, s => !string.IsNullOrWhiteSpace(s));
-            _keySpace = keySpace;
-            _columnFamily = columnFamily;
-            _replication = replication;
-            _ttl = ttl.HasValue ? ttl.Value : 0;
+            _keySpace = keySpace.ThrowIfNullOrWhiteSpace().Trim();
+            _columnFamily = columnFamily.ThrowIfNullOrWhiteSpace().Trim();
+            _replication = replication.ThrowIfLessThanOne();
+            _ttl = ttl;
 
             _cluster = new Lazy<Cluster>(
                 () => Cluster.Builder().WithDefaultKeyspace(KeySpace)
@@ -121,12 +125,13 @@ namespace RecruitmentSystem.Logging
                     { "replication_factor", Replication.ToString() }
                 };
 
-            _session = new Lazy<ISession>(
-                () => _cluster.Value.ConnectAndCreateDefaultKeyspaceIfNotExists(
+            _session = new Lazy<ISession>(() => _cluster.Value
+                .ConnectAndCreateDefaultKeyspaceIfNotExists(
                     new Dictionary<string, string>(clusterDef)));
 
-            _logStatement = new Lazy<PreparedStatement>(
-                () => _session.Value.Prepare(CassandraQueries.Insert(_keySpace, _columnFamily, _ttl)));
+            _logStatement = new Lazy<PreparedStatement>(() => _session.Value
+                .Prepare(CassandraQueries
+                    .Insert(_keySpace, _columnFamily, (int) _ttl)));
         }
 
         protected override void Write(LogEventInfo logEvent)
@@ -140,16 +145,18 @@ namespace RecruitmentSystem.Logging
                       timestamp = logEvent.TimeStamp,
                       level = logEvent.Level.ToString(),
                       message = Layout.Render(logEvent),
-                      stacktrace = logEvent.Exception == null ? "" : logEvent.Exception.StackTrace
+                      stacktrace = logEvent.Exception == null ?
+                        "" : logEvent.Exception.StackTrace
                     }
             ));
         }
 
         private void Init()
         {
-            IStatement createColumnFamilyStatement =
-                (new SimpleStatement(CassandraQueries.CreateTable(KeySpace, ColumnFamily)))
-                    .SetConsistencyLevel(new ConsistencyLevel?(ConsistencyLevel.All));
+            IStatement createColumnFamilyStatement = (new SimpleStatement(
+                CassandraQueries.CreateTable(KeySpace, ColumnFamily)))
+                .SetConsistencyLevel(new ConsistencyLevel?
+                    (ConsistencyLevel.All));
 
             _session.Value.Execute(createColumnFamilyStatement);
             _cluster.Value.RefreshSchema();
