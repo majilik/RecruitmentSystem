@@ -22,13 +22,24 @@ namespace RecruitmentSystem.Controllers
         //TODO: Is this needed here?
         private RecruitmentContext db = new RecruitmentContext();
 
-        //TODO: Implement Login GET/POST here?
-        
+
+
+        /// <summary>
+        /// GET for login
+        /// </summary>
+        /// <returns>Login View</returns>
         public ActionResult Login()
         {
             return View();
         }
-        
+
+        /// <summary>
+        /// POST for login
+        /// Checks whether username is in use and if password is valid
+        /// If so, user is authorized.
+        /// </summary>
+        /// <param name="loginView">ViewModel for login</param>
+        /// <returns>View of either start page or login page</returns>
         [HttpPost]
         public ActionResult Login(LoginView loginView)
         {
@@ -56,6 +67,11 @@ namespace RecruitmentSystem.Controllers
             return View();
         }
 
+
+        /// <summary>
+        /// Removes the users authorization from URL
+        /// </summary>
+        /// <returns>Home page view</returns>
         [PersonAuthorization]
         public ActionResult SignOut()
         {
@@ -63,11 +79,21 @@ namespace RecruitmentSystem.Controllers
             return RedirectToAction("Index", "Home");
         }
         
+        /// <summary>
+        /// GET for register
+        /// </summary>
+        /// <returns>Register View</returns>
         public ActionResult Register()
         {
             return View();
         }
         
+        /// <summary>
+        /// POST for register
+        /// Adds a new user with data from register view model if the username is availible.
+        /// </summary>
+        /// <param name="registerView"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Register(RegisterView registerView)
         {
@@ -91,13 +117,5 @@ namespace RecruitmentSystem.Controllers
             return View();
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }

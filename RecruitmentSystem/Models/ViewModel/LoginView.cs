@@ -2,7 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 
-
+/// <summary>
+/// Represents the ViewModel of login
+/// </summary>
 namespace RecruitmentSystem.Models.ViewModel
 {
     public class LoginView
