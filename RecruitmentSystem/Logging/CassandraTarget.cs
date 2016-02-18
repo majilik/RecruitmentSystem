@@ -116,7 +116,7 @@ namespace RecruitmentSystem.Logging
 
             _cluster = new Lazy<Cluster>(
                 () => Cluster.Builder().WithDefaultKeyspace(KeySpace)
-                    .AddContactPoints(_nodes).Build());
+                .AddContactPoints(_nodes).Build());
 
             Dictionary<string, string> clusterDef =
                 new Dictionary<string, string>()
@@ -125,13 +125,14 @@ namespace RecruitmentSystem.Logging
                     { "replication_factor", Replication.ToString() }
                 };
 
-            _session = new Lazy<ISession>(() => _cluster.Value
+            _session = new Lazy<ISession>(
+                () => _cluster.Value
                 .ConnectAndCreateDefaultKeyspaceIfNotExists(
                     new Dictionary<string, string>(clusterDef)));
 
             _logStatement = new Lazy<PreparedStatement>(() => _session.Value
                 .Prepare(CassandraQueries
-                    .Insert(_keySpace, _columnFamily, (int) _ttl)));
+                    .Insert(_keySpace, _columnFamily, _ttl)));
         }
 
         protected override void Write(LogEventInfo logEvent)
