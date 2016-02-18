@@ -17,11 +17,13 @@ namespace RecruitmentSystem.Controllers
 {
     //TODO: Document this class in Architecture Document
     
-    /// <summary>
-    /// Controller for Authentication services.
-    /// </summary>
     public class AuthenticationController : Controller
     {
+        //TODO: Is this needed here?
+        private RecruitmentContext db = new RecruitmentContext();
+
+
+
         /// <summary>
         /// GET for login
         /// </summary>

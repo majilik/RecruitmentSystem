@@ -23,7 +23,7 @@ namespace RecruitmentSystem
 
         protected void Application_Start()
         {
-            //CassandraTargetSetup();
+            CassandraTargetSetup();
 
             logger.Debug("Starting application.");
             AreaRegistration.RegisterAllAreas();
