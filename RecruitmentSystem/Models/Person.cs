@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace RecruitmentSystem.Models
 {
@@ -14,6 +15,7 @@ namespace RecruitmentSystem.Models
         public string Email { get; set; }
         public string Password { get; set; }
         public string Username { get; set; }
+        //[DefaultValue()]
         public virtual Role Role { get; set; }
 
         [Timestamp]
