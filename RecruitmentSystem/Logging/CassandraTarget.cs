@@ -11,12 +11,9 @@ using System.Linq;
 namespace RecruitmentSystem.Logging
 {
     /// <summary>
-    /// Represents a custom extension of the NLog framework. When NLog is
-    /// configured to use this target it will intercept any logs and handle the
-    /// process of writing thme to a backing Cassandra node. There are two ways
-    /// to configure NLog, see
-    /// <see cref="https://github.com/NLog/NLog/wiki/Extending-NLog"/> for more
-    /// information.
+    /// Represents a custom extension of the NLog framework. When NLog is configured to use this target it will
+    /// intercept any logs and handle the process of writing thme to a backing Cassandra node. There are two ways
+    /// to configure NLog, see <see cref="https://github.com/NLog/NLog/wiki/Extending-NLog"/> for more information.
     /// </summary>
     [Target("Cassandra")]
     public sealed class CassandraTarget : TargetWithLayout, IDisposable
@@ -40,10 +37,7 @@ namespace RecruitmentSystem.Logging
         public string Node
         {
             get { return string.Join(",", _nodes); }
-            set
-            {   _nodes = value.Split(',')
-                    .Select(s => s.ThrowIfNullOrWhiteSpace()).ToArray();
-            }
+            set {   _nodes = value.Split(',').Select(s => s.ThrowIfNullOrWhiteSpace().Trim()).ToArray(); }
         }
 
         /// <summary>
@@ -67,8 +61,8 @@ namespace RecruitmentSystem.Logging
         }
 
         /// <summary>
-        /// Specifies how many copies of each record should be stored. Each
-        /// record is stored on a separate node. Not optional.
+        /// Specifies how many copies of each record should be stored. Each record is stored on a separate node.
+        /// Not optional.
         /// </summary>
         [RequiredParameter]
         public uint Replication
@@ -78,9 +72,8 @@ namespace RecruitmentSystem.Logging
         }
 
         /// <summary>
-        /// Represents the time in seconds that a log entry should be
-        /// persisted. A value of 0 will store the record indefinitely.
-        /// Not optional.
+        /// Represents the time in seconds that a log entry should be persisted.
+        /// A value of 0 will store the record indefinitely. Not optional.
         /// </summary>
         [RequiredParameter]
         public uint Ttl
@@ -90,11 +83,9 @@ namespace RecruitmentSystem.Logging
         }
 
         /// <summary>
-        /// Constructs an NLog Target, see
-        /// <see cref="https://github.com/NLog/NLog/wiki/Targets"/>. A
-        /// connection will be established to a Cassandra cluster specified by
-        /// <paramref name="nodes"/>. A session will be constructed to hold
-        /// the  connections to the cluster nodes.
+        /// Constructs an NLog Target, see <see cref="https://github.com/NLog/NLog/wiki/Targets"/>.
+        /// A connection will be established to a Cassandra cluster specified by <paramref name="nodes"/>.
+        /// A session will be constructed to hold the  connections to the cluster nodes.
         /// </summary>
         /// <param name="nodes">A list of connection points.</param>
         /// <param name="keySpace">The Cassandra key space name.</param>
@@ -102,21 +93,19 @@ namespace RecruitmentSystem.Logging
         /// </param>
         /// <param name="replication">The number of nodes to replicate data on.
         /// </param>
-        /// <param name="ttl">The time in seconds that a log entry should be
-        /// persisted. A value of 0 stores it indefinitely.</param>
+        /// <param name="ttl">The time in seconds that a log entry should be persisted.
+        /// A value of 0 stores it indefinitely.</param>
         /// <exception cref="NoHostAvailableException"></exception>
-        public CassandraTarget(string[] nodes, string keySpace,
-            string columnFamily, uint replication, uint ttl)
+        public CassandraTarget(string[] nodes, string keySpace, string columnFamily, uint replication, uint ttl)
         {
-            _nodes = Array.FindAll(nodes, s => !string.IsNullOrWhiteSpace(s));
-            _keySpace = keySpace.ThrowIfNullOrWhiteSpace().Trim();
-            _columnFamily = columnFamily.ThrowIfNullOrWhiteSpace().Trim();
+            _nodes = nodes.Select(s => s.ThrowIfNullOrWhiteSpace()).ToArray();
+            _keySpace = keySpace.ThrowIfNullOrWhiteSpace();
+            _columnFamily = columnFamily.ThrowIfNullOrWhiteSpace();
             _replication = replication.ThrowIfLessThanOne();
             _ttl = ttl;
 
             _cluster = new Lazy<Cluster>(
-                () => Cluster.Builder().WithDefaultKeyspace(KeySpace)
-                .AddContactPoints(_nodes).Build());
+                () => Cluster.Builder().WithDefaultKeyspace(KeySpace).AddContactPoints(_nodes).Build());
 
             Dictionary<string, string> clusterDef =
                 new Dictionary<string, string>()
@@ -125,21 +114,20 @@ namespace RecruitmentSystem.Logging
                     { "replication_factor", Replication.ToString() }
                 };
 
-            _session = new Lazy<ISession>(
-                () => _cluster.Value
-                .ConnectAndCreateDefaultKeyspaceIfNotExists(
-                    new Dictionary<string, string>(clusterDef)));
+            _session = new Lazy<ISession>(() => _cluster.Value.ConnectAndCreateDefaultKeyspaceIfNotExists(clusterDef));
 
-            _logStatement = new Lazy<PreparedStatement>(() => _session.Value
-                .Prepare(CassandraQueries
-                    .Insert(_keySpace, _columnFamily, _ttl)));
+            _logStatement = new Lazy<PreparedStatement>(
+                () => _session.Value.Prepare(CassandraQueries.Insert(_keySpace, _columnFamily, _ttl)));
         }
 
         public void Connect() { }
 
         protected override void Write(LogEventInfo logEvent)
         {
-            if (!_initialized) Init();
+            if (!_initialized)
+            {
+                Init();
+            }
 
             _session.Value.Execute(_logStatement.Value.Bind(
                 new { logger = logEvent.LoggerName,
@@ -148,18 +136,16 @@ namespace RecruitmentSystem.Logging
                       timestamp = logEvent.TimeStamp,
                       level = logEvent.Level.ToString(),
                       message = Layout.Render(logEvent),
-                      stacktrace = logEvent.Exception == null ?
-                        "" : logEvent.Exception.StackTrace
+                      stacktrace = logEvent.Exception == null ? "" : logEvent.Exception.StackTrace
                     }
             ));
         }
 
         private void Init()
         {
-            IStatement createColumnFamilyStatement = (new SimpleStatement(
-                CassandraQueries.CreateTable(KeySpace, ColumnFamily)))
-                .SetConsistencyLevel(new ConsistencyLevel?
-                    (ConsistencyLevel.All));
+            IStatement createColumnFamilyStatement =
+                (new SimpleStatement(CassandraQueries.CreateTable(KeySpace, ColumnFamily)))
+                .SetConsistencyLevel(new ConsistencyLevel? (ConsistencyLevel.All));
 
             _session.Value.Execute(createColumnFamilyStatement);
             _cluster.Value.RefreshSchema();

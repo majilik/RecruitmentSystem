@@ -31,8 +31,7 @@ namespace RecruitmentSystem.Security.Tests
 
             foreach (string invalidArg in _invalidArgs)
             {
-                NUnit.Framework.Assert.That(() => PasswordHash.CreateHash(invalidArg),
-                    Throws.TypeOf<ArgumentException>());
+                NUnit.Framework.Assert.Throws<ArgumentException>(() => PasswordHash.CreateHash(invalidArg));
             }
         }
 
@@ -53,11 +52,11 @@ namespace RecruitmentSystem.Security.Tests
         {
             foreach (string invalidArg in _invalidArgs)
             {
-                NUnit.Framework.Assert.That(() => PasswordHash.ValidatePassword(invalidArg, _validArg),
-                    Throws.TypeOf<ArgumentException>());
+                NUnit.Framework.Assert.Throws<ArgumentException>(() =>
+                    PasswordHash.ValidatePassword(invalidArg, _validArg));
 
-                NUnit.Framework.Assert.That(() => PasswordHash.ValidatePassword(invalidArg, _validArg),
-                    Throws.TypeOf<ArgumentException>());
+                NUnit.Framework.Assert.Throws<ArgumentException>(() =>
+                    PasswordHash.ValidatePassword(invalidArg, _validArg));
             }
         }
 
@@ -65,7 +64,9 @@ namespace RecruitmentSystem.Security.Tests
         public void ValidatePasswordReturnsTrueWhenComparingAHashedStringWithTheOriginalStringTest()
         {
             string hash = PasswordHash.CreateHash(_validArg);
+
             bool result = PasswordHash.ValidatePassword(_validArg, hash);
+
             NUnit.Framework.Assert.IsTrue(result);
         }
 
@@ -74,7 +75,9 @@ namespace RecruitmentSystem.Security.Tests
         {
             string otherValidArg = "otherPass";
             string hash = PasswordHash.CreateHash(_validArg);
+
             bool result = PasswordHash.ValidatePassword(otherValidArg, hash);
+
             NUnit.Framework.Assert.IsFalse(result);
         }
 
@@ -85,8 +88,8 @@ namespace RecruitmentSystem.Security.Tests
             string[] hashParts = properHash.Split('$');
 
             string improperLength = hashParts[0];
-            NUnit.Framework.Assert.That(() => PasswordHash.ValidatePassword(_validArg, improperLength),
-                Throws.TypeOf<ArgumentException>());
+            NUnit.Framework.Assert.Throws<ArgumentException>(() =>
+                PasswordHash.ValidatePassword(_validArg, improperLength));
         }
 
         [TestMethod]
@@ -97,18 +100,18 @@ namespace RecruitmentSystem.Security.Tests
 
             hashParts[0] = "-10000";
             string negativeIterations = string.Join("$", hashParts);
-            NUnit.Framework.Assert.That(() => PasswordHash.ValidatePassword(_validArg, negativeIterations),
-                Throws.TypeOf<ArgumentException>());
+            NUnit.Framework.Assert.Throws<ArgumentException>(() =>
+                PasswordHash.ValidatePassword(_validArg, negativeIterations));
 
             hashParts[0] = int.MaxValue.ToString() + "0";
             string overflowIterations = string.Join("$", hashParts);
-            NUnit.Framework.Assert.That(() => PasswordHash.ValidatePassword(_validArg, overflowIterations),
-                Throws.TypeOf<ArgumentException>());
+            NUnit.Framework.Assert.Throws<ArgumentException>(() =>
+                PasswordHash.ValidatePassword(_validArg, overflowIterations));
 
             hashParts[0] = "NaN";
             string nanIterations = string.Join("$", hashParts);
-            NUnit.Framework.Assert.That(() => PasswordHash.ValidatePassword(_validArg, nanIterations),
-                Throws.TypeOf<ArgumentException>());
+            NUnit.Framework.Assert.Throws<ArgumentException>(() =>
+                PasswordHash.ValidatePassword(_validArg, nanIterations));
         }
 
         [TestMethod]
@@ -119,13 +122,13 @@ namespace RecruitmentSystem.Security.Tests
 
             hashParts[1] = "notbase64";
             string negativeIterations = string.Join("$", hashParts);
-            NUnit.Framework.Assert.That(() => PasswordHash.ValidatePassword(_validArg, negativeIterations),
-                Throws.TypeOf<ArgumentException>());
+            NUnit.Framework.Assert.Throws<ArgumentException>(() =>
+                PasswordHash.ValidatePassword(_validArg, negativeIterations));
 
             hashParts[2] = "notbase64";
             string overflowIterations = string.Join("$", hashParts);
-            NUnit.Framework.Assert.That(() => PasswordHash.ValidatePassword(_validArg, overflowIterations),
-                Throws.TypeOf<ArgumentException>());
+            NUnit.Framework.Assert.Throws<ArgumentException>(() =>
+                PasswordHash.ValidatePassword(_validArg, overflowIterations));
         }
     }
 }

@@ -43,24 +43,22 @@ namespace RecruitmentSystem
                 _cassandraTarget = new CassandraTarget(
                     new string[] { "localhost" }, "logging", "log_entries", 1, 0);
 
-                ConfigurationItemFactory.Default.Targets
-                    .RegisterDefinition("Cassandra", typeof(CassandraTarget));
+                ConfigurationItemFactory.Default.Targets.RegisterDefinition("Cassandra", typeof(CassandraTarget));
 
-                LogManager.Configuration.LoggingRules
-                    .Add(new LoggingRule("*", LogLevel.Trace, _cassandraTarget));
+                LogManager.Configuration.LoggingRules.Add(new LoggingRule("*", LogLevel.Trace, _cassandraTarget));
 
                 LogManager.ReconfigExistingLoggers();
 
                 logger.Debug("Successfully configured Cassandra Target.");
             } catch (NoHostAvailableException ex)
             {
-                logger.Error(ex, "Unable to connect to any of the provided"
-                    + " Cassandra nodes, proceeding with local file backup.");
+                logger.Error(ex, "Unable to connect to any of the provided Cassandra nodes,"
+                    + " proceeding with local file backup.");
             }
             catch (NotSupportedException ex)
             {
-                logger.Error(ex, "Unable to add logging rule for Cassandra"
-                    + " target, proceeding with local file backup.");
+                logger.Error(ex, "Unable to add logging rule for Cassandra target,"
+                    + " proceeding with local file backup.");
             }
         }
     }

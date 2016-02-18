@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web.Mvc;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RecruitmentSystem;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RecruitmentSystem.Controllers;
+using System.Web.Mvc;
 
 namespace RecruitmentSystem.Tests.Controllers
 {
@@ -13,15 +8,22 @@ namespace RecruitmentSystem.Tests.Controllers
     public class HomeControllerTest
     {
         [TestMethod]
-        public void Index()
+        public void IndexReturnsCorrectViewTest()
         {
-            // Arrange
             HomeController controller = new HomeController();
 
-            // Act
             ViewResult result = controller.Index() as ViewResult;
 
-            // Assert
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void UnauthorizedReturnsCorrectViewTest()
+        {
+            HomeController controller = new HomeController();
+
+            ViewResult result = controller.Unauthorized() as ViewResult;
+
             Assert.IsNotNull(result);
         }
     }
