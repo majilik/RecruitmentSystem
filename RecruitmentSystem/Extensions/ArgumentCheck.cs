@@ -4,7 +4,7 @@ namespace RecruitmentSystem.Extensions
 {
     public static class ArgumentCheck
     {
-        public static string ThrowIfNullOrWhiteSpace(this String arg)
+        public static string ThrowIfNullOrWhiteSpace(this string arg)
         {
             if (string.IsNullOrWhiteSpace(arg))
                 throw new ArgumentException("Argument must not be null, empty or white space.");

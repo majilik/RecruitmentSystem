@@ -13,7 +13,7 @@ namespace RecruitmentSystem.DAL.Authorization
     public class UserManager
     {
         //TODO: Put DEFAULT_ROLE_ON_CREATION in global settings?
-        private const string DEFAULT_ROLE_ON_CREATION = "applicant";
+        private const string DefaultRoleOnCreation = "applicant";
 
         /// <summary>
         /// Adds a User to the system.
@@ -31,7 +31,7 @@ namespace RecruitmentSystem.DAL.Authorization
                     Surname = registerView.Surname,
                     Ssn = registerView.Ssn,
                     Role = db.Roles.Where(role => 
-                        role.Name.Equals(DEFAULT_ROLE_ON_CREATION)).Single()
+                        role.Name.Equals(DefaultRoleOnCreation)).Single()
                 };
                 db.Persons.Add(person);
                 db.SaveChanges();
