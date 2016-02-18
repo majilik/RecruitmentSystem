@@ -16,8 +16,9 @@ namespace RecruitmentSystem.DAL.Authorization
         private const string DEFAULT_ROLE_ON_CREATION = "applicant";
 
         /// <summary>
-        /// Adds a User to the system.
+        /// Adds a user to the system.
         /// </summary>
+        /// <param name="registerView"></param>
         public void AddUser(RegisterView registerView)
         {
             using (RecruitmentContext db = new RecruitmentContext())
@@ -68,6 +69,11 @@ namespace RecruitmentSystem.DAL.Authorization
             }
         }
 
+        /// <summary>
+        /// Checks if the users password is correct.
+        /// </summary>
+        /// <param name="loginView"></param>
+        /// <returns>True or False</returns>
         public bool LoginCheck(LoginView loginView)
         {
             using(RecruitmentContext db = new RecruitmentContext())

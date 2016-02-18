@@ -4,6 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RecruitmentSystem.Models.ViewModel
 {
+    /// <summary>
+    /// Represents the ViewModel of register
+    /// </summary>
     public class RegisterView
     {
         public long Id { get; set; }
