@@ -22,7 +22,7 @@
                 <ul class="nav navbar-nav">
                     @{if (HttpContext.Current.User.Identity.IsAuthenticated)
                         {
-                            <li><p>Welcome, @HttpContext.Current.User.Identity.Name</></li>
+                            <li><p>Welcome, @HttpContext.Current.User.Identity.Name</p></li>
                             <li>@Html.ActionLink("Sign Out", "SignOut", "Authentication")</li>
                         }
                         else
