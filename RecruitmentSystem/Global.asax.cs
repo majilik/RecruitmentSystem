@@ -23,9 +23,9 @@ namespace RecruitmentSystem
 
         protected void Application_Start()
         {
-            CassandraLoggerSetup();
+            CassandraTargetSetup();
 
-            logger.Debug("Starting application");
+            logger.Debug("Starting application.");
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
@@ -37,7 +37,7 @@ namespace RecruitmentSystem
             if (_cassandraTarget != null) _cassandraTarget.Dispose();
         }
 
-        private void CassandraLoggerSetup()
+        private void CassandraTargetSetup()
         {
             try {
                 _cassandraTarget = new CassandraTarget(
@@ -50,6 +50,8 @@ namespace RecruitmentSystem
                     .Add(new LoggingRule("*", LogLevel.Trace, _cassandraTarget));
 
                 LogManager.ReconfigExistingLoggers();
+
+                logger.Debug("Successfully configured Cassandra Target.");
             } catch (NoHostAvailableException ex)
             {
                 logger.Error(ex, "Unable to connect to any of the provided"

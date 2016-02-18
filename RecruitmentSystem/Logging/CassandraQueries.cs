@@ -1,4 +1,6 @@
-﻿namespace RecruitmentSystem.Logging
+﻿using RecruitmentSystem.Extensions;
+
+namespace RecruitmentSystem.Logging
 {
     /// <summary>
     /// Encapsulates the query logic used to store application logs in an
@@ -32,7 +34,9 @@
                                 message text,
                                 stacktrace text,
                                 PRIMARY KEY(logger, id))
-                                WITH CLUSTERING ORDER BY(id ASC);", keySpace, columnFamily);
+                                WITH CLUSTERING ORDER BY(id ASC);",
+                                keySpace.ThrowIfNullOrWhiteSpace(),
+                                columnFamily.ThrowIfNullOrWhiteSpace());
         }
 
         /// <summary>
@@ -52,11 +56,14 @@
         /// stored. Will be stored indefinitely if the values is 0.</param>
         /// <returns>A CQL formatted string that can be executed in a
         /// statement.</returns>
-        public static string Insert(string keySpace, string columnFamily, int ttl)
+        public static string Insert(string keySpace, string columnFamily, uint ttl)
         {
             return string.Format(@"INSERT INTO ""{0}"".""{1}""
-                                (logger, id, sequenceid, timestamp, level, message, stacktrace)
-                                VALUES (?, ?, ?, ?, ?, ?, ?) USING TTL {2};", keySpace, columnFamily, ttl);
+                                (logger, id, sequenceid, timestamp, level,
+                                    message, stacktrace)
+                                VALUES (?, ?, ?, ?, ?, ?, ?) USING TTL {2};",
+                                keySpace.ThrowIfNullOrWhiteSpace(),
+                                columnFamily.ThrowIfNullOrWhiteSpace(), ttl);
         }
     }
 }
