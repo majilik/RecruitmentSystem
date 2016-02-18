@@ -56,7 +56,8 @@ namespace RecruitmentSystem
             {
                 logger.Error(ex, "Unable to connect to any of the provided"
                     + " Cassandra nodes, proceeding with local file backup.");
-            } catch (NotSupportedException ex)
+            }
+            catch (NotSupportedException ex)
             {
                 logger.Error(ex, "Unable to add logging rule for Cassandra"
                     + " target, proceeding with local file backup.");
