@@ -4248,6 +4248,12 @@ textarea.input-group-sm > .input-group-btn > .btn {
   line-height: 20px;
 }
 
+.navbar-nav > li > p {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 20px;
+}
+
 @media (max-width: 767px) {
   .navbar-nav .open .dropdown-menu {
     position: static;
@@ -4280,6 +4286,10 @@ textarea.input-group-sm > .input-group-btn > .btn {
     float: left;
   }
   .navbar-nav > li > a {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+  .navbar-nav > li > p {
     padding-top: 15px;
     padding-bottom: 15px;
   }
@@ -4405,6 +4415,9 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .navbar-default .navbar-nav > li > a {
   color: #777777;
 }
+.navbar-default .navbar-nav > li > p {
+  color: #eeeeee;
+}
 
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
@@ -4521,6 +4534,9 @@ textarea.input-group-sm > .input-group-btn > .btn {
 
 .navbar-inverse .navbar-nav > li > a {
   color: #999999;
+}
+.navbar-inverse .navbar-nav > li > p {
+  color: #eeeeee;
 }
 
 .navbar-inverse .navbar-nav > li > a:hover,
