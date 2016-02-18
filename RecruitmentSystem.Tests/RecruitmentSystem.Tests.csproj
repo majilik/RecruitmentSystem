@@ -101,7 +101,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\AuthenticationControllerTest.cs" />
+    <Compile Include="DAL\Authorization\UserManagerTests.cs" />
     <Compile Include="Extensions\ArgumentCheckTests.cs" />
     <Compile Include="Logging\CassandraQueriesTests.cs" />
     <Compile Include="Logging\CassandraTargetTests.cs" />
@@ -123,9 +123,7 @@
       <Name>RecruitmentSystem</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DAL\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
