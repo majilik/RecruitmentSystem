@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace RecruitmentSystem.Controllers.Tests
 {
+    //TODO: Look into this https://effort.codeplex.com/
     [TestClass()]
     public class UserManagerTests
     {

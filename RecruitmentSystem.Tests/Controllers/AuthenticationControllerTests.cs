@@ -120,6 +120,46 @@ namespace RecruitmentSystem.Controllers.Tests
         }
 
         [TestMethod]
+        public void RegisterReturnsCorrectViewOnTakenUsernameTest()
+        {
+            Mock<IUserManager> umMock = new Mock<IUserManager>();
+            AuthenticationController controller = new AuthenticationController(umMock.Object, null);
+
+            RegisterView registerView = new RegisterView();
+            registerView.Username = "user";
+            registerView.Password = registerView.PasswordVerify = "pass";
+
+            umMock.Setup(um => um.IsUsernameInUse(It.Is<string>(s => s.Equals(registerView.Username)))).Returns(true);
+
+            ViewResult result = controller.Register(registerView) as ViewResult;
+
+            Assert.IsNotNull(result);
+            ModelState paramState;
+            Assert.IsTrue(controller.ModelState.TryGetValue("username_in_use", out paramState));
+            NUnit.Framework.Assert.DoesNotThrow(() =>
+                paramState.Errors.Single(s => s.ErrorMessage.Equals("Username already in use.")));
+
+            umMock.Verify(um => um.IsUsernameInUse(It.Is<string>(s => s.Equals(registerView.Username))), Times.Once());
+        }
+
+        [TestMethod]
+        public void RegisterReturnsCorrectViewOnNonMatchingPasswordsTest()
+        {
+            AuthenticationController controller = new AuthenticationController(null, null);
+
+            RegisterView registerView = new RegisterView();
+            registerView.Password = "123456";
+            registerView.PasswordVerify = "abc123";
+            
+            ViewResult result = controller.Register(registerView) as ViewResult;
+            Assert.IsNotNull(result);
+            ModelState paramState;
+            Assert.IsTrue(controller.ModelState.TryGetValue("verify_pass", out paramState));
+            NUnit.Framework.Assert.DoesNotThrow(() =>
+                paramState.Errors.Single(s => s.ErrorMessage.Equals("Passwords must be identical.")));
+        }
+
+        [TestMethod]
         public void RegisterTest1()
         {
 
