@@ -2,11 +2,12 @@
 using RecruitmentSystem.Models.ViewModel;
 using System.Linq;
 using RecruitmentSystem.Security;
+using RecruitmentSystem.DAL.Authorization.Interfaces;
 
 namespace RecruitmentSystem.DAL.Authorization
 {
     //TODO: Document this class in Architecture Document
-    public class UserManager
+    public class UserManager : IUserManager
     {
         //TODO: Put DEFAULT_ROLE_ON_CREATION in global settings?
         private const string DefaultRoleOnCreation = "applicant";

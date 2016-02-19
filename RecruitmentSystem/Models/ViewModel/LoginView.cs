@@ -1,16 +1,14 @@
-﻿
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel;
+﻿using System.ComponentModel.DataAnnotations;
 
 /// <summary>
-/// Represents the ViewModel of login
+/// Represents the ViewModel of login.
 /// </summary>
 namespace RecruitmentSystem.Models.ViewModel
 {
     public class LoginView
     {
         [Required(ErrorMessage = "Please enter username.")]
-        public string Username{get; set;}
+        public string Username{ get; set; }
 
         [Required(ErrorMessage = "Please enter password.")]
         [DataType(DataType.Password)]

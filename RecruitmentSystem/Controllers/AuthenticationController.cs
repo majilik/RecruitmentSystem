@@ -1,28 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Security;
-using System.Web.Mvc;
-using RecruitmentSystem.DAL;
+﻿using System.Web.Mvc;
 using RecruitmentSystem.DAL.Authorization;
-using RecruitmentSystem.Models;
 using RecruitmentSystem.Models.ViewModel;
 using RecruitmentSystem.Security;
+using RecruitmentSystem.DAL.Authorization.Interfaces;
 
 namespace RecruitmentSystem.Controllers
 {
     //TODO: Document this class in Architecture Document
-    
     public class AuthenticationController : Controller
     {
-        //TODO: Is this needed here?
-        private RecruitmentContext db = new RecruitmentContext();
+        private readonly IUserManager _userManager;
+        private readonly IFormsAuthenticationWrap _formsAuthentication;
 
+        public AuthenticationController() : this (new UserManager(), new FormsAuthenticationWrap())
+        {
+        }
 
+        public AuthenticationController(IUserManager userManager, IFormsAuthenticationWrap formsAuthentication)
+        {
+            _userManager = userManager;
+            _formsAuthentication = formsAuthentication;
+        }
 
         /// <summary>
         /// GET for login
@@ -45,28 +43,26 @@ namespace RecruitmentSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                var um = new UserManager();
-
-                if (um.IsUsernameInUse(loginView.Username))
+                if (_userManager.IsUsernameInUse(loginView.Username))
                 {
-                    if (um.LoginCheck(loginView))
+                    if (_userManager.LoginCheck(loginView))
                     {
-                        FormsAuthentication.SetAuthCookie(loginView.Username, false);
+                        _formsAuthentication.SetAuthCookie(loginView.Username, false);
                         return RedirectToAction("Index", "Home");
                     }
                     else
                     {
-                        ModelState.AddModelError(string.Empty, "Wrong password.");
+                        ModelState.AddModelError("wrong_pass", "Wrong password.");
                     }
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "User doesn't exist.");
+                    ModelState.AddModelError("non_existing_user", "User doesn't exist.");
                 }
             }
+
             return View();
         }
-
 
         /// <summary>
         /// Removes the users authorization from URL
@@ -75,7 +71,7 @@ namespace RecruitmentSystem.Controllers
         [PersonAuthorization]
         public ActionResult SignOut()
         {
-            FormsAuthentication.SignOut();
+            _formsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
         }
         
@@ -99,21 +95,24 @@ namespace RecruitmentSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                var um = new UserManager();
-                if(registerView.Password == registerView.PasswordVerify)
+                if (registerView.Password.Equals(registerView.PasswordVerify))
                 {
-                    if (!um.IsUsernameInUse(registerView.Username))
+                    if (!_userManager.IsUsernameInUse(registerView.Username))
                     {
-                        um.AddUser(registerView);
+                        _userManager.AddUser(registerView);
                         return RedirectToAction("Login", "Authentication");
                     }
                     else
                     {
-                        ModelState.AddModelError(string.Empty, "Username already in use.");
+                        ModelState.AddModelError("username_in_use", "Username already in use.");
                     }
-                }else ModelState.AddModelError(string.Empty, "Passwords must be identical.");
-
+                }
+                else
+                {
+                    ModelState.AddModelError("verify_pass", "Passwords must be identical.");
+                }
             }
+
             return View();
         }
 

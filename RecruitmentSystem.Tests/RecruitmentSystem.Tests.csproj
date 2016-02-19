@@ -101,6 +101,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AuthenticationControllerTests.cs" />
     <Compile Include="DAL\Authorization\UserManagerTests.cs" />
     <Compile Include="Extensions\ArgumentCheckTests.cs" />
     <Compile Include="Logging\CassandraQueriesTests.cs" />
