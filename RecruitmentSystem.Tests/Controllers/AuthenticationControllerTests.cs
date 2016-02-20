@@ -2,6 +2,7 @@
 using Moq;
 using RecruitmentSystem.DAL.Authorization.Interfaces;
 using RecruitmentSystem.Models.ViewModel;
+using RecruitmentSystem.Security;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -46,7 +47,7 @@ namespace RecruitmentSystem.Controllers.Tests
         }
 
         [TestMethod]
-        public void LoginReturnsCorrectViewIfLoginFailsTest()
+        public void LoginReturnsCorrectViewIfPasswordWrongTest()
         {
             Mock<IUserManager> umMock = new Mock<IUserManager>();
             Mock<IFormsAuthenticationWrap> formsAuthMock = new Mock<IFormsAuthenticationWrap>();
@@ -68,6 +69,29 @@ namespace RecruitmentSystem.Controllers.Tests
 
             umMock.Verify(um => um.IsUsernameInUse(It.Is<string>(s => s.Equals(loginView.Username))), Times.Once());
             umMock.Verify(um => um.LoginCheck(It.Is<LoginView>(lw => lw.Equals(loginView))), Times.Once());
+        }
+
+        [TestMethod]
+        public void LoginReturnsCorrectViewIfUsernameNotFoundTest()
+        {
+            Mock<IUserManager> umMock = new Mock<IUserManager>();
+            Mock<IFormsAuthenticationWrap> formsAuthMock = new Mock<IFormsAuthenticationWrap>();
+            AuthenticationController controller = new AuthenticationController(umMock.Object, formsAuthMock.Object);
+
+            LoginView loginView = new LoginView();
+            loginView.Username = "user";
+
+            umMock.Setup(um => um.IsUsernameInUse(It.Is<string>(s => s.Equals(loginView.Username)))).Returns(false);
+
+            ViewResult result = controller.Login(loginView) as ViewResult;
+
+            Assert.IsNotNull(result);
+            ModelState paramState;
+            Assert.IsTrue(controller.ModelState.TryGetValue("non_existent_user", out paramState));
+            NUnit.Framework.Assert.DoesNotThrow(() =>
+                paramState.Errors.Single(s => s.ErrorMessage.Equals("User doesn't exist.")));
+
+            umMock.Verify(um => um.IsUsernameInUse(It.Is<string>(s => s.Equals(loginView.Username))), Times.Once());
         }
 
         [TestMethod]
