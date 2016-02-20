@@ -22,6 +22,7 @@
                 <Source>.*\\Models\\CompetenceProfile\.cs</Source>
                 <Source>.*\\Models\\Person\.cs</Source>
                 <Source>.*\\Models\\Role\.cs</Source>
+                <Source>.*\\Security\\FormsAuthenticationWrap\.cs</Source>
               </Exclude>
             </Sources>
           </CodeCoverage>
