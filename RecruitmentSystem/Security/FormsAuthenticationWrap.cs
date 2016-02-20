@@ -1,7 +1,6 @@
-﻿using System;
-using System.Web.Security;
+﻿using System.Web.Security;
 
-namespace RecruitmentSystem.Controllers
+namespace RecruitmentSystem.Security
 {
     public class FormsAuthenticationWrap : IFormsAuthenticationWrap
     {
