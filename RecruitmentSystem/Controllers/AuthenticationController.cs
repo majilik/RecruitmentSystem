@@ -12,7 +12,7 @@ namespace RecruitmentSystem.Controllers
         private readonly IUserManager _userManager;
         private readonly IFormsAuthenticationWrap _formsAuthentication;
 
-        public AuthenticationController() : this (new UserManager(), new FormsAuthenticationWrap())
+        public AuthenticationController() : this(new UserManager(), new FormsAuthenticationWrap())
         {
         }
 
@@ -57,7 +57,7 @@ namespace RecruitmentSystem.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("non_existing_user", "User doesn't exist.");
+                    ModelState.AddModelError("non_existent_user", "User doesn't exist.");
                 }
             }
 

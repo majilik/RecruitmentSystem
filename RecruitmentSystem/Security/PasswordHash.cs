@@ -9,7 +9,7 @@ using System.Security.Cryptography;
 namespace RecruitmentSystem.Security
 {
     /// <summary>
-    /// Salted password hashing with PBKDF2-SHA56.
+    /// Salted password hashing with PBKDF2-SHA256.
     /// </summary>
     public static class PasswordHash
     {

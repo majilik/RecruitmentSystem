@@ -177,9 +177,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
-    <Compile Include="Controllers\Implementations\FormsAuthenticationWrap.cs" />
+    <Compile Include="Security\FormsAuthenticationWrap.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\Interfaces\IFormsAuthenticationWrap.cs" />
+    <Compile Include="Security\IFormsAuthenticationWrap.cs" />
     <Compile Include="DAL\Authorization\IUserManager.cs" />
     <Compile Include="Extensions\ArgumentCheck.cs" />
     <Compile Include="Logging\CassandraQueries.cs" />
