@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using RecruitmentSystem.DAL.Authorization;
+﻿using RecruitmentSystem.DAL.Authorization;
 using System.Web;
 using System.Web.Mvc;
+using RecruitmentSystem.DAL.Authorization.Interfaces;
 
 namespace RecruitmentSystem.Security
 {
@@ -12,32 +10,46 @@ namespace RecruitmentSystem.Security
     /// </summary>
     public class PersonAuthorizationAttribute : AuthorizeAttribute
     {
-        private readonly new string[] Roles;
+        private readonly IUserManager _userManager;
+        private readonly string[] _roles;
 
-        public PersonAuthorizationAttribute()
+        public PersonAuthorizationAttribute() : this(new UserManager())
         {
-            Roles = null;
         }
 
-        public PersonAuthorizationAttribute(params string[] roles)
+        public PersonAuthorizationAttribute(UserManager userManager)
         {
-            Roles = roles;
+            _userManager = userManager;
+            _roles = null;
+        }
+
+        public PersonAuthorizationAttribute(params string[] roles) : this(new UserManager(), roles)
+        {
+        }
+
+        public PersonAuthorizationAttribute(UserManager userManager, params string[] roles)
+        {
+            _userManager = userManager;
+            _roles = roles;
         }
 
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
             string user = httpContext.User.Identity.Name;
-            var um = new UserManager();
-            if (Roles != null)
+
+            if (_roles != null)
             {
-                foreach (var role in Roles)
+                foreach (var role in _roles)
                 {
-                    role.Trim();
-                    if (um.IsUserInRole(user, role))
+                    if (_userManager.IsUserInRole(user, role))
+                    {
                         return true;
+                    }
                 }
+
                 return false;
             }
+
             return base.AuthorizeCore(httpContext);
         }
 
