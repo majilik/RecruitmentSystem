@@ -1,4 +1,5 @@
 ﻿using RecruitmentSystem.DAL.Authorization;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using RecruitmentSystem.DAL.Authorization.Interfaces;
@@ -20,7 +21,7 @@ namespace RecruitmentSystem.Security
         public PersonAuthorizationAttribute(UserManager userManager)
         {
             _userManager = userManager;
-            _roles = null;
+            _roles = new string[0];
         }
 
         public PersonAuthorizationAttribute(params string[] roles) : this(new UserManager(), roles)
@@ -35,19 +36,20 @@ namespace RecruitmentSystem.Security
 
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
+            if (httpContext == null)
+            {
+
+            }
+
             string user = httpContext.User.Identity.Name;
 
-            if (_roles != null)
+            if (_roles.Length == 0)
             {
-                foreach (var role in _roles)
-                {
-                    if (_userManager.IsUserInRole(user, role))
-                    {
-                        return true;
-                    }
-                }
-
                 return false;
+            }
+            else if (_roles.Any(role => _userManager.IsUserInRole(user, role)))
+            {
+                return true;
             }
 
             return base.AuthorizeCore(httpContext);
