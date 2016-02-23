@@ -3,11 +3,12 @@ using RecruitmentSystem.DAL.Authorization;
 using RecruitmentSystem.Models.ViewModel;
 using RecruitmentSystem.Security;
 using RecruitmentSystem.DAL.Authorization.Interfaces;
+using RecruitmentSystem.Controllers.Base;
 
 namespace RecruitmentSystem.Controllers
 {
     //TODO: Document this class in Architecture Document
-    public class AuthenticationController : Controller
+    public class AuthenticationController : BaseController
     {
         private readonly IUserManager _userManager;
         private readonly IFormsAuthenticationWrap _formsAuthentication;
