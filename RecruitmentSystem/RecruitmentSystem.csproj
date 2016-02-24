@@ -191,6 +191,7 @@
     <Compile Include="Controllers\RegisterApplicationController.cs" />
     <Compile Include="DAL\DbContextFactory.cs" />
     <Compile Include="DAL\QueryService.cs" />
+    <Compile Include="Models\ViewModel\ApplicationView.cs" />
     <Compile Include="Resources\Locales.cs" />
     <Compile Include="Security\FormsAuthenticationWrap.cs" />
     <Compile Include="Controllers\HomeController.cs" />
