@@ -14,7 +14,7 @@ namespace RecruitmentSystem.DAL
     /// parent and provides the data that should replace the dropped data of
     /// the database specified by RecruitmentContext.
     /// </summary>
-    public class DbInitializer : DropCreateDatabaseIfModelChanges<RecruitmentContext>
+    public class DbInitializer : DropCreateDatabaseAlways<RecruitmentContext>
     {
         protected override void Seed(RecruitmentContext context)
         {
@@ -28,6 +28,13 @@ namespace RecruitmentSystem.DAL
 
             var persons = new List<Person>
             {
+                new Person
+                {   Name = "Test",
+                    Surname = "Applicant",
+                    Username = "applicant",
+                    Password = SecurityManager.HashPassword("applicant"),
+                    Role = context.Roles.Where(r => r.Id == 2).Single()
+                },
                 new Person
                 {   Name = "Greta",
                     Surname = "Borg",

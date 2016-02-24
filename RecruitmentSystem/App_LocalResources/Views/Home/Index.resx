@@ -117,28 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="English" xml:space="preserve">
-    <value>English</value>
+  <data name="InformationContent" xml:space="preserve">
+    <value>Register an account to apply today!</value>
   </data>
-  <data name="Language" xml:space="preserve">
-    <value>Language</value>
-  </data>
-  <data name="LogIn" xml:space="preserve">
+  <data name="InformationLoginLink" xml:space="preserve">
     <value>Log In</value>
   </data>
-  <data name="Register" xml:space="preserve">
+  <data name="InformationRegisterLink" xml:space="preserve">
     <value>Register</value>
   </data>
-  <data name="SignOut" xml:space="preserve">
-    <value>Sign Out</value>
+  <data name="InformationTitle" xml:space="preserve">
+    <value>Getting started</value>
   </data>
-  <data name="Swedish" xml:space="preserve">
-    <value>Swedish</value>
+  <data name="JumbotronContent" xml:space="preserve">
+    <value>Developed in the course IV1201.</value>
   </data>
-  <data name="SystemName" xml:space="preserve">
+  <data name="JumbotronTitle" xml:space="preserve">
     <value>Recruitment System</value>
   </data>
-  <data name="WelcomePhrase" xml:space="preserve">
-    <value>Welcome,</value>
+  <data name="PageTitle" xml:space="preserve">
+    <value>Home Page</value>
   </data>
 </root>
