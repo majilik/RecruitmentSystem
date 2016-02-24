@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Recruitment System</title>
+    <title>@ViewBag.Title - @Resources._Layout.SystemName</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -16,22 +16,30 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Recruitment System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink(Resources._Layout.SystemName, "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     @{if (HttpContext.Current.User.Identity.IsAuthenticated)
                         {
-                            <li><p>Welcome, @HttpContext.Current.User.Identity.Name</p></li>
-                            <li>@Html.ActionLink("Sign Out", "SignOut", "Authentication")</li>
+                            <li><p class="navbar-text">@Resources._Layout.WelcomePhrase @HttpContext.Current.User.Identity.Name</p></li>
+                            <li>@Html.ActionLink(Resources._Layout.SignOut, "SignOut", "Authentication")</li>
                         }
                         else
                         {
-                            <li>@Html.ActionLink("Register", "Register", "Authentication")</li>
-                            <li>@Html.ActionLink("Login", "Login", "Authentication")</li>
+                            <li>@Html.ActionLink(Resources._Layout.Register, "Register", "Authentication")</li>
+                            <li>@Html.ActionLink(Resources._Layout.LogIn, "Login", "Authentication")</li>
                         }
                     }
-                    
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@Resources._Layout.Language <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink(Resources._Layout.English, "ChangeLocale", "Home", new { locale = RecruitmentSystem.Resources.Locales.EN_US }, null)</li>
+                            <li>@Html.ActionLink(Resources._Layout.Swedish, "ChangeLocale", "Home", new { locale = RecruitmentSystem.Resources.Locales.SV_SE }, null)</li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -40,12 +48,19 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Recruitment System</p>
+            <p>&copy; @DateTime.Now.Year - @Resources._Layout.SystemName</p>
         </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jquery-ui")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.datepicker').datetimepicker({ format: 'l' });
+        });
+    </script>
 </body>
 </html>

@@ -3,11 +3,12 @@ using RecruitmentSystem.DAL.Authorization;
 using RecruitmentSystem.Models.ViewModel;
 using RecruitmentSystem.Security;
 using RecruitmentSystem.DAL.Authorization.Interfaces;
+using RecruitmentSystem.Controllers.Base;
 
 namespace RecruitmentSystem.Controllers
 {
     //TODO: Document this class in Architecture Document
-    public class AuthenticationController : Controller
+    public class AuthenticationController : BaseController
     {
         private readonly IUserManager _userManager;
         private readonly IFormsAuthenticationWrap _formsAuthentication;
@@ -39,6 +40,7 @@ namespace RecruitmentSystem.Controllers
         /// <param name="loginView">ViewModel for login</param>
         /// <returns>View of either start page or login page</returns>
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Login(LoginView loginView)
         {
             if (ModelState.IsValid)
@@ -91,6 +93,7 @@ namespace RecruitmentSystem.Controllers
         /// <param name="registerView"></param>
         /// <returns></returns>
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterView registerView)
         {
             if (ModelState.IsValid)

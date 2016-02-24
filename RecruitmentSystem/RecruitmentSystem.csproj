@@ -187,6 +187,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
+    <Compile Include="Controllers\Base\BaseController.cs" />
+    <Compile Include="Controllers\RegisterApplicationController.cs" />
+    <Compile Include="DAL\DbContextFactory.cs" />
+    <Compile Include="DAL\QueryService.cs" />
+    <Compile Include="Resources\Locales.cs" />
     <Compile Include="Security\FormsAuthenticationWrap.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Security\IFormsAuthenticationWrap.cs" />
@@ -343,7 +348,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>62344</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
