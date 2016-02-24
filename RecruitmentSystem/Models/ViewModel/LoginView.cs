@@ -8,7 +8,7 @@ namespace RecruitmentSystem.Models.ViewModel
     public class LoginView
     {
         [Required(ErrorMessage = "Please enter username.")]
-        public string Username{ get; set; }
+        public string Username { get; set; }
 
         [Required(ErrorMessage = "Please enter password.")]
         [DataType(DataType.Password)]

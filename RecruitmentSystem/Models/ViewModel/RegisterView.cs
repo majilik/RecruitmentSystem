@@ -32,8 +32,7 @@ namespace RecruitmentSystem.Models.ViewModel
         [Index(IsUnique = true)]
         public string Ssn { get; set; }
 
-        [RegularExpression(@"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$",
-            ErrorMessage = "Invalid e-mail!")]
+        [EmailAddress(ErrorMessage = "Invalid e-mail!")]
         [StringLength(100, MinimumLength = 5)]
         [Index(IsUnique = true)]
         public string Email { get; set; }

@@ -1,5 +1,7 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RecruitmentSystem.Models
 {
@@ -17,6 +19,8 @@ namespace RecruitmentSystem.Models
         public string Username { get; set; }
         //[DefaultValue(2)]
         public virtual Role Role { get; set; }
+        [Column(TypeName = "DateTime2")]
+        public DateTime ApplicationDate { get; set; }
 
         [Timestamp]
         public byte[] Timestamp { get; set; }
