@@ -188,6 +188,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Unauthorized.resx</DependentUpon>
     </Compile>
+    <Compile Include="App_LocalResources\Views\Home\Unauthorized.sv-SE.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Unauthorized.sv-SE.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_LocalResources\Views\Shared\Error.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -213,6 +218,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\Base\BaseController.cs" />
+    <Compile Include="Controllers\LocaleController.cs" />
     <Compile Include="Controllers\RegisterApplicationController.cs" />
     <Compile Include="DAL\DbContextFactory.cs" />
     <Compile Include="DAL\QueryService.cs" />
@@ -342,6 +348,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="App_LocalResources\Models\" />
     <Folder Include="App_LocalResources\Views\Authentication\" />
+    <Folder Include="Views\Locale\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -356,7 +363,11 @@
       <LastGenOutput>Index.sv-SE.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Resources</CustomToolNamespace>
     </EmbeddedResource>
-    <Content Include="App_LocalResources\Views\Home\Unauthorized.sv-SE.resx" />
+    <EmbeddedResource Include="App_LocalResources\Views\Home\Unauthorized.sv-SE.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Unauthorized.sv-SE.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
     <EmbeddedResource Include="App_LocalResources\Views\Shared\Error.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Error.Designer.cs</LastGenOutput>

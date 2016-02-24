@@ -38,8 +38,8 @@
                         <ul class="dropdown-menu">
                             @foreach (RecruitmentSystem.Resources.Locales loc in Enum.GetValues(typeof(RecruitmentSystem.Resources.Locales)))
                             {
-                                string localeName = RecruitmentSystem.Resources.LocalesExtension.ParseCultureInfo(loc).NativeName;
-                                <li>@Html.ActionLink(localeName, "ChangeLocale", "Home", new { locale = loc }, null)</li>
+                                string displayName = RecruitmentSystem.Resources.LocalesExtension.ParseCultureInfo(loc).NativeName;
+                                <li>@Html.ActionLink(displayName, "ChangeLocale", "Locale", new { locale = loc }, null)</li>
                             }
                         </ul>
                     </li>
