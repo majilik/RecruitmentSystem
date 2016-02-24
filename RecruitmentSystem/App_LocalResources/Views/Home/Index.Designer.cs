@@ -22,14 +22,14 @@ namespace Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class _Layout {
+    public class Index {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal _Layout() {
+        internal Index() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RecruitmentSystem.App_LocalResources._Layout", typeof(_Layout).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RecruitmentSystem.App_LocalResources.Views.Home.Index", typeof(Index).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,74 +61,65 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to English.
+        ///   Looks up a localized string similar to Register an account to apply today!.
         /// </summary>
-        public static string English {
+        public static string InformationContent {
             get {
-                return ResourceManager.GetString("English", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Language.
-        /// </summary>
-        public static string Language {
-            get {
-                return ResourceManager.GetString("Language", resourceCulture);
+                return ResourceManager.GetString("InformationContent", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Log In.
         /// </summary>
-        public static string LogIn {
+        public static string InformationLoginLink {
             get {
-                return ResourceManager.GetString("LogIn", resourceCulture);
+                return ResourceManager.GetString("InformationLoginLink", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Register.
         /// </summary>
-        public static string Register {
+        public static string InformationRegisterLink {
             get {
-                return ResourceManager.GetString("Register", resourceCulture);
+                return ResourceManager.GetString("InformationRegisterLink", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sign Out.
+        ///   Looks up a localized string similar to Getting started.
         /// </summary>
-        public static string SignOut {
+        public static string InformationTitle {
             get {
-                return ResourceManager.GetString("SignOut", resourceCulture);
+                return ResourceManager.GetString("InformationTitle", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Swedish.
+        ///   Looks up a localized string similar to Developed in the course IV1201..
         /// </summary>
-        public static string Swedish {
+        public static string JumbotronContent {
             get {
-                return ResourceManager.GetString("Swedish", resourceCulture);
+                return ResourceManager.GetString("JumbotronContent", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Recruitment System.
         /// </summary>
-        public static string SystemName {
+        public static string JumbotronTitle {
             get {
-                return ResourceManager.GetString("SystemName", resourceCulture);
+                return ResourceManager.GetString("JumbotronTitle", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Welcome,.
+        ///   Looks up a localized string similar to Home Page.
         /// </summary>
-        public static string WelcomePhrase {
+        public static string PageTitle {
             get {
-                return ResourceManager.GetString("WelcomePhrase", resourceCulture);
+                return ResourceManager.GetString("PageTitle", resourceCulture);
             }
         }
     }

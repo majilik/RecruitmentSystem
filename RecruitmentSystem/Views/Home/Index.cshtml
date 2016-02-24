@@ -1,19 +1,19 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = Resources.Index.PageTitle;
 }
 
 <div class="jumbotron">
-    <h1>Recruitment System</h1>
-    <p class="lead">Developed in the course IV1201.</p>
+    <h1>@Resources.Index.JumbotronTitle</h1>
+    <p class="lead">@Resources.Index.JumbotronContent</p>
 </div>
 
 <div class="row">
     <div class="col-md-4">
-        <h2>Getting started</h2>
+        <h2>@Resources.Index.InformationTitle</h2>
         <p>
-            Register an account to apply today!
+            @Resources.Index.InformationContent
         </p>
-        <p>@Html.ActionLink("Register", "Register", "Authentication")</p>
-        <p>@Html.ActionLink("Login", "Login", "Authentication")</p>
+        <p>@Html.ActionLink(Resources.Index.InformationRegisterLink, "Register", "Authentication")</p>
+        <p>@Html.ActionLink(Resources.Index.InformationLoginLink, "Login", "Authentication")</p>
     </div>
 </div>
