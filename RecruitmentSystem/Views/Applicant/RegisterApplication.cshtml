@@ -95,25 +95,25 @@
 
 <table class="table">
     <tr>
-        <th>
+        <th class="col-lg-4">
             @Html.DisplayNameFor(model => model.SelectedFromDate)
         </th>
-        <th>
+        <th class="col-lg-4">
             @Html.DisplayNameFor(model => model.SelectedToDate)
-        </th>
+        </th class="col-lg-4">
         <th></th>
     </tr>
 
     @foreach (KeyValuePair<DateTime, DateTime> entry in Model.SelectedAvailabilities)
     {
         <tr>
-            <td>
+            <td class="col-lg-4">
                 @Html.DisplayFor(modelItem => entry.Key)
             </td>
-            <td>
+            <td class="col-lg-4">
                 @Html.DisplayFor(modelItem => entry.Value)
             </td>
-            <td>
+            <td class="col-lg-1">
                 @Html.ActionLink("Delete", "Delete")
             </td>
         </tr>

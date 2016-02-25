@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -50,12 +51,12 @@ namespace RecruitmentSystem.Models.ViewModel
 
         [DisplayName("Available From")]
         [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
         public DateTime SelectedFromDate { get; set; }
 
         [DisplayName("Available To")]
         [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
         public DateTime SelectedToDate { get; set; }
 
         public Dictionary<DateTime, DateTime> SelectedAvailabilities { get; set; }
