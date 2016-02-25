@@ -15,7 +15,7 @@ namespace RecruitmentSystem.Controllers
     /// ASP.NET MVC Web application and responds to this action.
     /// </summary>
     //[PersonAuthorization("applicant")]
-    public class ApplicantController : BaseController
+    public class ApplicantController : Controller
     {
         private QueryService<Competence> _competenceQueryService;
         private QueryService<CompetenceProfile> _competenceProfileQueryService;
@@ -33,11 +33,11 @@ namespace RecruitmentSystem.Controllers
         }
 
         /// <summary>
-        /// HTTP Get for the view named RegisterApplication.
-        /// Initializes an ApplicationView for the returned View.
+        /// HTTP Get for the view named RegisterApplication. Initializes an
+        /// <see cref="ApplicationView"/> for the returned <see cref="View"/>.
         /// </summary>
-        /// <returns>The RegisterApplication ViewObject initialized
-        /// with the ApplicationView model.</returns>
+        /// <returns>The RegisterApplication <see cref="ViewResult"/> initialized
+        /// with the <see cref="ApplicationView"/> model.</returns>
         public ActionResult RegisterApplication()
         {
             return View(new ApplicationView());
@@ -76,8 +76,8 @@ namespace RecruitmentSystem.Controllers
         /// Takes the current ApplicationView when submitted and processes the data.
         /// The application is then stored for the currently authorized user.
         /// </summary>
-        /// <param name="view">The current ApplicationView.</param>
-        /// <returns>Returns an empty ApplicationView.</returns>
+        /// <param name="view">The current <see cref="ApplicationView"/>.</param>
+        /// <returns>Returns an new <see cref="ApplicationView"/>.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Apply(ApplicationView view)
@@ -86,20 +86,30 @@ namespace RecruitmentSystem.Controllers
             {
                 string username = HttpContext.User.Identity.Name;
                 Person applicant = _personQueryService.GetSingle(e => e.Name.Equals(username));
-                List<CompetenceProfile> compProfiles = new List<CompetenceProfile>();
+                List<CompetenceProfile> competenceProfiles = new List<CompetenceProfile>();
 
                 foreach (KeyValuePair<Competence, decimal> entry in view.SelectedCompetences)
                 {
-                    compProfiles.Add(new CompetenceProfile
+                    competenceProfiles.Add(new CompetenceProfile
                         {
                             Person = applicant, Competence = entry.Key, YearsOfExperience = entry.Value
                         });
                 }
 
-                _competenceProfileQueryService.Add(compProfiles.ToArray());
+                _competenceProfileQueryService.Add(competenceProfiles.ToArray());
             }
 
             return View(new ApplicationView());
+        }
+
+        public ActionResult Delete(ApplicationView view)
+        {
+            if (ModelState.IsValid)
+            {
+                //view.RemoveCompetence(competence);
+            }
+
+            return View("RegisterApplication", new ApplicationView());
         }
     }
 }

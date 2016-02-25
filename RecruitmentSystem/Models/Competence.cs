@@ -11,8 +11,7 @@ namespace RecruitmentSystem.Models
         public long Id { get; set; }
 
         [Required]
-        [StringLength(50, MinimumLength = 1,
-            ErrorMessage = "")]
+        [StringLength(50, MinimumLength = 1, ErrorMessage = "")]
         [Index(IsUnique = true)]
         public string Name { get; set; }
 

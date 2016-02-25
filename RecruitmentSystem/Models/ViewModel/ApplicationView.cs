@@ -66,6 +66,11 @@ namespace RecruitmentSystem.Models.ViewModel
             SelectedCompetences[key] = SelectedYearsOfExperience;
         }
 
+        public void RemoveCompetence(Competence competence)
+        {
+            SelectedCompetences.Remove(competence);
+        }
+
         public void AddAvailability()
         {
             SelectedAvailabilities[SelectedFromDate] = SelectedToDate;
