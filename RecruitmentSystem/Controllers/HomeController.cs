@@ -1,8 +1,5 @@
 ﻿using System.Web.Mvc;
-using System.Globalization;
 using RecruitmentSystem.Controllers.Base;
-using System.Web;
-using System;
 
 namespace RecruitmentSystem.Controllers
 {
@@ -17,6 +14,5 @@ namespace RecruitmentSystem.Controllers
         {
             return View();
         }
-
     }
 }
