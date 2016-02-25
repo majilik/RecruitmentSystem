@@ -1,5 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using RecruitmentSystem.Resources;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Threading;
 
 namespace RecruitmentSystem.Models
 {
@@ -9,12 +12,23 @@ namespace RecruitmentSystem.Models
     public class Competence
     {
         public long Id { get; set; }
+        
+        public string Name { get
+            {
+                switch(LocalesExtension.LocalesFromString(Thread.CurrentThread.CurrentUICulture.Name))
+                {
+                    case Locales.SV_SE:
+                        return SwedishName;
+                    case Locales.EN_US:
+                    default:
+                        return EnglishName;
+                }
+            }
+        }
 
-        [Required]
-        [StringLength(50, MinimumLength = 1,
-            ErrorMessage = "")]
-        [Index(IsUnique = true)]
-        public string Name { get; set; }
+        public string SwedishName { get; set; }
+
+        public string EnglishName { get; set; }
 
         [Timestamp]
         public byte[] Timestamp { get; set; }

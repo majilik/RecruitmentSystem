@@ -64,8 +64,8 @@ namespace RecruitmentSystem.DAL
 
             var competence = new List<Competence>
             {
-                new Competence{ Name = "Korvgrillning" },
-                new Competence{ Name = "Karuselldrift" }
+                new Competence{ SwedishName = "Korvgrillning", EnglishName = "Sausage BBQ" },
+                new Competence{ SwedishName = "Karuselldrift", EnglishName = "Carousel driver" }
             };
             competence.ForEach(c => context.Competences.Add(c));
             context.SaveChanges();
