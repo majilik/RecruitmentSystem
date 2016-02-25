@@ -54,12 +54,12 @@ namespace RecruitmentSystem.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError("wrong_pass", "Wrong password.");
+                        ModelState.AddModelError("wrong_pass", Localization.Models.ViewModels.LoginView.ModelErrorWrongPassword);
                     }
                 }
                 else
                 {
-                    ModelState.AddModelError("non_existent_user", "User doesn't exist.");
+                    ModelState.AddModelError("non_existent_user", Localization.Models.ViewModels.LoginView.ModelErrorNonExistUser);
                 }
             }
 
@@ -107,12 +107,12 @@ namespace RecruitmentSystem.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError("username_in_use", "Username already in use.");
+                        ModelState.AddModelError("username_in_use", Localization.Models.ViewModels.RegisterView.ModelErrorUsernameTaken);
                     }
                 }
                 else
                 {
-                    ModelState.AddModelError("verify_pass", "Passwords must be identical.");
+                    ModelState.AddModelError("verify_pass", Localization.Models.ViewModels.RegisterView.ModelErrorVerifyPasswordFailed);
                 }
             }
 

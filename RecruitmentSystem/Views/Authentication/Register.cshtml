@@ -1,10 +1,10 @@
 ﻿@model RecruitmentSystem.Models.ViewModel.RegisterView
 
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = Localization.Views.Authentication.Register.Title;
 }
 
-<h2>Register Account</h2>
+<h2>@Localization.Views.Authentication.Register.Title</h2>
 
 @using (Html.BeginForm()) 
 {
@@ -72,7 +72,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Register" class="btn btn-default" />
+                <input type="submit" value="@Localization.Views.Authentication.Register.RegisterButton" class="btn btn-default" />
             </div>
         </div>
     </div>

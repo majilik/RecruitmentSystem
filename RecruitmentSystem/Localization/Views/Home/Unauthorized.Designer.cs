@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Resources {
+namespace Localization.Views.Home {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RecruitmentSystem.App_LocalResources.Views.Home.Unauthorized", typeof(Unauthorized).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RecruitmentSystem.Localization.Views.Home.Unauthorized", typeof(Unauthorized).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

@@ -37,6 +37,9 @@ namespace RecruitmentSystem.Security
 
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
+            if (httpContext == null)
+                return false;
+
             string user = httpContext.User.Identity.Name;
 
             if (_roles.Any(role => _userManager.IsUserInRole(user, role)))
