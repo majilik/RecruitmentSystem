@@ -12,7 +12,7 @@ namespace RecruitmentSystem.Models
     public class Competence
     {
         public long Id { get; set; }
-        
+
         public string Name { get
             {
                 switch(LocalesExtension.LocalesFromString(Thread.CurrentThread.CurrentUICulture.Name))
