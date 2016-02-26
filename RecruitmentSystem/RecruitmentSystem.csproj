@@ -213,10 +213,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\Base\BaseController.cs" />
+    <Compile Include="Controllers\RecruiterController.cs" />
     <Compile Include="Controllers\RegisterApplicationController.cs" />
+    <Compile Include="DAL\Applications\ApplicationManager.cs" />
     <Compile Include="DAL\DbContextFactory.cs" />
     <Compile Include="DAL\QueryService.cs" />
     <Compile Include="Models\ViewModel\ApplicationView.cs" />
+    <Compile Include="Models\ViewModel\RecruiterView.cs" />
     <Compile Include="Resources\Locales.cs" />
     <Compile Include="Security\FormsAuthenticationWrap.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -337,6 +340,7 @@
     <Content Include="Views\Authentication\Login.cshtml" />
     <Content Include="Views\Applicant\RegisterApplication.cshtml" />
     <Content Include="Views\Templates\Date.cshtml" />
+    <Content Include="Views\Recruiter\ListApplications.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
