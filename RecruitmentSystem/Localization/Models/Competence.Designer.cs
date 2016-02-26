@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Localization.Views.Home {
+namespace Localization.Models {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Localization.Views.Home {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Unauthorized {
+    public class Competence {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Unauthorized() {
+        internal Competence() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Localization.Views.Home {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RecruitmentSystem.Localization.Views.Home.Unauthorized", typeof(Unauthorized).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RecruitmentSystem.Localization.Models.Competence", typeof(Competence).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +61,20 @@ namespace Localization.Views.Home {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You are not authorized to access this resource..
+        ///   Looks up a localized string similar to Sausage BBQ.
         /// </summary>
-        public static string Message {
+        public static string Competence1 {
             get {
-                return ResourceManager.GetString("Message", resourceCulture);
+                return ResourceManager.GetString("Competence1", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Oops!.
+        ///   Looks up a localized string similar to Carousel operation.
         /// </summary>
-        public static string Title {
+        public static string Competence2 {
             get {
-                return ResourceManager.GetString("Title", resourceCulture);
+                return ResourceManager.GetString("Competence2", resourceCulture);
             }
         }
     }

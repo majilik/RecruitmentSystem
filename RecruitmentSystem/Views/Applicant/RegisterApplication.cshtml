@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "RegisterApplication";
+    int i = 0;
 }
 
 <h2>Register Application</h2>
@@ -10,10 +11,6 @@
 @using (Html.BeginForm("AddCompetence", "Applicant"))
 {
     @Html.AntiForgeryToken()
-    foreach (KeyValuePair<RecruitmentSystem.Models.Competence, decimal> entry in Model.SelectedCompetences)
-    {
-        @Html.HiddenFor(model => model.SelectedCompetences[entry.Key])
-    }
 
     <div class="form-horizontal">
         <div class="form-group">
@@ -30,6 +27,40 @@
         <div class="form-group">
             <input type="submit" value="Add" class="btn btn-primary col-lg-offset-2" />
         </div>
+
+        <table class="table">
+            <tr>
+                <th class="col-lg-4">
+                    @Html.DisplayNameFor(model => model.SelectedCompetence)
+                </th>
+                <th class="col-lg-4">
+                    @Html.DisplayNameFor(model => model.SelectedYearsOfExperience)
+                </th>
+                <th class="col-lg-4"></th>
+            </tr>
+
+            @i = 0;
+            @foreach (KeyValuePair<RecruitmentSystem.Models.Competence, decimal> entry in Model.SelectedCompetences)
+            {
+                <tr>
+                    <td>
+                        <input type="hidden" name="Model.SelectedCompetences[@i].Key" value="@entry.Key" />
+                        <input type="hidden" name="Model.SelectedCompetences[@i].Value" value="@entry.Value" />
+                        <input type="hidden" name="Model.SelectedCompetences.Index" value="@i" />
+                        @i++;
+                    </td>
+                    <td class="col-lg-4">
+                        @Html.DisplayFor(model => entry.Key.LocalizedName)
+                    </td>
+                    <td class="col-lg-4">
+                        @Html.DisplayFor(model => entry.Value)
+                    </td>
+                    <td class="col-lg-4">
+                        @Html.ActionLink("undo", "Delete", "Applicant")
+                    </td>
+                </tr>
+            }
+        </table>
     </div>
 }
 
@@ -68,26 +99,26 @@
 
 <table class="table">
     <tr>
-        <th>
+        <th class="col-lg-4">
             @Html.DisplayNameFor(model => model.SelectedCompetence)
         </th>
-        <th>
+        <th class="col-lg-4">
             @Html.DisplayNameFor(model => model.SelectedYearsOfExperience)
         </th>
-        <th></th>
+        <th class="col-lg-4"></th>
     </tr>
 
     @foreach (KeyValuePair<RecruitmentSystem.Models.Competence, decimal> entry in Model.SelectedCompetences)
     {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => entry.Key.Name)
+            <td class="col-lg-4">
+                @Html.DisplayFor(modelItem => entry.Key.LocalizedName)
             </td>
-            <td>
+            <td class="col-lg-4">
                 @Html.DisplayFor(modelItem => entry.Value)
             </td>
-            <td>
-                @Html.ActionLink("delete", "Delete", "Applicant")
+            <td class="col-lg-4">
+                @Html.ActionLink("undo", "Delete", "Applicant")
             </td>
         </tr>
     }
@@ -101,7 +132,7 @@
         <th class="col-lg-4">
             @Html.DisplayNameFor(model => model.SelectedToDate)
         </th class="col-lg-4">
-        <th></th>
+        <th class="col-lg-4"></th>
     </tr>
 
     @foreach (KeyValuePair<DateTime, DateTime> entry in Model.SelectedAvailabilities)

@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -11,9 +10,13 @@ namespace RecruitmentSystem.Models.ViewModel
 {
     public class ApplicationView
     {
-        public ApplicationView()
+        public ApplicationView() : this(new QueryService<Competence>().GetAll())
         {
-            _Competences = new QueryService<Competence>().GetAll();
+        }
+
+        public ApplicationView(IList<Competence> competences)
+        {
+            _competences = competences;
             Competences = new List<SelectListItem>();
             SelectedCompetences = new Dictionary<Competence, decimal>();
             SelectedAvailabilities = new Dictionary<DateTime, DateTime>();
@@ -33,9 +36,9 @@ namespace RecruitmentSystem.Models.ViewModel
             {
                 List<SelectListItem> competences = new List<SelectListItem>();
                 competences.Add(new SelectListItem() { Text = "Select competence..." });
-                foreach (Competence competence in _Competences)
+                foreach (Competence competence in _competences)
                 {
-                    competences.Add(new SelectListItem() { Value = competence.Id.ToString(), Text = competence.Name });
+                    competences.Add(new SelectListItem() { Value = competence.Id.ToString(), Text = competence.LocalizedName });
                 }
 
                 return competences;
@@ -47,7 +50,7 @@ namespace RecruitmentSystem.Models.ViewModel
 
         public Dictionary<Competence, decimal> SelectedCompetences { get; set; }
 
-        private IEnumerable<Competence> _Competences { get; set; }
+        public IEnumerable<Competence> _competences { get; set; }
 
         [DisplayName("Available From")]
         [DataType(DataType.Date)]
@@ -63,8 +66,9 @@ namespace RecruitmentSystem.Models.ViewModel
 
         public void AddCompetence()
         {
-            Competence key = _Competences.Single(c => c.Id == SelectedCompetence);
+            Competence key = _competences.Single(c => c.Id == SelectedCompetence);
             SelectedCompetences[key] = SelectedYearsOfExperience;
+            key = null;
         }
 
         public void RemoveCompetence(Competence competence)
