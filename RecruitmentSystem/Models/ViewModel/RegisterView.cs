@@ -12,24 +12,24 @@ namespace RecruitmentSystem.Models.ViewModel
         public long Id { get; set; }
 
         [Required(ErrorMessageResourceName = "NameRequiredErrorMessage", ErrorMessageResourceType = typeof(Localization.Models.ViewModels.RegisterView))]
-        [RegularExpression(@"^[\u00c0-\u01ffa-zA-Z'-]{2,}( [\u00c0-\u01ffa-zA-Z'-]{2,})*$",
-            ErrorMessageResourceName = "NameRegexErrorMessage", ErrorMessageResourceType = typeof(Localization.Models.ViewModels.RegisterView))]
         [StringLength(50, MinimumLength = 2,
             ErrorMessageResourceName = "NameLengthErrorMessage", ErrorMessageResourceType = typeof(Localization.Models.ViewModels.RegisterView))]
+        [RegularExpression(@"^[\u00c0-\u01ffa-zA-Z'-]{2,}( [\u00c0-\u01ffa-zA-Z'-]{2,})*$",
+            ErrorMessageResourceName = "NameRegexErrorMessage", ErrorMessageResourceType = typeof(Localization.Models.ViewModels.RegisterView))]
         [Display(Name = "NameDisplayName", ResourceType = typeof(Localization.Models.ViewModels.RegisterView))]
         public string Name { get; set; }
 
         [Required(ErrorMessageResourceName = "SurnameRequiredErrorMessage", ErrorMessageResourceType = typeof(Localization.Models.ViewModels.RegisterView))]
-        [RegularExpression(@"^[\u00c0-\u01ffa-zA-Z'-]{2,}$",
-            ErrorMessageResourceName = "SurnameRegexErrorMessage", ErrorMessageResourceType = typeof(Localization.Models.ViewModels.RegisterView))]
         [StringLength(50, MinimumLength = 2,
             ErrorMessageResourceName = "SurnameLengthErrorMessage", ErrorMessageResourceType = typeof(Localization.Models.ViewModels.RegisterView))]
+        [RegularExpression(@"^[\u00c0-\u01ffa-zA-Z'-]{2,}$",
+            ErrorMessageResourceName = "SurnameRegexErrorMessage", ErrorMessageResourceType = typeof(Localization.Models.ViewModels.RegisterView))]
         [Display(Name = "SurnameDisplayName", ResourceType = typeof(Localization.Models.ViewModels.RegisterView))]
         public string Surname { get; set; }
 
+        [StringLength(13, ErrorMessageResourceName = "SsnLengthErrorMessage", ErrorMessageResourceType = typeof(Localization.Models.ViewModels.RegisterView))]
         [RegularExpression(@"^(19|20)[0-9]{2}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])-[0-9]{4}$",
             ErrorMessageResourceName = "SsnRegexErrorMessage", ErrorMessageResourceType = typeof(Localization.Models.ViewModels.RegisterView))]
-        [StringLength(13, ErrorMessageResourceName = "SsnLengthErrorMessage", ErrorMessageResourceType = typeof(Localization.Models.ViewModels.RegisterView))]
         [Display(Name = "SsnDisplayName", ResourceType = typeof(Localization.Models.ViewModels.RegisterView))]
         [Index(IsUnique = true)]
         public string Ssn { get; set; }

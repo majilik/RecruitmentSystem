@@ -19,6 +19,22 @@ namespace RecruitmentSystem.Resources
     /// </summary>
     public class LocalesExtension
     {
+
+        public static Locales LocalesFromString(string locale)
+        {
+            if (locale == null)
+                return Locales.EN_US;
+            locale = locale.ToLower();
+            switch (locale)
+            {
+                case "sv-se":
+                    return Locales.SV_SE;
+                case "en-us":
+                default:
+                    return Locales.EN_US;
+            }
+        }
+
         /// <summary>
         /// Parses a locales enum and returns corresponding CultureInfo.
         /// </summary>

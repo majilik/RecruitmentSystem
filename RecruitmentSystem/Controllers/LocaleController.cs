@@ -18,7 +18,6 @@ namespace RecruitmentSystem.Controllers
         public ActionResult ChangeLocale(Locales? locale)
         {
             //TODO: Reference from http://afana.me/post/aspnet-mvc-internationalization.aspx in Architecture Document
-            //NOTE: Locale data is saved in cookie '_locale'.
             string localeName = LocalesExtension.ParseCultureInfo(locale).Name;
 
             HttpCookie cookie = Request.Cookies["_locale"];
