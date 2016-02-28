@@ -15,7 +15,7 @@ namespace RecruitmentSystem.Controllers
     /// ASP.NET MVC Web application and responds to this action.
     /// </summary>
     //[PersonAuthorization("applicant")]
-    public class ApplicantController : Controller
+    public class ApplicantController : BaseController
     {
         private QueryService<Competence> _competenceQueryService;
         private QueryService<CompetenceProfile> _competenceProfileQueryService;
@@ -40,7 +40,7 @@ namespace RecruitmentSystem.Controllers
         /// with the <see cref="ApplicationView"/> model.</returns>
         public ActionResult RegisterApplication()
         {
-            return View(new ApplicationView());
+            return View(new ApplicationView(_competenceQueryService.GetAll()));
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace RecruitmentSystem.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddCompetence(ApplicationView view)
+        public ActionResult AddCompetence([Bind(Include = "SelectedCompetence,SelectedYearsOfExperience,SelectedCompetences,Competences,_competences")] ApplicationView view)
         {
             if (ModelState.IsValid)
             {
