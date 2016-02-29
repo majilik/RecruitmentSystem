@@ -9,7 +9,7 @@ namespace RecruitmentSystem.Models
     public class Availability
     {
         public long Id { get; set; }
-        public virtual Person Person { get; set; }
+        public virtual Application Application { get; set; }
 
         [DataType(DataType.Date)]
         public DateTime FromDate { get; set; }

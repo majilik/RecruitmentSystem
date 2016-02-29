@@ -1,19 +1,19 @@
 ﻿@{
-    ViewBag.Title = Resources.Index.PageTitle;
+    ViewBag.Title = Localization.Views.Home.Index.PageTitle;
 }
 
 <div class="jumbotron">
-    <h1>@Resources.Index.JumbotronTitle</h1>
-    <p class="lead">@Resources.Index.JumbotronContent</p>
+    <h1>@Localization.Views.Home.Index.JumbotronTitle</h1>
+    <p class="lead">@Localization.Views.Home.Index.JumbotronContent</p>
 </div>
 
 <div class="row">
     <div class="col-md-4">
-        <h2>@Resources.Index.InformationTitle</h2>
+        <h2>@Localization.Views.Home.Index.InformationTitle</h2>
         <p>
-            @Resources.Index.InformationContent
+            @Localization.Views.Home.Index.InformationContent
         </p>
-        <p>@Html.ActionLink(Resources.Index.InformationRegisterLink, "Register", "Authentication")</p>
-        <p>@Html.ActionLink(Resources.Index.InformationLoginLink, "Login", "Authentication")</p>
+        <p>@Html.ActionLink(Localization.Views.Home.Index.InformationRegisterLink, "Register", "Authentication")</p>
+        <p>@Html.ActionLink(Localization.Views.Home.Index.InformationLoginLink, "Login", "Authentication")</p>
     </div>
 </div>

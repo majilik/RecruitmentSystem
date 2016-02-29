@@ -173,52 +173,107 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_LocalResources\Views\Home\Index.Designer.cs">
+    <Compile Include="Controllers\RecruiterController.cs" />
+    <Compile Include="Localization\Models\Competence.Designer.cs">
+      <DependentUpon>Competence.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Index.resx</DependentUpon>
     </Compile>
-    <Compile Include="App_LocalResources\Views\Home\Index.sv-SE.Designer.cs">
+    <Compile Include="Localization\Models\Competence.sv-SE.Designer.cs">
+      <DependentUpon>Competence.sv-SE.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Index.sv-SE.resx</DependentUpon>
     </Compile>
-    <Compile Include="App_LocalResources\Views\Home\Unauthorized.Designer.cs">
+    <Compile Include="Localization\Models\ViewModels\LoginView.sv-SE.Designer.cs">
+      <DependentUpon>LoginView.sv-SE.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Unauthorized.resx</DependentUpon>
     </Compile>
-    <Compile Include="App_LocalResources\Views\Shared\Error.Designer.cs">
+    <Compile Include="Localization\Models\ViewModels\LoginView.Designer.cs">
+      <DependentUpon>LoginView.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Error.resx</DependentUpon>
     </Compile>
-    <Compile Include="App_LocalResources\Views\Shared\Error.sv-SE.Designer.cs">
+    <Compile Include="Localization\Models\ViewModels\RegisterView.sv-SE.Designer.cs">
+      <DependentUpon>RegisterView.sv-SE.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Error.sv-SE.resx</DependentUpon>
     </Compile>
-    <Compile Include="App_LocalResources\Views\Shared\_Layout.Designer.cs">
+    <Compile Include="Localization\Models\ViewModels\RegisterView.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>_Layout.resx</DependentUpon>
-    </Compile>
-    <Compile Include="App_LocalResources\Views\Shared\_Layout.sv-SE.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>_Layout.sv-SE.resx</DependentUpon>
+      <DependentUpon>RegisterView.resx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\Base\BaseController.cs" />
-    <Compile Include="Controllers\RecruiterController.cs" />
     <Compile Include="Controllers\RegisterApplicationController.cs" />
     <Compile Include="DAL\Applications\ApplicationManager.cs" />
     <Compile Include="DAL\DbContextFactory.cs" />
     <Compile Include="DAL\QueryService.cs" />
-    <Compile Include="Models\ViewModel\Application.cs" />
+    <Compile Include="Localization\Views\Authentication\Login.Designer.cs">
+      <DependentUpon>Login.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Localization\Views\Authentication\Login.sv-SE.Designer.cs">
+      <DependentUpon>Login.sv-SE.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Localization\Views\Authentication\Register.Designer.cs">
+      <DependentUpon>Register.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Localization\Views\Authentication\Register.sv-SE.Designer.cs">
+      <DependentUpon>Register.sv-SE.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Localization\Views\Home\Index.Designer.cs">
+      <DependentUpon>Index.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Localization\Views\Home\Index.sv-SE.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.sv-SE.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Localization\Views\Home\Unauthorized.Designer.cs">
+      <DependentUpon>Unauthorized.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Localization\Views\Home\Unauthorized.sv-SE.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Unauthorized.sv-SE.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Localization\Views\Shared\Error.Designer.cs">
+      <DependentUpon>Error.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Localization\Views\Shared\Error.sv-SE.Designer.cs">
+      <DependentUpon>Error.sv-SE.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Localization\Views\Shared\_Layout.Designer.cs">
+      <DependentUpon>_Layout.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Localization\Views\Shared\_Layout.sv-SE.Designer.cs">
+      <DependentUpon>_Layout.sv-SE.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\Application.cs" />
     <Compile Include="Models\ViewModel\ApplicationView.cs" />
     <Compile Include="Models\ViewModel\RecruiterView.cs" />
     <Compile Include="Resources\Locales.cs" />
@@ -345,8 +400,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="App_LocalResources\Models\" />
-    <Folder Include="App_LocalResources\Views\Authentication\" />
+    <Folder Include="Views\Locale\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -356,41 +410,95 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="App_LocalResources\Views\Home\Index.sv-SE.resx">
+    <EmbeddedResource Include="Localization\Models\Competence.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Index.sv-SE.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
+      <LastGenOutput>Competence.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Localization.Models</CustomToolNamespace>
     </EmbeddedResource>
-    <Content Include="App_LocalResources\Views\Home\Unauthorized.sv-SE.resx" />
-    <EmbeddedResource Include="App_LocalResources\Views\Shared\Error.resx">
+    <EmbeddedResource Include="Localization\Models\Competence.sv-SE.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Error.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
+      <LastGenOutput>Competence.sv-SE.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Localization.Models</CustomToolNamespace>
     </EmbeddedResource>
-    <EmbeddedResource Include="App_LocalResources\Views\Shared\Error.sv-SE.resx">
+    <EmbeddedResource Include="Localization\Models\ViewModels\LoginView.sv-SE.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Error.sv-SE.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
+      <LastGenOutput>LoginView.sv-SE.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Localization.Models.ViewModels</CustomToolNamespace>
     </EmbeddedResource>
-    <EmbeddedResource Include="App_LocalResources\Views\Home\Index.resx">
+    <EmbeddedResource Include="Localization\Models\ViewModels\LoginView.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>LoginView.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Localization.Models.ViewModels</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Models\ViewModels\RegisterView.sv-SE.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RegisterView.sv-SE.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Localization.Models.ViewModels</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Models\ViewModels\RegisterView.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RegisterView.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Localization.Models.ViewModels</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Views\Authentication\Login.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Login.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Localization.Views.Authentication</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Views\Authentication\Login.sv-SE.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Login.sv-SE.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Localization.Views.Authentication</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Views\Authentication\Register.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Register.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Localization.Views.Authentication</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Views\Authentication\Register.sv-SE.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Register.sv-SE.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Localization.Views.Authentication</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Views\Home\Index.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Index.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
+      <CustomToolNamespace>Localization.Views.Home</CustomToolNamespace>
     </EmbeddedResource>
-    <EmbeddedResource Include="App_LocalResources\Views\Home\Unauthorized.resx">
+    <EmbeddedResource Include="Localization\Views\Home\Index.sv-SE.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.sv-SE.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Localization.Views.Home</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Views\Home\Unauthorized.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Unauthorized.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
+      <CustomToolNamespace>Localization.Views.Home</CustomToolNamespace>
     </EmbeddedResource>
-    <EmbeddedResource Include="App_LocalResources\Views\Shared\_Layout.sv-SE.resx">
+    <EmbeddedResource Include="Localization\Views\Home\Unauthorized.sv-SE.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>_Layout.sv-SE.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
+      <LastGenOutput>Unauthorized.sv-SE.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Localization.Views.Home</CustomToolNamespace>
     </EmbeddedResource>
-    <EmbeddedResource Include="App_LocalResources\Views\Shared\_Layout.resx">
+    <EmbeddedResource Include="Localization\Views\Shared\Error.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Error.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Localization.Views.Shared</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Views\Shared\Error.sv-SE.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Error.sv-SE.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Localization.Views.Shared</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Views\Shared\_Layout.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>_Layout.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
+      <CustomToolNamespace>Localization.Views.Shared</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Views\Shared\_Layout.sv-SE.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>_Layout.sv-SE.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Localization.Views.Shared</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿
+using System.ComponentModel.DataAnnotations;
 
 namespace RecruitmentSystem.Models
 {
@@ -8,7 +9,7 @@ namespace RecruitmentSystem.Models
     public class CompetenceProfile
     {
         public long Id { get; set; }
-        public virtual Person Person { get; set; }
+        public virtual Application Application { get; set; }
         public virtual Competence Competence { get; set; }
         public decimal YearsOfExperience { get; set; }
 

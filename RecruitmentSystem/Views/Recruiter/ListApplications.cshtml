@@ -7,7 +7,7 @@
 <h2>List Applications</h2>
 <hr />
 
-@using (Html.BeginForm("Search", "Recruiter"))
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
@@ -34,8 +34,8 @@
     </div>
     <div class="form-horizontal">
         <div class="form-group">
-            @Html.LabelFor(model => model.DatesOfRegistration, htmlAttributes: new { @class = "control-label col-lg-3" })
-            @Html.DropDownListFor(model => model.SelectedDateOfRegistration, new SelectList(Model.DatesOfRegistration, "Value", "Text"),
+            @Html.LabelFor(model => model.DatesOfApplication, htmlAttributes: new { @class = "control-label col-lg-3" })
+            @Html.DropDownListFor(model => model.SelectedDateOfRegistration, new SelectList(Model.DatesOfApplication, "Value", "Text"),
                 new { @class = "form-control col-lg-4", placeholder = "Choose a from date..." })
         </div>
     </div>
@@ -53,6 +53,26 @@
     </div>
 
 }
+
+<table class="table">
+    @foreach (RecruitmentSystem.Models.Application entry in Model.Result)
+    {
+        <tr>
+            <td class="col-lg-4">
+                @Html.DisplayFor(modelItem => entry.Person.Name)
+            </td>
+            <td class="col-lg-4">
+                @Html.DisplayFor(modelItem => entry.Person.Surname)
+            </td>
+            <td class="col-lg-1">
+                @Html.DisplayFor(modelItem => entry.ApplicationDate)
+            </td>
+            <td class="col-lg-1">
+                @Html.ActionLink("View", "View", new { id = entry.Id });
+            </td>
+        </tr>
+    }
+</table>
 
 
 

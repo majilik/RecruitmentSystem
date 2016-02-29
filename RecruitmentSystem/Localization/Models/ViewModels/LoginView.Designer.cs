@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Resources {
+namespace Localization.Models.ViewModels {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Index {
+    public class LoginView {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Index() {
+        internal LoginView() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RecruitmentSystem.App_LocalResources.Views.Home.Index", typeof(Index).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RecruitmentSystem.Localization.Models.ViewModels.LoginView", typeof(LoginView).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,65 +61,56 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Register an account to apply today!.
+        ///   Looks up a localized string similar to User doesn&apos;t exist..
         /// </summary>
-        public static string InformationContent {
+        public static string ModelErrorNonExistUser {
             get {
-                return ResourceManager.GetString("InformationContent", resourceCulture);
+                return ResourceManager.GetString("ModelErrorNonExistUser", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Log In.
+        ///   Looks up a localized string similar to Wrong password..
         /// </summary>
-        public static string InformationLoginLink {
+        public static string ModelErrorWrongPassword {
             get {
-                return ResourceManager.GetString("InformationLoginLink", resourceCulture);
+                return ResourceManager.GetString("ModelErrorWrongPassword", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Register.
+        ///   Looks up a localized string similar to Password.
         /// </summary>
-        public static string InformationRegisterLink {
+        public static string PasswordDisplayName {
             get {
-                return ResourceManager.GetString("InformationRegisterLink", resourceCulture);
+                return ResourceManager.GetString("PasswordDisplayName", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Getting started.
+        ///   Looks up a localized string similar to Please enter password..
         /// </summary>
-        public static string InformationTitle {
+        public static string PasswordRequiredErrorMessage {
             get {
-                return ResourceManager.GetString("InformationTitle", resourceCulture);
+                return ResourceManager.GetString("PasswordRequiredErrorMessage", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Developed in the course IV1201..
+        ///   Looks up a localized string similar to Username.
         /// </summary>
-        public static string JumbotronContent {
+        public static string UsernameDisplayName {
             get {
-                return ResourceManager.GetString("JumbotronContent", resourceCulture);
+                return ResourceManager.GetString("UsernameDisplayName", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Recruitment System.
+        ///   Looks up a localized string similar to Please enter username..
         /// </summary>
-        public static string JumbotronTitle {
+        public static string UsernameRequiredErrorMessage {
             get {
-                return ResourceManager.GetString("JumbotronTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Home Page.
-        /// </summary>
-        public static string PageTitle {
-            get {
-                return ResourceManager.GetString("PageTitle", resourceCulture);
+                return ResourceManager.GetString("UsernameRequiredErrorMessage", resourceCulture);
             }
         }
     }

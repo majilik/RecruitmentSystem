@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using RecruitmentSystem.DAL.Authorization.Interfaces;
+using System.Web.Routing;
 
 namespace RecruitmentSystem.Security
 {
@@ -37,27 +38,26 @@ namespace RecruitmentSystem.Security
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
             if (httpContext == null)
-            {
-
-            }
+                return false;
 
             string user = httpContext.User.Identity.Name;
 
-            if (_roles.Length == 0)
-            {
-                return false;
-            }
-            else if (_roles.Any(role => _userManager.IsUserInRole(user, role)))
+            if (_roles.Any(role => _userManager.IsUserInRole(user, role)))
             {
                 return true;
             }
 
-            return base.AuthorizeCore(httpContext);
+            return httpContext.User.Identity.IsAuthenticated;
         }
-
+        
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
         {
-            filterContext.Result = new RedirectResult("~/Home/Unauthorized");
+            filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new
+            {
+                action = "Unauthorized",
+                controller = "Home",
+                area = ""
+            }));
         }
     }
 }

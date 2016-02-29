@@ -1,10 +1,10 @@
 ﻿@model RecruitmentSystem.Models.ViewModel.LoginView
 
 @{
-    ViewBag.Title = "Login";
+    ViewBag.Title = Localization.Views.Authentication.Login.Title;
 }
 
-<h2>Login</h2>
+<h2>@Localization.Views.Authentication.Login.Header</h2>
 
 @using (Html.BeginForm())
 {
@@ -33,7 +33,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Login" class="btn btn-default" />
+                <input type="submit" value="@Localization.Views.Authentication.Login.LoginButton" class="btn btn-default" />
             </div>
         </div>
     </div>

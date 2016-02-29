@@ -11,44 +11,50 @@ namespace RecruitmentSystem.Models.ViewModel
     {
         public long Id { get; set; }
 
-        [Required(ErrorMessage = "Name is required.")]
-        [RegularExpression(@"^[\u00c0-\u01ffa-zA-Z'-]{2,}( [\u00c0-\u01ffa-zA-Z'-]{2,})*$",
-            ErrorMessage = "Invalid characters in name!")]
+        [Required(ErrorMessageResourceName = "NameRequiredErrorMessage", ErrorMessageResourceType = typeof(Localization.Models.ViewModels.RegisterView))]
         [StringLength(50, MinimumLength = 2,
-            ErrorMessage = "Name must be between 2 and 50 characters!")]
+            ErrorMessageResourceName = "NameLengthErrorMessage", ErrorMessageResourceType = typeof(Localization.Models.ViewModels.RegisterView))]
+        [RegularExpression(@"^[\u00c0-\u01ffa-zA-Z'-]{2,}( [\u00c0-\u01ffa-zA-Z'-]{2,})*$",
+            ErrorMessageResourceName = "NameRegexErrorMessage", ErrorMessageResourceType = typeof(Localization.Models.ViewModels.RegisterView))]
+        [Display(Name = "NameDisplayName", ResourceType = typeof(Localization.Models.ViewModels.RegisterView))]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Surname is required.")]
-        [RegularExpression(@"^[\u00c0-\u01ffa-zA-Z'-]{2,}$",
-            ErrorMessage = "Invalid characters in surname!")]
+        [Required(ErrorMessageResourceName = "SurnameRequiredErrorMessage", ErrorMessageResourceType = typeof(Localization.Models.ViewModels.RegisterView))]
         [StringLength(50, MinimumLength = 2,
-            ErrorMessage = "Surname must be between 2 and 50 characters!")]
+            ErrorMessageResourceName = "SurnameLengthErrorMessage", ErrorMessageResourceType = typeof(Localization.Models.ViewModels.RegisterView))]
+        [RegularExpression(@"^[\u00c0-\u01ffa-zA-Z'-]{2,}$",
+            ErrorMessageResourceName = "SurnameRegexErrorMessage", ErrorMessageResourceType = typeof(Localization.Models.ViewModels.RegisterView))]
+        [Display(Name = "SurnameDisplayName", ResourceType = typeof(Localization.Models.ViewModels.RegisterView))]
         public string Surname { get; set; }
 
+        [StringLength(13, ErrorMessageResourceName = "SsnLengthErrorMessage", ErrorMessageResourceType = typeof(Localization.Models.ViewModels.RegisterView))]
         [RegularExpression(@"^(19|20)[0-9]{2}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])-[0-9]{4}$",
-            ErrorMessage = "Please enter a valid Social Security Number on the form YYYYMMDD-XXXX")]
-        [StringLength(13, ErrorMessage = "Social Security Number must be 13 characters!")]
-        [DisplayName("Social Security Number")]
+            ErrorMessageResourceName = "SsnRegexErrorMessage", ErrorMessageResourceType = typeof(Localization.Models.ViewModels.RegisterView))]
+        [Display(Name = "SsnDisplayName", ResourceType = typeof(Localization.Models.ViewModels.RegisterView))]
         [Index(IsUnique = true)]
         public string Ssn { get; set; }
 
-        [EmailAddress(ErrorMessage = "Invalid e-mail!")]
-        [StringLength(100, MinimumLength = 5)]
+        [EmailAddress(ErrorMessageResourceName = "EmailInvalidErrorMessage", ErrorMessageResourceType = typeof(Localization.Models.ViewModels.RegisterView))]
+        [StringLength(100, MinimumLength = 5, 
+            ErrorMessageResourceName = "EmailLengthErrorMessage", ErrorMessageResourceType = typeof(Localization.Models.ViewModels.RegisterView))]
+        [Display(Name = "EmailDisplayName", ResourceType = typeof(Localization.Models.ViewModels.RegisterView))]
         [Index(IsUnique = true)]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Password is required.")]
+        [Required(ErrorMessageResourceName = "PasswordRequiredErrorMessage", ErrorMessageResourceType = typeof(Localization.Models.ViewModels.RegisterView))]
+        [Display(Name = "PasswordDisplayName", ResourceType = typeof(Localization.Models.ViewModels.RegisterView))]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Required(ErrorMessage = "Password must be verified.")]
-        [DisplayName("Verify Password")]
+        [Required(ErrorMessageResourceName = "VerifyPasswordRequiredErrorMessage", ErrorMessageResourceType = typeof(Localization.Models.ViewModels.RegisterView))]
+        [Display(Name = "VerifyPasswordDisplayName", ResourceType = typeof(Localization.Models.ViewModels.RegisterView))]
         [DataType(DataType.Password)]
         public string PasswordVerify { get; set; }
 
-        [Required(ErrorMessage = "Username is required.")]
+        [Required(ErrorMessageResourceName = "UsernameRequiredErrorMessage", ErrorMessageResourceType = typeof(Localization.Models.ViewModels.RegisterView))]
         [StringLength(30, MinimumLength = 1,
-            ErrorMessage = "Please check that the entered username is between 1 and 30 characters long")]
+            ErrorMessageResourceName = "UsernameLengthErrorMessage", ErrorMessageResourceType = typeof(Localization.Models.ViewModels.RegisterView))]
+        [Display(Name = "UsernameDisplayName", ResourceType = typeof(Localization.Models.ViewModels.RegisterView))]
         [Index(IsUnique = true)]
         public string Username { get; set; }
     }

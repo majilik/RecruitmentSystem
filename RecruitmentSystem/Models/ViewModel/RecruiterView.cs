@@ -16,9 +16,10 @@ namespace RecruitmentSystem.Models.ViewModel
             Competences = new List<SelectListItem>();
             FromDate = new List<SelectListItem>();
             ToDate = new List<SelectListItem>();
-            DatesOfRegistration = new List<SelectListItem>();
+            DatesOfApplication = new List<SelectListItem>();
             Names = new List<SelectListItem>();
-            _Persons = new QueryService<Person>().GetAll();
+            Result = new List<Application>();
+            _Applications = new QueryService<Application>().GetAll();
             _Competences = new QueryService<Competence>().GetAll();
             _Availabilities = new QueryService<Availability>().GetAll();
         }
@@ -28,22 +29,22 @@ namespace RecruitmentSystem.Models.ViewModel
 
         
         private IEnumerable<Availability> _Availabilities { get; set; }
-        private IEnumerable<Person> _Persons { get; set; }
+        private IEnumerable<Application> _Applications { get; set; }
         private List<SelectListItem> _Names = new List<SelectListItem>();
-        public IEnumerable<SelectListItem> DatesOfRegistration
+        public IEnumerable<SelectListItem> DatesOfApplication
         {
             get
             {
-                List<SelectListItem> datesOfRegistration = new List<SelectListItem>();
-                datesOfRegistration.Add(new SelectListItem() { Text = "Any" });
+                List<SelectListItem> datesOfApplication = new List<SelectListItem>();
+                datesOfApplication.Add(new SelectListItem() { Text = "Any" });
                 _Names.Add(new SelectListItem() { Text = "Any" });
-                foreach (Person p in _Persons)
+                foreach (Application a in _Applications)
                 {
-                    _Names.Add(new SelectListItem() { Value = p.Id.ToString(), Text = p.Name });
-                    datesOfRegistration.Add(new SelectListItem() { Value = p.Id.ToString(), Text = p.ApplicationDate.ToString() });
+                    _Names.Add(new SelectListItem() { Value = a.Person.Id.ToString(), Text = a.Person.Name });
+                    datesOfApplication.Add(new SelectListItem() { Value = a.Id.ToString(), Text = a.ApplicationDate.ToString() });
                 }
 
-                return datesOfRegistration;
+                return datesOfApplication;
             }
             set
             {
@@ -113,12 +114,15 @@ namespace RecruitmentSystem.Models.ViewModel
             set { }
         }
 
+        
+
         [DisplayName("Selected Competence")]
         public Competence SelectedCompetence { get; set; }
         public DateTime SelectedFromDate { get; set; }
         public DateTime SelectedToDate { get; set; }
         public DateTime SelectedDateOfRegistration { get; set; }
         public string SelectedName { get; set; }
+        public List<Application> Result { get; set; }
 
         
     }

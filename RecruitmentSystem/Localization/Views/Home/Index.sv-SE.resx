@@ -117,10 +117,32 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Message" xml:space="preserve">
-    <value>You are not authorized to access this resource</value>
+  <data name="InformationContent" xml:space="preserve">
+    <value>Registrera ett konto för att ansöka idag!</value>
+    <comment>Register an account to apply today!</comment>
   </data>
-  <data name="Title" xml:space="preserve">
-    <value>Oops!</value>
+  <data name="InformationLoginLink" xml:space="preserve">
+    <value>Logga in</value>
+    <comment>Log In</comment>
+  </data>
+  <data name="InformationRegisterLink" xml:space="preserve">
+    <value>Registrera</value>
+    <comment>Register</comment>
+  </data>
+  <data name="InformationTitle" xml:space="preserve">
+    <value>Kom igång!</value>
+    <comment>Getting started</comment>
+  </data>
+  <data name="JumbotronContent" xml:space="preserve">
+    <value>Utvecklat i kursen IV1201.</value>
+    <comment>Developed in the course IV1201.</comment>
+  </data>
+  <data name="JumbotronTitle" xml:space="preserve">
+    <value>Rekryteringssystem</value>
+    <comment>Recruitment System</comment>
+  </data>
+  <data name="PageTitle" xml:space="preserve">
+    <value>Hem</value>
+    <comment>Home Page</comment>
   </data>
 </root>

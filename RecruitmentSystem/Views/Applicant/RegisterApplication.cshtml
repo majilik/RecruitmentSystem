@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "RegisterApplication";
+    int i = 0;
 }
 
 <h2>Register Application</h2>
@@ -13,19 +14,53 @@
 
     <div class="form-horizontal">
         <div class="form-group">
-            @Html.LabelFor(model => model.Competences, htmlAttributes: new { @class = "control-label col-lg-3" })
+            @Html.LabelFor(model => model.Competences, htmlAttributes: new { @class = "control-label col-lg-3 col-lg-pull-1" })
             @Html.DropDownListFor(model => model.SelectedCompetence, new SelectList(Model.Competences, "Value", "Text"),
-                new { @class = "form-control col-lg-4", placeholder = "Choose a competence..." })
+                new { @class = "form-control col-lg-4 col-lg-pull-1" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.SelectedYearsOfExperience, htmlAttributes: new { @class = "control-label col-lg-3" })
-            @Html.EditorFor(model => model.SelectedYearsOfExperience, new { htmlAttributes = new { @class = "form-control col-lg-4" } })
+            @Html.LabelFor(model => model.SelectedYearsOfExperience, htmlAttributes: new { @class = "control-label col-lg-3 col-lg-pull-1" })
+            @Html.EditorFor(model => model.SelectedYearsOfExperience, new { htmlAttributes = new { @class = "form-control col-lg-4 col-lg-pull-1" } })
         </div>
 
         <div class="form-group">
-            <input type="submit" value="Add" class="btn btn-primary col-lg-offset-3" />
+            <input type="submit" value="Add" class="btn btn-primary col-lg-offset-2" />
         </div>
+
+        <table class="table">
+            <tr>
+                <th class="col-lg-4">
+                    @Html.DisplayNameFor(model => model.SelectedCompetence)
+                </th>
+                <th class="col-lg-4">
+                    @Html.DisplayNameFor(model => model.SelectedYearsOfExperience)
+                </th>
+                <th class="col-lg-4"></th>
+            </tr>
+
+            @i = 0;
+            @foreach (KeyValuePair<RecruitmentSystem.Models.Competence, decimal> entry in Model.SelectedCompetences)
+            {
+                <tr>
+                    <td>
+                        <input type="hidden" name="Model.SelectedCompetences[@i].Key" value="@entry.Key" />
+                        <input type="hidden" name="Model.SelectedCompetences[@i].Value" value="@entry.Value" />
+                        <input type="hidden" name="Model.SelectedCompetences.Index" value="@i" />
+                        @i++;
+                    </td>
+                    <td class="col-lg-4">
+                        @Html.DisplayFor(model => entry.Key.LocalizedName)
+                    </td>
+                    <td class="col-lg-4">
+                        @Html.DisplayFor(model => entry.Value)
+                    </td>
+                    <td class="col-lg-4">
+                        @Html.ActionLink("undo", "Delete", "Applicant")
+                    </td>
+                </tr>
+            }
+        </table>
     </div>
 }
 
@@ -35,63 +70,55 @@
 
     <div class="form-horizontal">
         <div class="form-group">
-            <div class="control-group">
-                @Html.LabelFor(model => model.SelectedFromDate, htmlAttributes: new { @class = "control-label col-lg-3" })
-                <div class="controls">
-                    <div class="input-group col-lg-3">
-                        @Html.TextBoxFor(model => model.SelectedFromDate,
-                            new { @class = "datepicker form-control", id = "date-picker-from", placeholder = "Select date..." })
-                        <label for="date-picker-from" class="input-group-addon btn">
-                            <span class="glyphicon glyphicon-calendar" />
-                        </label>
-                    </div>
-                </div>
+            @Html.LabelFor(model => model.SelectedFromDate, htmlAttributes: new { @class = "control-label col-lg-3 col-lg-pull-1" })
+            <div class="input-group col-lg-3 col-lg-pull-1" style="padding-left:0">
+                @Html.TextBoxFor(model => model.SelectedFromDate,
+                    new { @class = "datepicker form-control", id = "date-picker-from", placeholder = "Select date..." })
+                <label for="date-picker-from" class="input-group-addon btn">
+                    <span class="glyphicon glyphicon-calendar" />
+                </label>
             </div>
         </div>
 
         <div class="form-group">
-            <div class="control-group">
-                @Html.LabelFor(model => model.SelectedToDate, htmlAttributes: new { @class = "control-label col-lg-3" })
-                <div class="controls">
-                    <div class="input-group col-lg-3">
-                        @Html.TextBoxFor(model => model.SelectedToDate,
-                            new { @class = "datepicker form-control", id = "date-picker-to", placeholder = "Select date..." })
-                        <label for="date-picker-to" class="input-group-addon btn">
-                            <span class="glyphicon glyphicon-calendar" />
-                        </label>
-                    </div>
-                </div>
+            @Html.LabelFor(model => model.SelectedToDate, htmlAttributes: new { @class = "control-label col-lg-3 col-lg-pull-1" })
+            <div class="input-group col-lg-3 col-lg-pull-1" style="padding-left:0">
+                @Html.TextBoxFor(model => model.SelectedToDate,
+                    new { @class = "datepicker form-control", id = "date-picker-to", placeholder = "Select date..." })
+                <label for="date-picker-to" class="input-group-addon btn">
+                    <span class="glyphicon glyphicon-calendar" />
+                </label>
             </div>
         </div>
 
         <div class="form-group">
-            <input type="submit" value="Add" class="btn btn-primary col-lg-offset-3" />
+            <input type="submit" value="Add" class="btn btn-primary col-lg-offset-2" />
         </div>
     </div>
 }
 
 <table class="table">
     <tr>
-        <th>
+        <th class="col-lg-4">
             @Html.DisplayNameFor(model => model.SelectedCompetence)
         </th>
-        <th>
+        <th class="col-lg-4">
             @Html.DisplayNameFor(model => model.SelectedYearsOfExperience)
         </th>
-        <th></th>
+        <th class="col-lg-4"></th>
     </tr>
 
     @foreach (KeyValuePair<RecruitmentSystem.Models.Competence, decimal> entry in Model.SelectedCompetences)
     {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => entry.Key.Name)
+            <td class="col-lg-4">
+                @Html.DisplayFor(modelItem => entry.Key.LocalizedName)
             </td>
-            <td>
+            <td class="col-lg-4">
                 @Html.DisplayFor(modelItem => entry.Value)
             </td>
-            <td>
-                @Html.ActionLink("Delete", "Delete")
+            <td class="col-lg-4">
+                @Html.ActionLink("undo", "Delete", "Applicant")
             </td>
         </tr>
     }
@@ -99,25 +126,25 @@
 
 <table class="table">
     <tr>
-        <th>
+        <th class="col-lg-4">
             @Html.DisplayNameFor(model => model.SelectedFromDate)
         </th>
-        <th>
+        <th class="col-lg-4">
             @Html.DisplayNameFor(model => model.SelectedToDate)
-        </th>
-        <th></th>
+        </th class="col-lg-4">
+        <th class="col-lg-4"></th>
     </tr>
 
     @foreach (KeyValuePair<DateTime, DateTime> entry in Model.SelectedAvailabilities)
     {
         <tr>
-            <td>
+            <td class="col-lg-4">
                 @Html.DisplayFor(modelItem => entry.Key)
             </td>
-            <td>
+            <td class="col-lg-4">
                 @Html.DisplayFor(modelItem => entry.Value)
             </td>
-            <td>
+            <td class="col-lg-1">
                 @Html.ActionLink("Delete", "Delete")
             </td>
         </tr>
@@ -130,7 +157,7 @@
 
     <div class="form-horizontal">
         <div class="form-group">
-            <input type="submit" value="Apply" class="btn btn-primary col-lg-offset-3" />
+            <input type="submit" value="Apply" class="btn btn-primary col-lg-offset-2" />
         </div>
     </div>
 }

@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Reflection;
+using System.Resources;
 
 namespace RecruitmentSystem.Models
 {
@@ -11,12 +13,20 @@ namespace RecruitmentSystem.Models
         public long Id { get; set; }
 
         [Required]
-        [StringLength(50, MinimumLength = 1,
-            ErrorMessage = "")]
+        [StringLength(50, MinimumLength = 1, ErrorMessage = "")]
         [Index(IsUnique = true)]
         public string Name { get; set; }
 
         [Timestamp]
         public byte[] Timestamp { get; set; }
+
+        [NotMapped]
+        public string LocalizedName
+        {
+            get
+            {
+                return Localization.Models.Competence.ResourceManager.GetString("Competence" + Id);
+            }
+        }
     }
 }
