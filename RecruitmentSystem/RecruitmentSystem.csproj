@@ -218,6 +218,7 @@
     <Compile Include="DAL\Applications\ApplicationManager.cs" />
     <Compile Include="DAL\DbContextFactory.cs" />
     <Compile Include="DAL\QueryService.cs" />
+    <Compile Include="Models\ViewModel\Application.cs" />
     <Compile Include="Models\ViewModel\ApplicationView.cs" />
     <Compile Include="Models\ViewModel\RecruiterView.cs" />
     <Compile Include="Resources\Locales.cs" />
