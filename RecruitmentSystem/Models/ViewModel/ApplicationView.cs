@@ -17,9 +17,9 @@ namespace RecruitmentSystem.Models.ViewModel
         public ApplicationView(IList<Competence> competences)
         {
             _competences = competences;
+            SelectedCompetences = SelectedCompetences ?? new Dictionary<Competence, decimal>();
             Competences = new List<SelectListItem>();
-            SelectedCompetences = new Dictionary<Competence, decimal>();
-            SelectedAvailabilities = new Dictionary<DateTime, DateTime>();
+            SelectedAvailabilities = SelectedAvailabilities ?? new Dictionary<DateTime, DateTime>();
         }
 
         [DisplayName("Competence")]
@@ -35,7 +35,6 @@ namespace RecruitmentSystem.Models.ViewModel
             get
             {
                 List<SelectListItem> competences = new List<SelectListItem>();
-                competences.Add(new SelectListItem() { Text = "Select competence..." });
                 foreach (Competence competence in _competences)
                 {
                     competences.Add(new SelectListItem() { Value = competence.Id.ToString(), Text = competence.LocalizedName });
@@ -50,7 +49,7 @@ namespace RecruitmentSystem.Models.ViewModel
 
         public Dictionary<Competence, decimal> SelectedCompetences { get; set; }
 
-        public IEnumerable<Competence> _competences { get; set; }
+        private IEnumerable<Competence> _competences { get; set; }
 
         [DisplayName("Available From")]
         [DataType(DataType.Date)]
@@ -73,7 +72,7 @@ namespace RecruitmentSystem.Models.ViewModel
 
         public void RemoveCompetence(Competence competence)
         {
-            SelectedCompetences.Remove(competence);
+            //SelectedCompetences.Remove(competence);
         }
 
         public void AddAvailability()

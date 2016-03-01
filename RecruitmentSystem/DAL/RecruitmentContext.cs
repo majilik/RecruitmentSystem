@@ -46,6 +46,10 @@ namespace RecruitmentSystem.DAL
         {
         }
 
+        public RecruitmentContext(string connectionString) : base(connectionString)
+        {
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
