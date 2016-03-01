@@ -19,9 +19,6 @@ namespace RecruitmentSystem.Models
         //[DefaultValue(2)]
         public virtual Role Role { get; set; }
 
-        [Column(TypeName = "DateTime2")]
-        public DateTime ApplicationDate { get; set; }
-
         [Timestamp]
         public byte[] Timestamp { get; set; }
     }

@@ -1,0 +1,81 @@
+﻿@model RecruitmentSystem.Models.ViewModel.RecruiterView
+
+@{
+    ViewBag.Title = "ListApplications";
+}
+
+<h2>List Applications</h2>
+<hr />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Competences, htmlAttributes: new { @class = "control-label col-lg-3" })
+            @Html.DropDownListFor(model => model.SelectedCompetence, new SelectList(Model.Competences, "Value", "Text"),
+                new { @class = "form-control col-lg-4", placeholder = "Choose a competence..." })
+        </div>
+    </div>
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(model => model.FromDate, htmlAttributes: new { @class = "control-label col-lg-3" })
+            @Html.DropDownListFor(model => model.SelectedFromDate, new SelectList(Model.FromDate, "Value", "Text"),
+                new { @class = "form-control col-lg-4", placeholder = "Choose a from date..." })
+        </div>
+    </div>
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(model => model.ToDate, htmlAttributes: new { @class = "control-label col-lg-3" })
+            @Html.DropDownListFor(model => model.SelectedToDate, new SelectList(Model.ToDate, "Value", "Text"),
+                new { @class = "form-control col-lg-4", placeholder = "Choose a from date..." })
+        </div>
+    </div>
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(model => model.DatesOfApplication, htmlAttributes: new { @class = "control-label col-lg-3" })
+            @Html.DropDownListFor(model => model.SelectedDateOfRegistration, new SelectList(Model.DatesOfApplication, "Value", "Text"),
+                new { @class = "form-control col-lg-4", placeholder = "Choose a from date..." })
+        </div>
+    </div>
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Names, htmlAttributes: new { @class = "control-label col-lg-3" })
+            @Html.DropDownListFor(model => model.SelectedName, new SelectList(Model.Names, "Value", "Text"),
+                new { @class = "form-control col-lg-4", placeholder = "Choose a from date..." })
+        </div>
+    </div>
+    <div class="form-horizontal">
+        <div class="form-group">
+            <input type="submit" value="Search" class="btn btn-primary col-lg-offset-3" />
+        </div>
+    </div>
+
+}
+
+<table class="table">
+    @foreach (RecruitmentSystem.Models.Application entry in Model.Result)
+    {
+        <tr>
+            <td class="col-lg-4">
+                @Html.DisplayFor(modelItem => entry.Person.Name)
+            </td>
+            <td class="col-lg-4">
+                @Html.DisplayFor(modelItem => entry.Person.Surname)
+            </td>
+            <td class="col-lg-1">
+                @Html.DisplayFor(modelItem => entry.ApplicationDate)
+            </td>
+            <td class="col-lg-1">
+                @Html.ActionLink("View", "View", new { id = entry.Id });
+            </td>
+        </tr>
+    }
+</table>
+
+
+
+
+
+

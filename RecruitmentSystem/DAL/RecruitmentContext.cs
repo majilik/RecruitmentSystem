@@ -32,6 +32,7 @@ namespace RecruitmentSystem.DAL
         public virtual DbSet<CompetenceProfile> CompetenceProfiles { get; set; }
         public virtual DbSet<Competence> Competences { get; set; }
         public virtual DbSet<Availability> Availabilites { get; set; }
+        public virtual DbSet<Application> Applications { get; set; }
 
         /// <summary>
         /// Takes the connection string defined in web.config and instantiates

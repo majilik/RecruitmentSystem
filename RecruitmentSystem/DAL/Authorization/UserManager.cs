@@ -9,8 +9,14 @@ namespace RecruitmentSystem.DAL.Authorization
     //TODO: Document this class in Architecture Document
     public class UserManager : IUserManager
     {
-        //TODO: Put DEFAULT_ROLE_ON_CREATION in global settings?
-        private const string DefaultRoleOnCreation = "applicant";
+        public UserManager()
+        {
+            _personQueryService = new QueryService<Person>();
+            _roleQueryService = new QueryService<Role>();
+        }
+        
+        QueryService<Person> _personQueryService;
+        QueryService<Role> _roleQueryService;
 
         /// <summary>
         /// Adds a user to the system.
@@ -18,22 +24,20 @@ namespace RecruitmentSystem.DAL.Authorization
         /// <param name="registerView"></param>
         public void AddUser(RegisterView registerView)
         {
-            using (RecruitmentContext db = new RecruitmentContext())
+            Role defaultRole = _roleQueryService.GetSingle(role => role.Name.Equals("applicant"));
+
+            Person person = new Person()
             {
-                Person person = new Person()
-                {
-                    Username = registerView.Username,
-                    Password = SecurityManager.HashPassword(registerView.Password),
-                    Email = registerView.Email,
-                    Name = registerView.Name,
-                    Surname = registerView.Surname,
-                    Ssn = registerView.Ssn,
-                    Role = db.Roles.Where(role => 
-                        role.Name.Equals(DefaultRoleOnCreation)).Single()
-                };
-                db.Persons.Add(person);
-                db.SaveChanges();
-            }
+                Username = registerView.Username,
+                Password = SecurityManager.HashPassword(registerView.Password),
+                Email = registerView.Email,
+                Name = registerView.Name,
+                Surname = registerView.Surname,
+                Ssn = registerView.Ssn,
+                Role = defaultRole
+            };
+
+            _personQueryService.Add(person);
         }
 
         /// <summary>
@@ -43,10 +47,7 @@ namespace RecruitmentSystem.DAL.Authorization
         /// <returns>Usage status</returns>
         public bool IsUsernameInUse(string username)
         {
-            using (RecruitmentContext db = new RecruitmentContext())
-            {
-                return db.Persons.Where(person => person.Username.Equals(username)).Any();
-            }
+            return _personQueryService.GetSingle(person => person.Username.Equals(username)) != null;
         }
 
         /// <summary>
@@ -57,12 +58,9 @@ namespace RecruitmentSystem.DAL.Authorization
         /// <returns>User in Role status</returns>
         public bool IsUserInRole(string username, string role)
         {
-            using (RecruitmentContext db = new RecruitmentContext())
-            {
-                return db.Persons.Where(person =>
-                    person.Username.Equals(username) &&
-                    person.Role.Name.Equals(role)).Any();
-            }
+            return _personQueryService.GetSingle(person =>
+                person.Username.Equals(username) &&
+                person.Role.Name.Equals(role)) != null;
         }
 
         /// <summary>
@@ -72,12 +70,7 @@ namespace RecruitmentSystem.DAL.Authorization
         /// <returns>True or False</returns>
         public bool LoginCheck(LoginView loginView)
         {
-            string hash;
-            using (RecruitmentContext db = new RecruitmentContext())
-            {
-                hash = db.Persons.Where(person => person.Username.Equals(loginView.Username))
-                    .Select(person => person.Password).Single();
-            }
+            string hash = _personQueryService.GetSingle(person => person.Username.Equals(loginView.Username)).Password;
 
             return SecurityManager.checkPassword(loginView.Password, hash);
         }

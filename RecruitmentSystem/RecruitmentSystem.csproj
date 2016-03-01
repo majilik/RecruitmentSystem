@@ -173,6 +173,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\RecruiterController.cs" />
     <Compile Include="Localization\Models\Competence.Designer.cs">
       <DependentUpon>Competence.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -272,7 +273,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Models\Application.cs" />
     <Compile Include="Models\ViewModel\ApplicationView.cs" />
+    <Compile Include="Models\ViewModel\RecruiterView.cs" />
     <Compile Include="Resources\Locales.cs" />
     <Compile Include="Security\FormsAuthenticationWrap.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -393,6 +396,7 @@
     <Content Include="Views\Authentication\Login.cshtml" />
     <Content Include="Views\Applicant\RegisterApplication.cshtml" />
     <Content Include="Views\Templates\Date.cshtml" />
+    <Content Include="Views\Recruiter\ListApplications.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

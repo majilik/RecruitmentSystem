@@ -92,7 +92,7 @@ namespace RecruitmentSystem.Controllers
                 {
                     competenceProfiles.Add(new CompetenceProfile
                         {
-                            Person = applicant, Competence = entry.Key, YearsOfExperience = entry.Value
+                            //Person = applicant, Competence = entry.Key, YearsOfExperience = entry.Value
                         });
                 }
 

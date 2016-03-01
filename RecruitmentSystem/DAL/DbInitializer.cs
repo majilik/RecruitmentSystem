@@ -48,17 +48,24 @@ namespace RecruitmentSystem.DAL
             persons.ForEach(p => context.Persons.Add(p));
             context.SaveChanges();
 
+            var application = new Application
+            {
+                Person = context.Persons.Where(p => p.Id == 2).Single(),
+                CompetenceProfiles = new List<CompetenceProfile>(),
+                Availabilities = new List<Availability>(),
+            };
+
             var availability = new List<Availability>
             {
                 new Availability
                 {
-                    Person = context.Persons.Where(p => p.Id == 2).Single(),
+                    Application = context.Applications.Where(p => p.Id == 1).Single(),
                     FromDate = DateTime.Parse("2014-02-23"),
                     ToDate = DateTime.Parse("2014-05-25")
                 },
                 new Availability
                 {
-                    Person = context.Persons.Where(p => p.Id == 2).Single(),
+                    Application = context.Applications.Where(p => p.Id == 1).Single(),
                     FromDate = DateTime.Parse("2014-07-10"),
                     ToDate = DateTime.Parse("2014-08-10")
                 }
@@ -78,13 +85,13 @@ namespace RecruitmentSystem.DAL
             {
                 new CompetenceProfile
                 {
-                    Person = context.Persons.Where(p => p.Id == 2).Single(),
+                    Application = context.Applications.Where(p => p.Id == 1).Single(),
                     Competence = context.Competences.Where(c => c.Id == 1).Single(),
                     YearsOfExperience = 3.5M
                 },
                 new CompetenceProfile
                 {
-                    Person = context.Persons.Where(p => p.Id == 2).Single(),
+                    Application = context.Applications.Where(p => p.Id == 1).Single(),
                     Competence = context.Competences.Where(c => c.Id == 2).Single(),
                     YearsOfExperience = 2.0M
                 }
