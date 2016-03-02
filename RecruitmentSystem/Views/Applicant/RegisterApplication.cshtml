@@ -25,125 +25,63 @@
     </div>
 </div>
 
-    <div class="form-horizontal">
-        <div class="form-group">
-            @Html.Label("Available From", htmlAttributes: new { @class = "control-label col-lg-3 col-lg-pull-1" })
-            <div class="input-group col-lg-3 col-lg-pull-1" style="padding-left:0">
-                <input type="text" data-provide="datepicker" class="datepicker form-control" id="datepicker-from" placeholder = "Select date...">
-                <label for="datepicker-from" class="input-group-addon btn">
-                    <span class="glyphicon glyphicon-calendar" />
-                </label>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label("Available To", htmlAttributes: new { @class = "control-label col-lg-3 col-lg-pull-1" })
-            <div class="input-group col-lg-3 col-lg-pull-1" style="padding-left:0">
-                <input type="text" data-provide="datepicker" class="datepicker form-control" id="datepicker-to" placeholder="Select date...">
-                <label for="datepicker-to" class="input-group-addon btn">
-                    <span class="glyphicon glyphicon-calendar" />
-                </label>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <input id="add-availability" type="button" value="Add" class="btn btn-primary col-lg-offset-2" />
+<div class="form-horizontal">
+    <div class="form-group">
+        @Html.Label("Available From", htmlAttributes: new { @class = "control-label col-lg-3 col-lg-pull-1" })
+        <div class="input-group col-lg-3 col-lg-pull-1" style="padding-left:0">
+            <input type="text" data-provide="datepicker" class="datepicker form-control" id="datepicker-from" placeholder = "Select date...">
+            <label for="datepicker-from" class="input-group-addon btn">
+                <span class="glyphicon glyphicon-calendar" />
+            </label>
         </div>
     </div>
 
-<table class="table" id="competence-table">
-    <tr>
-        <th class="col-lg-4">
-            @Html.DisplayNameFor(model => model.SelectedCompetence)
-        </th>
-        <th class="col-lg-4">
-            @Html.DisplayNameFor(model => model.SelectedYearsOfExperience)
-        </th>
-        <th class="col-lg-4"></th>
-    </tr>
-</table>
+    <div class="form-group">
+        @Html.Label("Available To", htmlAttributes: new { @class = "control-label col-lg-3 col-lg-pull-1" })
+        <div class="input-group col-lg-3 col-lg-pull-1" style="padding-left:0">
+            <input type="text" data-provide="datepicker" class="datepicker form-control" id="datepicker-to" placeholder="Select date...">
+            <label for="datepicker-to" class="input-group-addon btn">
+                <span class="glyphicon glyphicon-calendar" />
+            </label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input id="add-availability" type="button" value="Add" class="btn btn-primary col-lg-offset-2" />
+    </div>
+</div>
 
 @using (Html.BeginForm("Apply", "Applicant"))
 {
     @Html.AntiForgeryToken()
 
-<table class="table" id="availability-table">
-    <tr>
-        <th class="col-lg-4">
-            @Html.DisplayNameFor(model => model.SelectedFromDate)
-        </th>
-        <th class="col-lg-4">
-            @Html.DisplayNameFor(model => model.SelectedToDate)
-        </th class="col-lg-4">
-        <th class="col-lg-4"></th>
-    </tr>
-</table>
+    <table class="table" id="competence-table">
+        <tr>
+            <th class="col-lg-4">
+                @Html.Label("Competence")
+            </th>
+            <th class="col-lg-4">
+                @Html.Label("Years of Experience")
+            </th>
+            <th class="col-lg-4"></th>
+        </tr>
+    </table>
+
+    <table class="table" id="availability-table">
+        <tr>
+            <th class="col-lg-4">
+                @Html.Label("Available From")
+            </th>
+            <th class="col-lg-4">
+                @Html.Label("Available To")
+            </th class="col-lg-4">
+            <th class="col-lg-4"></th>
+        </tr>
+    </table>
 
     <div class="form-horizontal">
         <div class="form-group">
             <input type="submit" value="Apply" class="btn btn-primary col-lg-offset-2" />
-        </div>
-    </div>
-}
-
-@using (Html.BeginForm("AddAvailability", "Applicant"))
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <div class="form-group">
-            @Html.LabelFor(model => model.SelectedFromDate, htmlAttributes: new { @class = "control-label col-lg-3 col-lg-pull-1" })
-            <div class="input-group col-lg-3 col-lg-pull-1" style="padding-left:0">
-                @Html.TextBoxFor(model => model.SelectedFromDate,
-                    new { @class = "datepicker form-control", placeholder = "Select date..." })
-                <label for="date-picker-from" class="input-group-addon btn">
-                    <span class="glyphicon glyphicon-calendar" />
-                </label>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.SelectedToDate, htmlAttributes: new { @class = "control-label col-lg-3 col-lg-pull-1" })
-            <div class="input-group col-lg-3 col-lg-pull-1" style="padding-left:0">
-                @Html.TextBoxFor(model => model.SelectedToDate,
-                    new { @class = "datepicker form-control", placeholder = "Select date..." })
-                <label for="date-picker-to" class="input-group-addon btn">
-                    <span class="glyphicon glyphicon-calendar" />
-                </label>
-            </div>
-        </div>
-
-        <table class="table">
-            <tr>
-                <th class="col-lg-4">
-                    @Html.DisplayNameFor(model => model.SelectedFromDate)
-                </th>
-                <th class="col-lg-4">
-                    @Html.DisplayNameFor(model => model.SelectedToDate)
-                </th>
-                <th class="col-lg-4"></th>
-            </tr>
-
-            @foreach (KeyValuePair<DateTime, DateTime> entry in Model.SelectedAvailabilities)
-            {
-                <tr>
-                    <td class="col-lg-4">
-                        @Html.DisplayFor(modelItem => entry.Key)
-                    </td>
-                    <td class="col-lg-4">
-                        @Html.DisplayFor(modelItem => entry.Value)
-                    </td>
-                    <td class="col-lg-1">
-                        @Html.ActionLink("Delete", "Delete")
-                    </td>
-                    <td><input type="hidden" name="@("SelectedAvailabilities[" + entry.Key + "]")"
-                           value="@entry.Value" /></td>
-                </tr>
-            }
-        </table>
-
-        <div class="form-group">
-            <input type="submit" value="Add" class="btn btn-primary col-lg-offset-2" />
         </div>
     </div>
 }

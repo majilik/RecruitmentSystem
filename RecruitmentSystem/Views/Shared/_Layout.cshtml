@@ -62,7 +62,7 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#competence-list').prepend('<option value="" disabled selected hidden>Choose competence...</option>');
+            $('#competence-list').prepend('<option style="color: grey" value="" disabled selected hidden>Choose competence...</option>');
 
             $('#add-competence').on("click", function () {
                 var selected = $('#competence-list').children("option").filter(":selected");
@@ -71,20 +71,30 @@
                 }
 
                 var yearsOfExperience = $('#years-of-experience').val();
-                $('#competence-table').append('<tr><td class="col-lg-4">' + selected.text() + '</td><td class="col-lg-4">' + yearsOfExperience + '</td><td class="col-lg-4"><button class="remove" style="background:none; border:none; color:blue;}">remove</button></td></tr>');
+                var index = $('#availability-table tr').length;
+                $('#competence-table').append('<tr><td class="col-lg-4">' + selected.text() + '</td>'
+                    + '<td class="col-lg-4">' + yearsOfExperience + '</td>'
+                    + '<td class="col-lg-4"><button class="btn btn-link remove">remove</button></td>'
+                    + '<td><input type="hidden" name="SelectedCompetences.Index" value="' + index + '"/>'
+                    + '<input type="hidden" name="SelectedCompetences[' + index + '].Key" value="' + selected.val() + '"/>'
+                    + '<input type="hidden" name="SelectedCompetences[' + index + '].Value" value="' + yearsOfExperience + '"/></td></tr>');
 
-                var option = $("option[value='" + selected.val() + "']", $('#competence-list'));
-                option.attr("disabled", "disabled");
+                $("option[value='" + selected.val() + "']", $('#competence-list')).attr("disabled", "disabled");
             });
 
             $('#competence-table').on("click", '.remove', function () {
                 var competence = $(this).parents('tr').find(':first-child').html();
                 $(this).parents('tr').remove();
-                $('#competence-list option').filter(function () { return $(this).html() == competence; }).removeAttr('disabled');
+                $('#competence-list option').filter(function () { return $(this).html() == competence; }).removeAttr("disabled");
             });
 
             var defaultMinDate = new Date("6/1/2016");
             var defaultMaxDate = new Date("8/31/2016");
+
+            $.fn.clearDateTimePickers = function () {
+                $('#datepicker-from').data("DateTimePicker").clear();
+                $('#datepicker-to').data("DateTimePicker").clear();
+            };
 
             $('#add-availability').on("click", function () {
                 var fromDate = $('#datepicker-from').val();
@@ -94,29 +104,35 @@
                 }
 
                 var index = $('#availability-table tr').length;
+                $('#availability-table').append('<tr></td><td class="col-lg-4">' + fromDate + '</td><td class="col-lg-4">' + toDate + '</td>'
+                    + '<td class="col-lg-4"><button class="btn btn-link remove"">remove</button></td>'
+                    + '<td><input type="hidden" name="SelectedAvailabilities.Index" value="' + index + '"/>'
+                    + '<input type="hidden" name="SelectedAvailabilities[' + index + '].Key" value="' + fromDate + '"/>'
+                    + '<input type="hidden" name="SelectedAvailabilities[' + index + '].Value" value="' + toDate + '"/></tr>');
 
-                $('#availability-table').append('<tr><td><input type="hidden" name="SelectedAvailabilities.Index" value="' + index + '"/></td><td class="col-lg-4"><input type="text" name="SelectedAvailabilities[' + index + '].Key" value="' + fromDate + '"/></td><td class="col-lg-4"><input type="text" name="SelectedAvailabilities[' + index + '].Value" value="' + toDate + '"/></td><td class="col-lg-4"><button class="remove" style="background:none; border:none; color:blue;}">remove</button></td></tr>');
-
+                $.fn.clearDateTimePickers();
                 $('#datepicker-from').data("DateTimePicker").minDate(defaultMinDate);
+                $('#datepicker-from').data("DateTimePicker").maxDate(defaultMaxDate);
                 $('#datepicker-to').data("DateTimePicker").minDate(defaultMinDate);
+                $('#datepicker-to').data("DateTimePicker").maxDate(defaultMaxDate);
+                $.fn.clearDateTimePickers();
             });
 
             $('#availability-table').on("click", '.remove', function () {
                 $(this).parents('tr').remove();
             });
 
-            $('.datepicker').datetimepicker({ format: 'l', minDate: defaultMinDate, maxDate: defaultMaxDate });
+            $('#datepicker-from').datetimepicker({ format: 'l', minDate: defaultMinDate, maxDate: defaultMaxDate });
+            $('#datepicker-to').datetimepicker({ format: 'l', minDate: defaultMinDate, maxDate: defaultMaxDate, useCurrent: false });
+            $.fn.clearDateTimePickers();
 
-            $('#datepicker-from').on('dp.change', function (selected) {
-                $('#datepicker-to').data("DateTimePicker").minDate(selected.date);
-                //$('#datepicker-to').data("DateTimePicker").clear();
+            $('#datepicker-from').on('dp.change', function (e) {
+                $('#datepicker-to').data("DateTimePicker").minDate(e.date);
             });
 
-            $('#datepicker-to').on('dp.change', function (selected) {
-                $('#datepicker-from').data("DateTimePicker").maxDate(selected.date);
+            $('#datepicker-to').on('dp.change', function (e) {
+                $('#datepicker-from').data("DateTimePicker").maxDate(e.date);
             });
-
-            $('.datepicker').data("DateTimePicker").clear();
         });
     </script>
 </body>
