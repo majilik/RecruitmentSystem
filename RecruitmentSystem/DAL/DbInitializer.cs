@@ -50,22 +50,25 @@ namespace RecruitmentSystem.DAL
 
             var application = new Application
             {
-                Person = context.Persons.Where(p => p.Id == 2).Single(),
-                CompetenceProfiles = new List<CompetenceProfile>(),
+                ApplicationDate = DateTime.Now,
                 Availabilities = new List<Availability>(),
+                CompetenceProfiles = new List<CompetenceProfile>(),
+                Person = context.Persons.Where(p => p.Id == 2).Single()
             };
+            context.Applications.Add(application);
+            context.SaveChanges();
 
             var availability = new List<Availability>
             {
                 new Availability
                 {
-                    Application = context.Applications.Where(p => p.Id == 1).Single(),
+                    Application = context.Applications.Where(a => a.Id == 1).Single(),
                     FromDate = DateTime.Parse("2014-02-23"),
                     ToDate = DateTime.Parse("2014-05-25")
                 },
                 new Availability
                 {
-                    Application = context.Applications.Where(p => p.Id == 1).Single(),
+                    Application = context.Applications.Where(a => a.Id == 1).Single(),
                     FromDate = DateTime.Parse("2014-07-10"),
                     ToDate = DateTime.Parse("2014-08-10")
                 }
@@ -85,13 +88,13 @@ namespace RecruitmentSystem.DAL
             {
                 new CompetenceProfile
                 {
-                    Application = context.Applications.Where(p => p.Id == 1).Single(),
+                    Application = context.Applications.Where(a => a.Id == 1).Single(),
                     Competence = context.Competences.Where(c => c.Id == 1).Single(),
                     YearsOfExperience = 3.5M
                 },
                 new CompetenceProfile
                 {
-                    Application = context.Applications.Where(p => p.Id == 1).Single(),
+                    Application = context.Applications.Where(a => a.Id == 1).Single(),
                     Competence = context.Competences.Where(c => c.Id == 2).Single(),
                     YearsOfExperience = 2.0M
                 }
