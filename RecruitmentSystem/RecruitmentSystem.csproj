@@ -105,6 +105,10 @@
       <HintPath>..\packages\NLog.4.2.3\lib\net45\NLog.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="RefactorThis.GraphDiff, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RefactorThis.GraphDiff.2.0.1\lib\RefactorThis.GraphDiff.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -174,6 +178,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\RecruiterController.cs" />
+    <Compile Include="DAL\Applications\ApplicationManager.cs" />
     <Compile Include="Localization\Models\Competence.Designer.cs">
       <DependentUpon>Competence.resx</DependentUpon>
       <AutoGen>True</AutoGen>

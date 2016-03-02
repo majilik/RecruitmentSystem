@@ -3,6 +3,7 @@ using RecruitmentSystem.Models.ViewModel;
 using System.Linq;
 using RecruitmentSystem.Security;
 using RecruitmentSystem.DAL.Authorization.Interfaces;
+using RecruitmentSystem.Extensions;
 
 namespace RecruitmentSystem.DAL.Authorization
 {
@@ -47,7 +48,7 @@ namespace RecruitmentSystem.DAL.Authorization
         /// <returns>Usage status</returns>
         public bool IsUsernameInUse(string username)
         {
-            return _personQueryService.GetSingle(person => person.Username.Equals(username)) != null;
+            return _personQueryService.GetSingle(person => person.Username == username) != null;
         }
 
         /// <summary>
@@ -58,9 +59,10 @@ namespace RecruitmentSystem.DAL.Authorization
         /// <returns>User in Role status</returns>
         public bool IsUserInRole(string username, string role)
         {
-            return _personQueryService.GetSingle(person =>
-                person.Username.Equals(username) &&
-                person.Role.Name.Equals(role)) != null;
+            Person user = _personQueryService.GetSingle(
+                person => person.Username == username,
+                person => person.Role);
+            return user == null ? false : user.Role.Name.Equals(role);
         }
 
         /// <summary>
@@ -70,7 +72,7 @@ namespace RecruitmentSystem.DAL.Authorization
         /// <returns>True or False</returns>
         public bool LoginCheck(LoginView loginView)
         {
-            string hash = _personQueryService.GetSingle(person => person.Username.Equals(loginView.Username)).Password;
+            string hash = _personQueryService.GetSingle(person => person.Username == loginView.Username).Password;
 
             return SecurityManager.checkPassword(loginView.Password, hash);
         }
