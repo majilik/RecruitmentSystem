@@ -161,7 +161,7 @@ namespace RecruitmentSystem.Controllers.Tests
             ModelState paramState;
             Assert.IsTrue(controller.ModelState.TryGetValue("username_in_use", out paramState));
             NUnit.Framework.Assert.DoesNotThrow(() =>
-                paramState.Errors.Single(s => s.ErrorMessage.Equals("Username already in use.")));
+                paramState.Errors.Single(s => s.ErrorMessage.Equals("Username already in use!")));
 
             umMock.Verify(um => um.IsUsernameInUse(It.Is<string>(s => s.Equals(registerView.Username))), Times.Once());
         }
@@ -180,7 +180,7 @@ namespace RecruitmentSystem.Controllers.Tests
             ModelState paramState;
             Assert.IsTrue(controller.ModelState.TryGetValue("verify_pass", out paramState));
             NUnit.Framework.Assert.DoesNotThrow(() =>
-                paramState.Errors.Single(s => s.ErrorMessage.Equals("Passwords must be identical.")));
+                paramState.Errors.Single(s => s.ErrorMessage.Equals("Password verification failed!")));
         }
 
         [TestMethod]

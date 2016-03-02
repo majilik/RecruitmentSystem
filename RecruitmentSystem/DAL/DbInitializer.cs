@@ -80,7 +80,7 @@ namespace RecruitmentSystem.DAL
             {
                 new Competence
                 {
-                    DefaultName = "Korvgrillning",
+                    DefaultName = "Sausage BBQ:ing",
                     Translations = new List<CompetenceTranslation>
                     {
                         new CompetenceTranslation
@@ -97,7 +97,7 @@ namespace RecruitmentSystem.DAL
                 },
                 new Competence
                 {
-                    DefaultName = "Karuselldrift",
+                    DefaultName = "Carousel Operation",
                     Translations = new List<CompetenceTranslation>
                     {
                         new CompetenceTranslation

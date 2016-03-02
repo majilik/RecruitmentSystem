@@ -4,32 +4,32 @@
     ViewBag.Title = "RegisterApplication";
 }
 
-<h2>Register Application</h2>
+<h2>@Localization.Views.Applicant.RegisterApplication.Title</h2>
 <hr />
 
 <div class="form-horizontal">
     <div class="form-group">
-        @Html.LabelFor(model => model.Competences, htmlAttributes: new { @class = "control-label col-lg-3 col-lg-pull-1" })
+        @Html.Label(Localization.Views.Applicant.RegisterApplication.CompetenceDropdownLabel, new { @class = "control-label col-lg-3 col-lg-pull-1" })
         @Html.DropDownList("ddl", new SelectList(Model.Competences, "Value", "Text"),
             new { @class = "form-control col-lg-4 col-lg-pull-1", @id = "competence-list"})
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.SelectedYearsOfExperience, htmlAttributes: new { @class = "control-label col-lg-3 col-lg-pull-1" })
+        @Html.Label(Localization.Views.Applicant.RegisterApplication.YearsOfExperienceLabel, new { @class = "control-label col-lg-3 col-lg-pull-1" })
         @Html.EditorFor(model => model.SelectedYearsOfExperience,
             new { htmlAttributes = new { @class = "form-control col-lg-4 col-lg-pull-1", @id = "years-of-experience" } })
     </div>
 
     <div class="form-group">
-        <input id="add-competence" type="button" value="Add" class="btn btn-primary col-lg-offset-2" />
+        <input id="add-competence" type="button" value="@Localization.Views.Applicant.RegisterApplication.AddCompetenceButton" class="btn btn-primary col-lg-offset-2" />
     </div>
 </div>
 
 <div class="form-horizontal">
     <div class="form-group">
-        @Html.Label("Available From", htmlAttributes: new { @class = "control-label col-lg-3 col-lg-pull-1" })
+        @Html.Label(Localization.Views.Applicant.RegisterApplication.AvailableFromLabel, new { @class = "control-label col-lg-3 col-lg-pull-1" })
         <div class="input-group col-lg-3 col-lg-pull-1" style="padding-left:0">
-            <input type="text" data-provide="datepicker" class="datepicker form-control" id="datepicker-from" placeholder = "Select date...">
+            <input type="text" data-provide="datepicker" class="datepicker form-control" id="datepicker-from" placeholder = "@Localization.Views.Applicant.RegisterApplication.DatepickerPlaceholder">
             <label for="datepicker-from" class="input-group-addon btn">
                 <span class="glyphicon glyphicon-calendar" />
             </label>
@@ -37,9 +37,9 @@
     </div>
 
     <div class="form-group">
-        @Html.Label("Available To", htmlAttributes: new { @class = "control-label col-lg-3 col-lg-pull-1" })
+        @Html.Label(Localization.Views.Applicant.RegisterApplication.AvailableToLabel, new { @class = "control-label col-lg-3 col-lg-pull-1" })
         <div class="input-group col-lg-3 col-lg-pull-1" style="padding-left:0">
-            <input type="text" data-provide="datepicker" class="datepicker form-control" id="datepicker-to" placeholder="Select date...">
+            <input type="text" data-provide="datepicker" class="datepicker form-control" id="datepicker-to" placeholder="@Localization.Views.Applicant.RegisterApplication.DatepickerPlaceholder">
             <label for="datepicker-to" class="input-group-addon btn">
                 <span class="glyphicon glyphicon-calendar" />
             </label>
@@ -47,7 +47,7 @@
     </div>
 
     <div class="form-group">
-        <input id="add-availability" type="button" value="Add" class="btn btn-primary col-lg-offset-2" />
+        <input id="add-availability" type="button" value="@Localization.Views.Applicant.RegisterApplication.AddAvailabilityButton" class="btn btn-primary col-lg-offset-2" />
     </div>
 </div>
 
@@ -58,10 +58,10 @@
     <table class="table" id="competence-table">
         <tr>
             <th class="col-lg-4">
-                @Html.Label("Competence")
+                @Html.Label(Localization.Views.Applicant.RegisterApplication.CompetenceTable)
             </th>
             <th class="col-lg-4">
-                @Html.Label("Years of Experience")
+                @Html.Label(Localization.Views.Applicant.RegisterApplication.YearsOfExperienceTable)
             </th>
             <th class="col-lg-4"></th>
         </tr>
@@ -70,10 +70,10 @@
     <table class="table" id="availability-table">
         <tr>
             <th class="col-lg-4">
-                @Html.Label("Available From")
+                @Html.Label(Localization.Views.Applicant.RegisterApplication.AvailableFromTable)
             </th>
             <th class="col-lg-4">
-                @Html.Label("Available To")
+                @Html.Label(Localization.Views.Applicant.RegisterApplication.AvailableToTable)
             </th class="col-lg-4">
             <th class="col-lg-4"></th>
         </tr>
@@ -81,7 +81,7 @@
 
     <div class="form-horizontal">
         <div class="form-group">
-            <input type="submit" value="Apply" class="btn btn-primary col-lg-offset-2" />
+            <input type="submit" value="@Localization.Views.Applicant.RegisterApplication.ApplyButton" class="btn btn-primary col-lg-offset-2" />
         </div>
     </div>
 }

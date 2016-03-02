@@ -21,11 +21,9 @@ namespace RecruitmentSystem.Models.ViewModel
             SelectedAvailabilities = new Dictionary<DateTime, DateTime>();
         }
 
-        [DisplayName("Years of Experience")]
         [DisplayFormat(ApplyFormatInEditMode = true)]
         public decimal SelectedYearsOfExperience { get; set; }
 
-        [DisplayName("Available Competences")]
         public IEnumerable<SelectListItem> Competences
         {
             get

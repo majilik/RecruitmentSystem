@@ -47,7 +47,7 @@ namespace RecruitmentSystem.Tests.DAL
 
         public void InsertingInvalidAvailabilityThrowsExceptionTest()
         {
-            /*Availability availabilityNullFrom = new Availability
+            Availability availabilityNullFrom = new Availability
             {
                 ToDate = DateTime.Now
             };
@@ -64,7 +64,7 @@ namespace RecruitmentSystem.Tests.DAL
             context.Entry(availabilityNullFrom).State = EntityState.Detached;
             context.Entry(availabilityNullTo).State = EntityState.Added;
 
-            NUnit.Framework.Assert.Throws<DbEntityValidationException>(() => context.SaveChanges());*/
+            NUnit.Framework.Assert.Throws<DbEntityValidationException>(() => context.SaveChanges());
         }
 
         [TestMethod]
@@ -101,7 +101,7 @@ namespace RecruitmentSystem.Tests.DAL
         [TestMethod]
         public void CanInsertValidCompetenceTest()
         {
-            Competence competence = new Competence { Name = "test_competence" };
+            Competence competence = new Competence { DefaultName = "test_competence" };
 
             context.Entry(competence).State = EntityState.Added;
 
@@ -121,8 +121,8 @@ namespace RecruitmentSystem.Tests.DAL
         [TestMethod]
         public void InsertingNonUniqueCompetenceThrowsExceptionTest()
         {
-            Competence competence = new Competence { Name = "test_competence" };
-            Competence competenceShallowCopy = new Competence { Name = competence.Name };
+            Competence competence = new Competence { DefaultName = "test_competence" };
+            Competence competenceShallowCopy = new Competence { DefaultName = competence.DefaultName };
 
             context.Entry(competence).State = EntityState.Added;
             context.Entry(competenceShallowCopy).State = EntityState.Added;

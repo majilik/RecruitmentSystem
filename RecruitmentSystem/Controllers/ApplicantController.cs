@@ -30,13 +30,12 @@ namespace RecruitmentSystem.Controllers
         {
             _applicationQueryService = new QueryService<Application>();
             _competenceQueryService = new QueryService<Competence>();
-
             _personQueryService = new QueryService<Person>();
         }
 
         /// <summary>
         /// HTTP Get for the view named RegisterApplication. Initializes an
-        /// <see cref="ApplicationView"/> for the returned <see cref="View"/>.
+        /// <see cref="ApplicationView"/> for the returned View.
         /// </summary>
         /// <returns>The RegisterApplication <see cref="ViewResult"/> initialized
         /// with the <see cref="ApplicationView"/> model.</returns>
@@ -87,7 +86,6 @@ namespace RecruitmentSystem.Controllers
                             Person = applicant
                         };
 
-                    //_applicationQueryService.Add(application);
                     context.UpdateGraph(application,
                         map => map
                             .OwnedCollection(a => a.CompetenceProfiles,

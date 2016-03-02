@@ -1,6 +1,5 @@
 ﻿using RecruitmentSystem.Models;
 using RecruitmentSystem.Models.ViewModel;
-using System.Linq;
 using RecruitmentSystem.Security;
 using RecruitmentSystem.DAL.Authorization.Interfaces;
 using RecruitmentSystem.Extensions;
@@ -10,14 +9,14 @@ namespace RecruitmentSystem.DAL.Authorization
     //TODO: Document this class in Architecture Document
     public class UserManager : IUserManager
     {
+        private readonly QueryService<Person> _personQueryService;
+        private readonly QueryService<Role> _roleQueryService;
+
         public UserManager()
         {
             _personQueryService = new QueryService<Person>();
             _roleQueryService = new QueryService<Role>();
         }
-        
-        QueryService<Person> _personQueryService;
-        QueryService<Role> _roleQueryService;
 
         /// <summary>
         /// Adds a user to the system.
