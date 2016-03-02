@@ -6,13 +6,15 @@ namespace RecruitmentSystem.Models
 {
     public class Application
     {
+        public long Id { get; set; }
+
         [Index(IsUnique = true)]
         public virtual Person Person { get; set; }
-        public long Id { get; set; }
+
         [Column(TypeName = "DateTime2")]
         public DateTime ApplicationDate { get; set; }
-        public List<CompetenceProfile> CompetenceProfiles { get; set; }
-        public List<Availability> Availabilities { get; set; }
+        public ICollection<CompetenceProfile> CompetenceProfiles { get; set; }
+        public ICollection<Availability> Availabilities { get; set; }
         public bool Status { get; set; }
     }
 }

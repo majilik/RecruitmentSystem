@@ -17,13 +17,9 @@ namespace RecruitmentSystem.Models.ViewModel
         public ApplicationView(IList<Competence> competences)
         {
             _competences = competences;
-            SelectedCompetences = SelectedCompetences ?? new Dictionary<Competence, decimal>();
-            Competences = new List<SelectListItem>();
-            SelectedAvailabilities = SelectedAvailabilities ?? new Dictionary<DateTime, DateTime>();
+            SelectedCompetences = new Dictionary<int, decimal>();
+            SelectedAvailabilities = new Dictionary<DateTime, DateTime>();
         }
-
-        [DisplayName("Competence")]
-        public int SelectedCompetence { get; set; }
 
         [DisplayName("Years of Experience")]
         [DisplayFormat(ApplyFormatInEditMode = true)]
@@ -34,50 +30,19 @@ namespace RecruitmentSystem.Models.ViewModel
         {
             get
             {
-                List<SelectListItem> competences = new List<SelectListItem>();
-                foreach (Competence competence in _competences)
-                {
-                    competences.Add(new SelectListItem() { Value = competence.Id.ToString(), Text = competence.LocalizedName });
-                }
-
-                return competences;
+                return _competences.Aggregate(new List<SelectListItem>(), (accumulator, entry) =>
+                    {
+                        accumulator.Add(new SelectListItem() { Value = entry.Id.ToString(), Text = entry.LocalizedName });
+                        return accumulator;
+                    });
             }
-            set
-            {
-            }
+            set { }
         }
 
-        public Dictionary<Competence, decimal> SelectedCompetences { get; set; }
+        public Dictionary<int, decimal> SelectedCompetences { get; set; }
 
         private IEnumerable<Competence> _competences { get; set; }
 
-        [DisplayName("Available From")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
-        public DateTime SelectedFromDate { get; set; }
-
-        [DisplayName("Available To")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
-        public DateTime SelectedToDate { get; set; }
-
         public Dictionary<DateTime, DateTime> SelectedAvailabilities { get; set; }
-
-        public void AddCompetence()
-        {
-            Competence key = _competences.Single(c => c.Id == SelectedCompetence);
-            SelectedCompetences[key] = SelectedYearsOfExperience;
-            key = null;
-        }
-
-        public void RemoveCompetence(Competence competence)
-        {
-            //SelectedCompetences.Remove(competence);
-        }
-
-        public void AddAvailability()
-        {
-            SelectedAvailabilities[SelectedFromDate] = SelectedToDate;
-        }
     }
 }
