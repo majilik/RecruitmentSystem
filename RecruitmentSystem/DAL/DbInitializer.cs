@@ -75,13 +75,29 @@ namespace RecruitmentSystem.DAL
             };
             availability.ForEach(a => context.Availabilites.Add(a));
             context.SaveChanges();
-
+            
             var competence = new List<Competence>
             {
-                new Competence{ Name = "Korvgrillning" },
-                new Competence{ Name = "Karuselldrift" }
+                new Competence{ DefaultName = "Korvgrillning" },
+                new Competence{ DefaultName = "Karuselldrift" }
             };
             competence.ForEach(c => context.Competences.Add(c));
+            context.SaveChanges();
+
+            var competence1Translations = new List<CompetenceTranslation>
+            {
+                new CompetenceTranslation {CompetenceRefId = 1, Competence = competence[0], Locale = Resources.Locales.EN_US, Translation = "Sausage BBQ:ing" },
+                new CompetenceTranslation {CompetenceRefId = 1, Locale = Resources.Locales.SV_SE, Translation = "Korvgrillning" }
+            };
+            var competence2Translations = new List<CompetenceTranslation>
+            {
+                new CompetenceTranslation {CompetenceRefId = 2, Competence = competence[1], Locale = Resources.Locales.EN_US, Translation = "Carousel Operation" },
+                new CompetenceTranslation {CompetenceRefId = 2, Competence = competence[1], Locale = Resources.Locales.SV_SE, Translation = "Karuselldrift" },
+            };
+            competence1Translations.ForEach(a => context.CompetenceTranslations.Add(a));
+            competence1Translations.ForEach(a => competence[0].Translations.Add(a));
+            competence2Translations.ForEach(a => context.CompetenceTranslations.Add(a));
+            competence2Translations.ForEach(a => competence[1].Translations.Add(a));
             context.SaveChanges();
 
             var competenceProfile = new List<CompetenceProfile>
