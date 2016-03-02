@@ -16,6 +16,11 @@ namespace RecruitmentSystem.Models
     {
         public long Id { get; set; }
 
+        [Required]
+        [StringLength(50, MinimumLength = 1, ErrorMessage = "")]
+        [Index(IsUnique = true)]
+        public string Name { get; set; }
+
         [Timestamp]
         public byte[] Timestamp { get; set; }
 
@@ -28,12 +33,12 @@ namespace RecruitmentSystem.Models
                 Locales currentLocale = LocalesExtension.LocalesFromString(Thread.CurrentThread.CurrentUICulture.Name);
                 return queryTranslations.GetSingle(t => t.Locale == currentLocale && t.CompetenceRefId == Id).Translation ?? DefaultName;
             }
-        }
+            }
 
         public string DefaultName { get; set; }
         
         public virtual ICollection<CompetenceTranslation> Translations { get; set; }
-    }
+        }
 
     public class CompetenceTranslation
     {

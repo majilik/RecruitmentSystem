@@ -210,8 +210,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\Base\BaseController.cs" />
-    <Compile Include="Controllers\RegisterApplicationController.cs" />
-    <Compile Include="DAL\Applications\ApplicationManager.cs" />
+    <Compile Include="Controllers\LocaleController.cs" />
+    <Compile Include="Controllers\ApplicantController.cs" />
     <Compile Include="DAL\DbContextFactory.cs" />
     <Compile Include="DAL\QueryService.cs" />
     <Compile Include="Localization\Views\Authentication\Login.Designer.cs">

@@ -50,26 +50,26 @@ namespace RecruitmentSystem.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddCompetence([Bind(Include = "SelectedCompetence,SelectedYearsOfExperience,SelectedCompetences,Competences,_competences")] ApplicationView view)
+        public ActionResult AddCompetence(ApplicationView applicationView)
         {
             if (ModelState.IsValid)
             {
-                view.AddCompetence();
+                applicationView.AddCompetence();
             }
 
-            return View("RegisterApplication", view);
+            return View("RegisterApplication", applicationView);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddAvailability(ApplicationView view)
+        public ActionResult AddAvailability(ApplicationView applicationView)
         {
             if (ModelState.IsValid)
             {
-                view.AddAvailability();
+                applicationView.AddAvailability();
             }
 
-            return View("RegisterApplication", view);
+            return View("RegisterApplication", applicationView);
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace RecruitmentSystem.Controllers
         /// <returns>Returns an new <see cref="ApplicationView"/>.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Apply(ApplicationView view)
+        public ActionResult Apply(ApplicationView applicationView)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +88,7 @@ namespace RecruitmentSystem.Controllers
                 Person applicant = _personQueryService.GetSingle(e => e.Name.Equals(username));
                 List<CompetenceProfile> competenceProfiles = new List<CompetenceProfile>();
 
-                foreach (KeyValuePair<Competence, decimal> entry in view.SelectedCompetences)
+                foreach (KeyValuePair<Competence, decimal> entry in applicationView.SelectedCompetences)
                 {
                     competenceProfiles.Add(new CompetenceProfile
                         {
@@ -102,7 +102,7 @@ namespace RecruitmentSystem.Controllers
             return View(new ApplicationView());
         }
 
-        public ActionResult Delete(ApplicationView view)
+        public ActionResult Delete(ApplicationView applicationView)
         {
             if (ModelState.IsValid)
             {
