@@ -173,6 +173,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\LocaleController.cs" />
     <Compile Include="Controllers\RecruiterController.cs" />
     <Compile Include="Localization\Models\Competence.Designer.cs">
       <DependentUpon>Competence.resx</DependentUpon>

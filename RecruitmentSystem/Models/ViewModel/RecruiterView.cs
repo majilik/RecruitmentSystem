@@ -72,7 +72,7 @@ namespace RecruitmentSystem.Models.ViewModel
                 competences.Add(new SelectListItem() { Text = "Any" });
                 foreach (Competence competence in _Competences)
                 {
-                    competences.Add(new SelectListItem() { Value = competence.Id.ToString(), Text = competence.Name });
+                    competences.Add(new SelectListItem() { Value = competence.Id.ToString(), Text = competence.LocalizedName });
                 }
 
                 return competences;
