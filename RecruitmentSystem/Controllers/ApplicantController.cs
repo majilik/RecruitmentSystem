@@ -3,6 +3,8 @@ using RecruitmentSystem.DAL;
 using RecruitmentSystem.Models;
 using RecruitmentSystem.Models.ViewModel;
 using RecruitmentSystem.Security;
+using RefactorThis.GraphDiff;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -14,11 +16,11 @@ namespace RecruitmentSystem.Controllers
     /// Represents a controller that handles user actions through an
     /// ASP.NET MVC Web application and responds to this action.
     /// </summary>
-    //[PersonAuthorization("applicant")]
+    [PersonAuthorization("applicant")]
     public class ApplicantController : BaseController
     {
+        private QueryService<Application> _applicationQueryService;
         private QueryService<Competence> _competenceQueryService;
-        private QueryService<CompetenceProfile> _competenceProfileQueryService;
         private QueryService<Person> _personQueryService;
 
         /// <summary>
@@ -27,8 +29,9 @@ namespace RecruitmentSystem.Controllers
         /// </summary>
         public ApplicantController()
         {
+            _applicationQueryService = new QueryService<Application>();
             _competenceQueryService = new QueryService<Competence>();
-            _competenceProfileQueryService = new QueryService<CompetenceProfile>();
+
             _personQueryService = new QueryService<Person>();
         }
 
@@ -44,35 +47,6 @@ namespace RecruitmentSystem.Controllers
         }
 
         /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="view"></param>
-        /// <returns></returns>
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult AddCompetence(ApplicationView applicationView)
-        {
-            if (ModelState.IsValid)
-            {
-                applicationView.AddCompetence();
-            }
-
-            return View("RegisterApplication", applicationView);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult AddAvailability(ApplicationView applicationView)
-        {
-            if (ModelState.IsValid)
-            {
-                applicationView.AddAvailability();
-            }
-
-            return View("RegisterApplication", applicationView);
-        }
-
-        /// <summary>
         /// Takes the current ApplicationView when submitted and processes the data.
         /// The application is then stored for the currently authorized user.
         /// </summary>
@@ -85,28 +59,45 @@ namespace RecruitmentSystem.Controllers
             if (ModelState.IsValid)
             {
                 string username = HttpContext.User.Identity.Name;
-                Person applicant = _personQueryService.GetSingle(e => e.Name.Equals(username));
-                List<CompetenceProfile> competenceProfiles = new List<CompetenceProfile>();
+                IList<Competence> competences = _competenceQueryService.GetAll();
+                Person applicant = _personQueryService.GetSingle(p => p.Username == username);
 
-                foreach (KeyValuePair<Competence, decimal> entry in applicationView.SelectedCompetences)
+                using (RecruitmentContext context = new RecruitmentContext())
                 {
-                    competenceProfiles.Add(new CompetenceProfile
+                    Application application =
+                        new Application
                         {
-                            //Person = applicant, Competence = entry.Key, YearsOfExperience = entry.Value
-                        });
+                            ApplicationDate = DateTime.Now,
+                            Availabilities = applicationView.SelectedAvailabilities
+                                .Aggregate(new List<Availability>(), (accumulator, entry) =>
+                                {
+                                    accumulator.Add(new Availability { FromDate = entry.Key, ToDate = entry.Value });
+                                    return accumulator;
+                                }),
+                            CompetenceProfiles = applicationView.SelectedCompetences
+                                .Aggregate(new List<CompetenceProfile>(), (accumulator, entry) =>
+                                {
+                                    accumulator.Add(new CompetenceProfile
+                                    {
+                                        Competence = competences.Single(c => c.Id == entry.Key),
+                                        YearsOfExperience = entry.Value
+                                    }
+                                        );
+                                    return accumulator;
+                                }),
+                            Person = applicant
+                        };
+
+                    //_applicationQueryService.Add(application);
+                    context.UpdateGraph(application,
+                        map => map
+                            .OwnedCollection(a => a.CompetenceProfiles,
+                                with => with.AssociatedEntity(cp => cp.Competence))
+                            .OwnedCollection(a => a.Availabilities)
+                            .OwnedEntity(a => a.Person,
+                                with => with.AssociatedEntity(p => p)));
+                    context.SaveChanges();
                 }
-
-                _competenceProfileQueryService.Add(competenceProfiles.ToArray());
-            }
-
-            return View(new ApplicationView());
-        }
-
-        public ActionResult Delete(ApplicationView applicationView)
-        {
-            if (ModelState.IsValid)
-            {
-                //view.RemoveCompetence(competence);
             }
 
             return View("RegisterApplication", new ApplicationView());
