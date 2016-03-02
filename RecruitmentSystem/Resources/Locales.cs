@@ -19,11 +19,13 @@ namespace RecruitmentSystem.Resources
     /// </summary>
     public class LocalesExtension
     {
-
         public static Locales LocalesFromString(string locale)
         {
             if (locale == null)
+            {
                 return Locales.EN_US;
+            }
+
             locale = locale.ToLower();
             switch (locale)
             {
@@ -60,7 +62,10 @@ namespace RecruitmentSystem.Resources
         public static CultureInfo ParseCultureInfo(string locale)
         {
             if (locale == null)
+            {
                 return new CultureInfo("en-US");
+            }
+
             locale = locale.ToLower();
             switch (locale)
             {

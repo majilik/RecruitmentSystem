@@ -269,6 +269,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Models\Application.cs" />
+    <Compile Include="Models\CompetenceTranslation.cs" />
     <Compile Include="Models\ViewModel\ApplicationView.cs" />
     <Compile Include="Models\ViewModel\RecruiterView.cs" />
     <Compile Include="Resources\Locales.cs" />

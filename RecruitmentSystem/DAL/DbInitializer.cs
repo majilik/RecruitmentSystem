@@ -20,8 +20,8 @@ namespace RecruitmentSystem.DAL
         {
             var roles = new List<Role>
             {
-                new Role{ Name = "recruit" },
-                new Role{ Name = "applicant" }
+                new Role { Name = "recruit" },
+                new Role { Name = "applicant" }
             };
             roles.ForEach(r => context.Roles.Add(r));
             context.SaveChanges();
@@ -34,7 +34,7 @@ namespace RecruitmentSystem.DAL
                     Surname = "Borg",
                     Username = "borg",
                     Password = SecurityManager.HashPassword("w19nk23a"),
-                    Role = context.Roles.Where(r => r.Id == 1).Single()
+                    Role = context.Roles.Single(r => r.Id == 1)
                 },
                 new Person
                 {
@@ -42,7 +42,7 @@ namespace RecruitmentSystem.DAL
                     Surname = "Strand",
                     Ssn = "19671212-1211",
                     Email ="per@strand.kth.se",
-                    Role = context.Roles.Where(r => r.Id == 2).Single()
+                    Role = context.Roles.Single(r => r.Id == 2)
                 }
             };
             persons.ForEach(p => context.Persons.Add(p));
@@ -62,13 +62,13 @@ namespace RecruitmentSystem.DAL
             {
                 new Availability
                 {
-                    Application = context.Applications.Where(a => a.Id == 1).Single(),
+                    Application = context.Applications.Single(a => a.Id == 1),
                     FromDate = DateTime.Parse("2014-02-23"),
                     ToDate = DateTime.Parse("2014-05-25")
                 },
                 new Availability
                 {
-                    Application = context.Applications.Where(a => a.Id == 1).Single(),
+                    Application = context.Applications.Single(a => a.Id == 1),
                     FromDate = DateTime.Parse("2014-07-10"),
                     ToDate = DateTime.Parse("2014-08-10")
                 }
@@ -78,40 +78,56 @@ namespace RecruitmentSystem.DAL
             
             var competence = new List<Competence>
             {
-                new Competence{ DefaultName = "Korvgrillning" },
-                new Competence{ DefaultName = "Karuselldrift" }
+                new Competence
+                {
+                    DefaultName = "Korvgrillning",
+                    Translations = new List<CompetenceTranslation>
+                    {
+                        new CompetenceTranslation
+                        {
+                            Locale = Resources.Locales.EN_US,
+                            Translation = "Sausage BBQ:ing"
+                        },
+                        new CompetenceTranslation
+                        {
+                            Locale = Resources.Locales.SV_SE,
+                            Translation = "Korvgrillning"
+                        }
+                    }
+                },
+                new Competence
+                {
+                    DefaultName = "Karuselldrift",
+                    Translations = new List<CompetenceTranslation>
+                    {
+                        new CompetenceTranslation
+                        {
+                            Locale = Resources.Locales.EN_US,
+                            Translation = "Carousel Operation"
+                        },
+                        new CompetenceTranslation
+                        {
+                            Locale = Resources.Locales.SV_SE,
+                            Translation = "Karuselldrift"
+                        }
+                    }
+                }
             };
             competence.ForEach(c => context.Competences.Add(c));
-            context.SaveChanges();
-
-            var competence1Translations = new List<CompetenceTranslation>
-            {
-                new CompetenceTranslation {CompetenceRefId = 1, Competence = competence[0], Locale = Resources.Locales.EN_US, Translation = "Sausage BBQ:ing" },
-                new CompetenceTranslation {CompetenceRefId = 1, Locale = Resources.Locales.SV_SE, Translation = "Korvgrillning" }
-            };
-            var competence2Translations = new List<CompetenceTranslation>
-            {
-                new CompetenceTranslation {CompetenceRefId = 2, Competence = competence[1], Locale = Resources.Locales.EN_US, Translation = "Carousel Operation" },
-                new CompetenceTranslation {CompetenceRefId = 2, Competence = competence[1], Locale = Resources.Locales.SV_SE, Translation = "Karuselldrift" },
-            };
-            competence1Translations.ForEach(a => context.CompetenceTranslations.Add(a));
-            competence1Translations.ForEach(a => competence[0].Translations.Add(a));
-            competence2Translations.ForEach(a => context.CompetenceTranslations.Add(a));
-            competence2Translations.ForEach(a => competence[1].Translations.Add(a));
             context.SaveChanges();
 
             var competenceProfile = new List<CompetenceProfile>
             {
                 new CompetenceProfile
                 {
-                    Application = context.Applications.Where(a => a.Id == 1).Single(),
-                    Competence = context.Competences.Where(c => c.Id == 1).Single(),
+                    Application = context.Applications.Single(a => a.Id == 1),
+                    Competence = context.Competences.Single(c => c.Id == 1),
                     YearsOfExperience = 3.5M
                 },
                 new CompetenceProfile
                 {
-                    Application = context.Applications.Where(a => a.Id == 1).Single(),
-                    Competence = context.Competences.Where(c => c.Id == 2).Single(),
+                    Application = context.Applications.Single(a => a.Id == 1),
+                    Competence = context.Competences.Single(c => c.Id == 2),
                     YearsOfExperience = 2.0M
                 }
             };

@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using System.Web.Security;
 
 namespace RecruitmentSystem.Controllers
 {
@@ -19,9 +18,9 @@ namespace RecruitmentSystem.Controllers
     [PersonAuthorization("applicant")]
     public class ApplicantController : BaseController
     {
-        private QueryService<Application> _applicationQueryService;
-        private QueryService<Competence> _competenceQueryService;
-        private QueryService<Person> _personQueryService;
+        private readonly QueryService<Application> _applicationQueryService;
+        private readonly QueryService<Competence> _competenceQueryService;
+        private readonly QueryService<Person> _personQueryService;
 
         /// <summary>
         /// Constructs the ApplicationController and initializes the database access objects
