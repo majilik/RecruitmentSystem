@@ -118,9 +118,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Competence1" xml:space="preserve">
-    <value>korvgrillning</value>
+    <value>Korvgrillning</value>
   </data>
   <data name="Competence2" xml:space="preserve">
-    <value>karuselldrift</value>
+    <value>Karuselldrift</value>
   </data>
 </root>
