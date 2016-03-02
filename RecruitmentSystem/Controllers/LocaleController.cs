@@ -17,7 +17,6 @@ namespace RecruitmentSystem.Controllers
         /// <returns>Redirects to Home.</returns>
         public ActionResult ChangeLocale(Locales? locale)
         {
-            //TODO: Reference from http://afana.me/post/aspnet-mvc-internationalization.aspx in Architecture Document
             string localeName = LocalesExtension.ParseCultureInfo(locale).Name;
 
             HttpCookie cookie = Request.Cookies["_locale"];

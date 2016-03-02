@@ -180,16 +180,6 @@
     <Compile Include="Controllers\LocaleController.cs" />
     <Compile Include="Controllers\RecruiterController.cs" />
     <Compile Include="DAL\Applications\ApplicationManager.cs" />
-    <Compile Include="Localization\Models\Competence.Designer.cs">
-      <DependentUpon>Competence.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Localization\Models\Competence.sv-SE.Designer.cs">
-      <DependentUpon>Competence.sv-SE.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Localization\Models\ViewModels\LoginView.sv-SE.Designer.cs">
       <DependentUpon>LoginView.sv-SE.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -215,7 +205,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\Base\BaseController.cs" />
-    <Compile Include="Controllers\LocaleController.cs" />
     <Compile Include="Controllers\ApplicantController.cs" />
     <Compile Include="DAL\DbContextFactory.cs" />
     <Compile Include="DAL\QueryService.cs" />
@@ -416,16 +405,6 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Localization\Models\Competence.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Competence.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>Localization.Models</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Localization\Models\Competence.sv-SE.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Competence.sv-SE.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>Localization.Models</CustomToolNamespace>
-    </EmbeddedResource>
     <EmbeddedResource Include="Localization\Models\ViewModels\LoginView.sv-SE.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>LoginView.sv-SE.Designer.cs</LastGenOutput>
