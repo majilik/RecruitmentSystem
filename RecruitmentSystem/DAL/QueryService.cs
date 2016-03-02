@@ -118,13 +118,14 @@ namespace RecruitmentSystem.DAL
         /// </summary>
         /// <param name="items">A variable number of arguments of type <typeparamref name="T"/>,
         /// or an array.</param>
-        public virtual void Add(params T[] items)
+        public virtual void Add(params T[] entities)
         {
             using (DbContext context = _contextFactory.Create())
             {
-                foreach (T item in items)
+                foreach (T entity in entities)
                 {
-                    context.Entry(item).State = EntityState.Added;
+                    context.Set<T>().Attach(entity);
+                    context.Entry(entity).State = EntityState.Added;
                 }
                 context.SaveChanges();
             }
@@ -138,13 +139,13 @@ namespace RecruitmentSystem.DAL
         /// </summary>
         /// <param name="items">A variable number of arguments of type <typeparamref name="T"/>,
         /// or an array.</param>
-        public virtual void Update(params T[] items)
+        public virtual void Update(params T[] entities)
         {
             using (DbContext context = _contextFactory.Create())
             {
-                foreach (T item in items)
+                foreach (T entity in entities)
                 {
-                    context.Entry(item).State = EntityState.Modified;
+                    context.Entry(entity).State = EntityState.Modified;
                 }
                 context.SaveChanges();
             }
@@ -158,13 +159,13 @@ namespace RecruitmentSystem.DAL
         /// </summary>
         /// <param name="items">A variable number of arguments of type <typeparamref name="T"/>,
         /// or an array.</param>
-        public virtual void Remove(params T[] items)
+        public virtual void Remove(params T[] entities)
         {
             using (DbContext context = _contextFactory.Create())
             {
-                foreach (T item in items)
+                foreach (T entity in entities)
                 {
-                    context.Entry(item).State = EntityState.Deleted;
+                    context.Entry(entity).State = EntityState.Deleted;
                 }
                 context.SaveChanges();
             }
