@@ -3,6 +3,7 @@ using RecruitmentSystem.Models.ViewModel;
 using RecruitmentSystem.Security;
 using RecruitmentSystem.DAL.Authorization.Interfaces;
 using RecruitmentSystem.Extensions;
+using System;
 
 namespace RecruitmentSystem.DAL.Authorization
 {
@@ -45,7 +46,14 @@ namespace RecruitmentSystem.DAL.Authorization
         /// <returns>Usage status</returns>
         public bool IsUsernameInUse(string username)
         {
-            username.ThrowIfNullOrWhiteSpace();
+            try
+            {
+                username.ThrowIfNullOrWhiteSpace();
+            }
+            catch (ArgumentException)
+            {
+                return false;
+            }
 
             return _personQueryService.GetSingle(p => p.Username == username) != null;
         }
@@ -58,8 +66,15 @@ namespace RecruitmentSystem.DAL.Authorization
         /// <returns>User in Role status</returns>
         public bool IsUserInRole(string username, string role)
         {
-            username.ThrowIfNullOrWhiteSpace();
-            role.ThrowIfNullOrWhiteSpace();
+            try
+            {
+                username.ThrowIfNullOrWhiteSpace();
+                role.ThrowIfNullOrWhiteSpace();
+            }
+            catch (ArgumentException)
+            {
+                return false;
+            }
 
             return _personQueryService.GetSingle(
                 p => p.Username == username && p.Role.Name.Equals(role),
@@ -73,8 +88,15 @@ namespace RecruitmentSystem.DAL.Authorization
         /// <returns>True or False</returns>
         public bool LoginCheck(LoginView loginView)
         {
-            loginView.Username.ThrowIfNullOrWhiteSpace();
-            loginView.Password.ThrowIfNullOrWhiteSpace();
+            try
+            {
+                loginView.Username.ThrowIfNullOrWhiteSpace();
+                loginView.Password.ThrowIfNullOrWhiteSpace();
+            }
+            catch (ArgumentException)
+            {
+                return false;
+            }
             string hash = _personQueryService.GetSingle(person => person.Username == loginView.Username).Password;
 
             return SecurityManager.checkPassword(loginView.Password, hash);

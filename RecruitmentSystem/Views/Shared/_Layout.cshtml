@@ -66,11 +66,11 @@
 
             $('#add-competence').on("click", function () {
                 var selected = $('#competence-list').children("option").filter(":selected");
-                if (selected.val() === "") {
+                var yearsOfExperience = $('#years-of-experience').val();
+                if (selected.val() === "" || !$.isNumeric(yearsOfExperience)) {
                     return;
                 }
 
-                var yearsOfExperience = $('#years-of-experience').val();
                 var index = $('#availability-table tr').length;
                 $('#competence-table').append('<tr><td class="col-lg-4">' + selected.text() + '</td>'
                     + '<td class="col-lg-4">' + yearsOfExperience + '</td>'

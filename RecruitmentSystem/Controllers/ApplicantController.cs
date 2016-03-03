@@ -15,7 +15,7 @@ namespace RecruitmentSystem.Controllers
     /// Represents a controller that handles user actions through an
     /// ASP.NET MVC Web application and responds to this action.
     /// </summary>
-    [PersonAuthorization("applicant")]
+    //[PersonAuthorization("applicant")]
     public class ApplicantController : BaseController
     {
         private readonly QueryService<Application> _applicationQueryService;
@@ -97,7 +97,7 @@ namespace RecruitmentSystem.Controllers
                 }
             }
 
-            return View("RegisterApplication", new ApplicationView());
+            return RedirectToAction("Index", "Home");
         }
     }
 }
