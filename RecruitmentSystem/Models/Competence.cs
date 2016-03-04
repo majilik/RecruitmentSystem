@@ -19,7 +19,7 @@ namespace RecruitmentSystem.Models
         [Required]
         [StringLength(50, MinimumLength = 1, ErrorMessage = "")]
         [Index(IsUnique = true)]
-        public string Name { get; set; }
+        public string DefaultName { get; set; }
 
         [Timestamp]
         public byte[] Timestamp { get; set; }
@@ -29,29 +29,11 @@ namespace RecruitmentSystem.Models
         {
             get
             {
-                QueryService<CompetenceTranslation> queryTranslations = new QueryService<CompetenceTranslation>();
                 Locales currentLocale = LocalesExtension.LocalesFromString(Thread.CurrentThread.CurrentUICulture.Name);
-                return queryTranslations.GetSingle(t => t.Locale == currentLocale && t.CompetenceRefId == Id).Translation ?? DefaultName;
+                return new QueryService<CompetenceTranslation>().GetSingle(
+                    t => t.Locale == currentLocale && t.Competence.Id == Id,
+                    t => t.Competence).Translation ?? DefaultName;
             }
-            }
-
-        public string DefaultName { get; set; }
-        
-        public virtual ICollection<CompetenceTranslation> Translations { get; set; }
         }
-
-    public class CompetenceTranslation
-    {
-        [Key, Column(Order = 0), ForeignKey("Competence")]
-        public long CompetenceRefId { get; set; }
-
-        [Key, Column(Order = 1)]
-        public Locales Locale { get; set; }
-
-        [Required]
-        public virtual Competence Competence { get; set; }
-
-        [Required]
-        public string Translation { get; set; }
     }
 }

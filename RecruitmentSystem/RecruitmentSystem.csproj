@@ -230,6 +230,16 @@
     <Compile Include="Controllers\ApplicantController.cs" />
     <Compile Include="DAL\DbContextFactory.cs" />
     <Compile Include="DAL\QueryService.cs" />
+    <Compile Include="Localization\Views\Applicant\RegisterApplication.Designer.cs">
+      <DependentUpon>RegisterApplication.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Localization\Views\Applicant\RegisterApplication.sv-SE.Designer.cs">
+      <DependentUpon>RegisterApplication.sv-SE.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Localization\Views\Authentication\Login.Designer.cs">
       <DependentUpon>Login.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -291,6 +301,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Models\Application.cs" />
+    <Compile Include="Models\CompetenceTranslation.cs" />
     <Compile Include="Models\ViewModel\ApplicationView.cs" />
     <Compile Include="Models\ViewModel\RecruiterView.cs" />
     <Compile Include="Resources\Locales.cs" />
@@ -417,8 +428,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Download\" />
-    <Folder Include="Views\Locale\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -447,6 +456,16 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>RegisterView.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Localization.Models.ViewModels</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Views\Applicant\RegisterApplication.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RegisterApplication.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Localization.Views.Applicant</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Views\Applicant\RegisterApplication.sv-SE.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RegisterApplication.sv-SE.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Localization.Views.Applicant</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Localization\Views\Authentication\Login.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

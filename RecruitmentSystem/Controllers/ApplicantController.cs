@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using System.Web.Security;
 
 namespace RecruitmentSystem.Controllers
 {
@@ -19,9 +18,9 @@ namespace RecruitmentSystem.Controllers
     [PersonAuthorization("applicant")]
     public class ApplicantController : BaseController
     {
-        private QueryService<Application> _applicationQueryService;
-        private QueryService<Competence> _competenceQueryService;
-        private QueryService<Person> _personQueryService;
+        private readonly QueryService<Application> _applicationQueryService;
+        private readonly QueryService<Competence> _competenceQueryService;
+        private readonly QueryService<Person> _personQueryService;
 
         /// <summary>
         /// Constructs the ApplicationController and initializes the database access objects
@@ -31,13 +30,12 @@ namespace RecruitmentSystem.Controllers
         {
             _applicationQueryService = new QueryService<Application>();
             _competenceQueryService = new QueryService<Competence>();
-
             _personQueryService = new QueryService<Person>();
         }
 
         /// <summary>
         /// HTTP Get for the view named RegisterApplication. Initializes an
-        /// <see cref="ApplicationView"/> for the returned <see cref="View"/>.
+        /// <see cref="ApplicationView"/> for the returned View.
         /// </summary>
         /// <returns>The RegisterApplication <see cref="ViewResult"/> initialized
         /// with the <see cref="ApplicationView"/> model.</returns>
@@ -51,7 +49,7 @@ namespace RecruitmentSystem.Controllers
         /// The application is then stored for the currently authorized user.
         /// </summary>
         /// <param name="view">The current <see cref="ApplicationView"/>.</param>
-        /// <returns>Returns an new <see cref="ApplicationView"/>.</returns>
+        /// <returns>Returns a new <see cref="ApplicationView"/>.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Apply(ApplicationView applicationView)
@@ -88,19 +86,17 @@ namespace RecruitmentSystem.Controllers
                             Person = applicant
                         };
 
-                    //_applicationQueryService.Add(application);
                     context.UpdateGraph(application,
                         map => map
                             .OwnedCollection(a => a.CompetenceProfiles,
                                 with => with.AssociatedEntity(cp => cp.Competence))
                             .OwnedCollection(a => a.Availabilities)
-                            .OwnedEntity(a => a.Person,
-                                with => with.AssociatedEntity(p => p)));
+                            .OwnedEntity(a => a.Person));
                     context.SaveChanges();
                 }
             }
 
-            return View("RegisterApplication", new ApplicationView());
+            return RedirectToAction("Index", "Home");
         }
     }
 }

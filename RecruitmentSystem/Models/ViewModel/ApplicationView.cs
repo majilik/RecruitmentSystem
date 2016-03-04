@@ -21,22 +21,24 @@ namespace RecruitmentSystem.Models.ViewModel
             SelectedAvailabilities = new Dictionary<DateTime, DateTime>();
         }
 
-        [DisplayName("Years of Experience")]
         [DisplayFormat(ApplyFormatInEditMode = true)]
         public decimal SelectedYearsOfExperience { get; set; }
 
-        [DisplayName("Available Competences")]
         public IEnumerable<SelectListItem> Competences
         {
             get
             {
                 return _competences.Aggregate(new List<SelectListItem>(), (accumulator, entry) =>
                     {
-                        accumulator.Add(new SelectListItem() { Value = entry.Id.ToString(), Text = entry.LocalizedName });
+                        accumulator.Add(new SelectListItem()
+                        {
+                            Value = entry.Id.ToString(),
+                            Text = entry.LocalizedName
+                        });
                         return accumulator;
                     });
             }
-            set { }
+            set {}
         }
 
         public Dictionary<int, decimal> SelectedCompetences { get; set; }

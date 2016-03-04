@@ -62,15 +62,15 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#competence-list').prepend('<option style="color: grey" value="" disabled selected hidden>Choose competence...</option>');
+            $('#competence-list').prepend('<option style="color: grey" value="" disabled selected hidden>@Localization.Views.Applicant.RegisterApplication.CompetencesPlaceholder</option>');
 
             $('#add-competence').on("click", function () {
                 var selected = $('#competence-list').children("option").filter(":selected");
-                if (selected.val() === "") {
+                var yearsOfExperience = $('#years-of-experience').val();
+                if (selected.val() === ""/* || !$.isNumeric(yearsOfExperience)*/) {
                     return;
                 }
 
-                var yearsOfExperience = $('#years-of-experience').val();
                 var index = $('#availability-table tr').length;
                 $('#competence-table').append('<tr><td class="col-lg-4">' + selected.text() + '</td>'
                     + '<td class="col-lg-4">' + yearsOfExperience + '</td>'

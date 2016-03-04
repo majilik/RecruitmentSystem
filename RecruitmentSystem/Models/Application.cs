@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RecruitmentSystem.Models
@@ -13,8 +14,13 @@ namespace RecruitmentSystem.Models
 
         [Column(TypeName = "DateTime2")]
         public DateTime ApplicationDate { get; set; }
+
+        [Required]
         public ICollection<CompetenceProfile> CompetenceProfiles { get; set; }
+
+        [Required]
         public ICollection<Availability> Availabilities { get; set; }
+
         public bool Status { get; set; }
     }
 }

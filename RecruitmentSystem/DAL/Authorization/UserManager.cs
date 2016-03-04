@@ -1,23 +1,23 @@
 ﻿using RecruitmentSystem.Models;
 using RecruitmentSystem.Models.ViewModel;
-using System.Linq;
 using RecruitmentSystem.Security;
 using RecruitmentSystem.DAL.Authorization.Interfaces;
 using RecruitmentSystem.Extensions;
+using System;
 
 namespace RecruitmentSystem.DAL.Authorization
 {
     //TODO: Document this class in Architecture Document
     public class UserManager : IUserManager
     {
+        private readonly QueryService<Person> _personQueryService;
+        private readonly QueryService<Role> _roleQueryService;
+
         public UserManager()
         {
             _personQueryService = new QueryService<Person>();
             _roleQueryService = new QueryService<Role>();
         }
-        
-        QueryService<Person> _personQueryService;
-        QueryService<Role> _roleQueryService;
 
         /// <summary>
         /// Adds a user to the system.
@@ -25,8 +25,6 @@ namespace RecruitmentSystem.DAL.Authorization
         /// <param name="registerView"></param>
         public void AddUser(RegisterView registerView)
         {
-            Role defaultRole = _roleQueryService.GetSingle(role => role.Name.Equals("applicant"));
-
             Person person = new Person()
             {
                 Username = registerView.Username,
@@ -35,7 +33,7 @@ namespace RecruitmentSystem.DAL.Authorization
                 Name = registerView.Name,
                 Surname = registerView.Surname,
                 Ssn = registerView.Ssn,
-                Role = defaultRole
+                Role = _roleQueryService.GetSingle(role => role.Name.Equals("applicant"))
             };
 
             _personQueryService.Add(person);
@@ -48,7 +46,16 @@ namespace RecruitmentSystem.DAL.Authorization
         /// <returns>Usage status</returns>
         public bool IsUsernameInUse(string username)
         {
-            return _personQueryService.GetSingle(person => person.Username == username) != null;
+            try
+            {
+                username.ThrowIfNullOrWhiteSpace();
+            }
+            catch (ArgumentException)
+            {
+                return false;
+            }
+
+            return _personQueryService.GetSingle(p => p.Username == username) != null;
         }
 
         /// <summary>
@@ -59,10 +66,19 @@ namespace RecruitmentSystem.DAL.Authorization
         /// <returns>User in Role status</returns>
         public bool IsUserInRole(string username, string role)
         {
-            Person user = _personQueryService.GetSingle(
-                person => person.Username == username,
-                person => person.Role);
-            return user == null ? false : user.Role.Name.Equals(role);
+            try
+            {
+                username.ThrowIfNullOrWhiteSpace();
+                role.ThrowIfNullOrWhiteSpace();
+            }
+            catch (ArgumentException)
+            {
+                return false;
+            }
+
+            return _personQueryService.GetSingle(
+                p => p.Username == username && p.Role.Name.Equals(role),
+                p => p.Role) != null;
         }
 
         /// <summary>
@@ -72,6 +88,15 @@ namespace RecruitmentSystem.DAL.Authorization
         /// <returns>True or False</returns>
         public bool LoginCheck(LoginView loginView)
         {
+            try
+            {
+                loginView.Username.ThrowIfNullOrWhiteSpace();
+                loginView.Password.ThrowIfNullOrWhiteSpace();
+            }
+            catch (ArgumentException)
+            {
+                return false;
+            }
             string hash = _personQueryService.GetSingle(person => person.Username == loginView.Username).Password;
 
             return SecurityManager.checkPassword(loginView.Password, hash);
