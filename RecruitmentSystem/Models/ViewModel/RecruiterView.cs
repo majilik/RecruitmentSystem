@@ -40,7 +40,7 @@ namespace RecruitmentSystem.Models.ViewModel
                 _Names.Add(new SelectListItem() { Text = "Any" });
                 foreach (Application a in _Applications)
                 {
-                    _Names.Add(new SelectListItem() { Value = a.Person.Id.ToString(), Text = a.Person.Name });
+                    //_Names.Add(new SelectListItem() { Value = a.Person.Id.ToString(), Text = a.Person.Name });
                     datesOfApplication.Add(new SelectListItem() { Value = a.Id.ToString(), Text = a.ApplicationDate.ToString() });
                 }
 
