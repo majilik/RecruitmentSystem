@@ -19,7 +19,7 @@ namespace RecruitmentSystem.Models.ViewModel
             DatesOfApplication = new List<SelectListItem>();
             Names = new List<SelectListItem>();
             Result = new List<Application>();
-            _Applications = new QueryService<Application>().GetAll();
+            _Applications = new QueryService<Application>().GetAll((a => a.Availabilities), (a => a.Person), (a => a.CompetenceProfiles));
             _Competences = new QueryService<Competence>().GetAll();
             _Availabilities = new QueryService<Availability>().GetAll();
         }

@@ -4,6 +4,7 @@ using MigraDoc.DocumentObjectModel.Tables;
 using MigraDoc.Rendering;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
+using RecruitmentSystem.DAL;
 using RecruitmentSystem.Models;
 using RecruitmentSystem.Resources;
 using System;
