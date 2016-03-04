@@ -33,7 +33,7 @@ namespace RecruitmentSystem.Controllers
 
 
             ApplicationManager am = new ApplicationManager();
-            rView.Result = (am.FindApplications(rView.SelectedCompetence));
+            rView.Result = (am.FindApplications());
             return View("ListApplications", rView);
 
         }
