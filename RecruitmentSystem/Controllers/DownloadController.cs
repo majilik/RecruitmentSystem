@@ -1,4 +1,5 @@
-﻿using RecruitmentSystem.Downloads;
+﻿using RecruitmentSystem.Controllers.Base;
+using RecruitmentSystem.Downloads;
 using RecruitmentSystem.Models;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Web.Mvc;
 
 namespace RecruitmentSystem.Controllers
 {
-    public class DownloadController : Controller
+    public class DownloadController : BaseController
     {
         /// <summary>
         /// Downloads a PDF generated from an Application.
