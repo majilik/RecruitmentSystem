@@ -41,6 +41,14 @@ namespace RecruitmentSystem.Controllers
         /// with the <see cref="ApplicationView"/> model.</returns>
         public ActionResult RegisterApplication()
         {
+            string username = HttpContext.User.Identity.Name;
+            Person applicant = _personQueryService.GetSingle(p => p.Username == username);
+            Application application = _applicationQueryService.GetSingle(a => a.Person.Id == applicant.Id, a => a.Person);
+            if (application != null)
+            {
+                return RedirectToAction("Success", "Applicant");
+            }
+
             return View(new ApplicationView(_competenceQueryService.GetAll()));
         }
 
@@ -57,11 +65,12 @@ namespace RecruitmentSystem.Controllers
             if (ModelState.IsValid)
             {
                 string username = HttpContext.User.Identity.Name;
-                IList<Competence> competences = _competenceQueryService.GetAll();
-                Person applicant = _personQueryService.GetSingle(p => p.Username == username);
 
                 using (RecruitmentContext context = new RecruitmentContext())
                 {
+                    IList<Competence> competences = context.Competences.ToList();
+                    Person applicant = context.Persons.Single(p => p.Username == username);
+
                     Application application =
                         new Application
                         {
@@ -86,17 +95,17 @@ namespace RecruitmentSystem.Controllers
                             Person = applicant
                         };
 
-                    context.UpdateGraph(application,
-                        map => map
-                            .OwnedCollection(a => a.CompetenceProfiles,
-                                with => with.AssociatedEntity(cp => cp.Competence))
-                            .OwnedCollection(a => a.Availabilities)
-                            .OwnedEntity(a => a.Person));
+                    context.Applications.Add(application);
                     context.SaveChanges();
                 }
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Success", "Applicant");
+        }
+
+        public ActionResult Success()
+        {
+            return View();
         }
     }
 }
