@@ -24,6 +24,17 @@
                         {
                             <li><p class="navbar-text">@Localization.Views.Shared._Layout.WelcomePhrase @HttpContext.Current.User.Identity.Name</p></li>
                             <li>@Html.ActionLink(Localization.Views.Shared._Layout.SignOut, "SignOut", "Authentication")</li>
+                            {
+                                var um = new RecruitmentSystem.DAL.Authorization.UserManager();
+                                if (um.IsUserInRole(HttpContext.Current.User.Identity.Name, "applicant"))
+                                {
+                                    <li>@Html.ActionLink(Localization.Views.Shared._Layout.Applications, "RegisterApplication", "Applicant")</li>
+                                }
+                                else
+                                {
+                                    <li>@Html.ActionLink(Localization.Views.Shared._Layout.Applications, "ListApplications", "Recruiter")</li>
+                                }
+                            }
                         }
                         else
                         {

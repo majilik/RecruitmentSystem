@@ -19,7 +19,7 @@ namespace RecruitmentSystem.Models.ViewModel
             DatesOfApplication = new List<SelectListItem>();
             Names = new List<SelectListItem>();
             Result = new List<Application>();
-            _Applications = new QueryService<Application>().GetAll();
+            _Applications = new QueryService<Application>().GetAll((a => a.Availabilities), (a => a.Person), (a => a.CompetenceProfiles));
             _Competences = new QueryService<Competence>().GetAll();
             _Availabilities = new QueryService<Availability>().GetAll();
         }
@@ -40,7 +40,7 @@ namespace RecruitmentSystem.Models.ViewModel
                 _Names.Add(new SelectListItem() { Text = "Any" });
                 foreach (Application a in _Applications)
                 {
-                    _Names.Add(new SelectListItem() { Value = a.Person.Id.ToString(), Text = a.Person.Name });
+                    //_Names.Add(new SelectListItem() { Value = a.Person.Id.ToString(), Text = a.Person.Name });
                     datesOfApplication.Add(new SelectListItem() { Value = a.Id.ToString(), Text = a.ApplicationDate.ToString() });
                 }
 
