@@ -67,7 +67,7 @@
             $('#add-competence').on("click", function () {
                 var selected = $('#competence-list').children("option").filter(":selected");
                 var yearsOfExperience = $('#years-of-experience').val();
-                if (selected.val() === "" || !$.isNumeric(yearsOfExperience)) {
+                if (selected.val() === ""/* || !$.isNumeric(yearsOfExperience)*/) {
                     return;
                 }
 

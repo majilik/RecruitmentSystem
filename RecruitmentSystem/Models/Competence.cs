@@ -35,7 +35,5 @@ namespace RecruitmentSystem.Models
                     t => t.Competence).Translation ?? DefaultName;
             }
         }
-        
-        public virtual ICollection<CompetenceTranslation> Translations { get; set; }
     }
 }

@@ -1,6 +1,4 @@
 ﻿using RecruitmentSystem.Resources;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace RecruitmentSystem.Models

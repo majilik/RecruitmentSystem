@@ -15,7 +15,7 @@ namespace RecruitmentSystem.Controllers
     /// Represents a controller that handles user actions through an
     /// ASP.NET MVC Web application and responds to this action.
     /// </summary>
-    //[PersonAuthorization("applicant")]
+    [PersonAuthorization("applicant")]
     public class ApplicantController : BaseController
     {
         private readonly QueryService<Application> _applicationQueryService;
@@ -49,7 +49,7 @@ namespace RecruitmentSystem.Controllers
         /// The application is then stored for the currently authorized user.
         /// </summary>
         /// <param name="view">The current <see cref="ApplicationView"/>.</param>
-        /// <returns>Returns an new <see cref="ApplicationView"/>.</returns>
+        /// <returns>Returns a new <see cref="ApplicationView"/>.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Apply(ApplicationView applicationView)
@@ -91,8 +91,7 @@ namespace RecruitmentSystem.Controllers
                             .OwnedCollection(a => a.CompetenceProfiles,
                                 with => with.AssociatedEntity(cp => cp.Competence))
                             .OwnedCollection(a => a.Availabilities)
-                            .OwnedEntity(a => a.Person,
-                                with => with.AssociatedEntity(p => p)));
+                            .OwnedEntity(a => a.Person));
                     context.SaveChanges();
                 }
             }

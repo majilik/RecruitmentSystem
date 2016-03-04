@@ -81,42 +81,46 @@ namespace RecruitmentSystem.DAL
                 new Competence
                 {
                     DefaultName = "Sausage BBQ:ing",
-                    Translations = new List<CompetenceTranslation>
-                    {
-                        new CompetenceTranslation
-                        {
-                            Locale = Resources.Locales.EN_US,
-                            Translation = "Sausage BBQ:ing"
-                        },
-                        new CompetenceTranslation
-                        {
-                            Locale = Resources.Locales.SV_SE,
-                            Translation = "Korvgrillning"
-                        }
-                    }
                 },
                 new Competence
                 {
-                    DefaultName = "Carousel Operation",
-                    Translations = new List<CompetenceTranslation>
-                    {
-                        new CompetenceTranslation
-                        {
-                            Locale = Resources.Locales.EN_US,
-                            Translation = "Carousel Operation"
-                        },
-                        new CompetenceTranslation
-                        {
-                            Locale = Resources.Locales.SV_SE,
-                            Translation = "Karuselldrift"
-                        }
-                    }
+                    DefaultName = "Carousel Operation"
                 }
             };
             competence.ForEach(c => context.Competences.Add(c));
             context.SaveChanges();
 
-            var competenceProfile = new List<CompetenceProfile>
+            var competenceTranslations = new List<CompetenceTranslation>
+            {
+                new CompetenceTranslation
+                {
+                    Competence = context.Competences.Single(c => c.Id == 1),
+                    Locale = Resources.Locales.EN_US,
+                    Translation = "Sausage BBQ:ing"
+                },
+                new CompetenceTranslation
+                {
+                    Competence = context.Competences.Single(c => c.Id == 1),
+                    Locale = Resources.Locales.SV_SE,
+                    Translation = "Korvgrillning"
+                },
+                new CompetenceTranslation
+                {
+                    Competence = context.Competences.Single(c => c.Id == 2),
+                    Locale = Resources.Locales.EN_US,
+                    Translation = "Carousel Operation"
+                },
+                new CompetenceTranslation
+                {
+                    Competence = context.Competences.Single(c => c.Id == 2),
+                    Locale = Resources.Locales.SV_SE,
+                    Translation = "Karuselldrift"
+                }
+            };
+            competenceTranslations.ForEach(ct => context.CompetenceTranslations.Add(ct));
+            context.SaveChanges();
+
+            var competenceProfiles = new List<CompetenceProfile>
             {
                 new CompetenceProfile
                 {
@@ -131,7 +135,7 @@ namespace RecruitmentSystem.DAL
                     YearsOfExperience = 2.0M
                 }
             };
-            competenceProfile.ForEach(cp => context.CompetenceProfiles.Add(cp));
+            competenceProfiles.ForEach(cp => context.CompetenceProfiles.Add(cp));
             context.SaveChanges();
         }
     }
