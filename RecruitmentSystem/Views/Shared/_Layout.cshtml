@@ -144,7 +144,7 @@
             });
 
             $('#datepicker-from').datetimepicker({ format: 'l', locale: $.cookie("_locale").split("-")[0], minDate: defaultMinDate, maxDate: defaultMaxDate });
-            $('#datepicker-to').datetimepicker({ format: 'l', minDate: defaultMinDate, maxDate: defaultMaxDate, useCurrent: false });
+            $('#datepicker-to').datetimepicker({ format: 'l', locale: $.cookie("_locale").split("-")[0], minDate: defaultMinDate, maxDate: defaultMaxDate, useCurrent: false });
             $.fn.clearDateTimePickers();
 
             $('#datepicker-from').on('dp.change', function (e) {

@@ -1,9 +1,9 @@
 ﻿using RecruitmentSystem.Controllers.Base;
 using RecruitmentSystem.DAL;
+using RecruitmentSystem.DAL.Query;
 using RecruitmentSystem.Models;
 using RecruitmentSystem.Models.ViewModel;
 using RecruitmentSystem.Security;
-using RefactorThis.GraphDiff;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,42 +62,10 @@ namespace RecruitmentSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Apply(ApplicationView applicationView)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && HttpContext != null)
             {
                 string username = HttpContext.User.Identity.Name;
-
-                using (RecruitmentContext context = new RecruitmentContext())
-                {
-                    IList<Competence> competences = context.Competences.ToList();
-                    Person applicant = context.Persons.Single(p => p.Username == username);
-
-                    Application application =
-                        new Application
-                        {
-                            ApplicationDate = DateTime.Now,
-                            Availabilities = applicationView.SelectedAvailabilities
-                                .Aggregate(new List<Availability>(), (accumulator, entry) =>
-                                {
-                                    accumulator.Add(new Availability { FromDate = entry.Key, ToDate = entry.Value });
-                                    return accumulator;
-                                }),
-                            CompetenceProfiles = applicationView.SelectedCompetences
-                                .Aggregate(new List<CompetenceProfile>(), (accumulator, entry) =>
-                                {
-                                    accumulator.Add(new CompetenceProfile
-                                    {
-                                        Competence = competences.Single(c => c.Id == entry.Key),
-                                        YearsOfExperience = entry.Value
-                                    }
-                                        );
-                                    return accumulator;
-                                }),
-                            Person = applicant
-                        };
-
-                    context.Applications.Add(application);
-                    context.SaveChanges();
-                }
+                CreateApplication.Invoke(username, applicationView.SelectedCompetences, applicationView.SelectedAvailabilities);
             }
 
             return RedirectToAction("Success", "Applicant");

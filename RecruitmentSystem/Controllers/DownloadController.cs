@@ -1,10 +1,6 @@
 ﻿using RecruitmentSystem.Controllers.Base;
 using RecruitmentSystem.Downloads;
 using RecruitmentSystem.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace RecruitmentSystem.Controllers
@@ -27,6 +23,7 @@ namespace RecruitmentSystem.Controllers
             Response.AddHeader("content-disposition", string.Format("attachment;filename={0}.pdf", fileName));
             Response.BinaryWrite(fileBinary);
             Response.End();
+
             return Redirect(Request.UrlReferrer.ToString());
         }
     }

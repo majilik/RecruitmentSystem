@@ -14,7 +14,5 @@ namespace RecruitmentSystem.Controllers
         {
             return View();
         }
-
-        
     }
 }

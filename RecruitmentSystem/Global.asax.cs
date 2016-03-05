@@ -1,7 +1,4 @@
-﻿using Cassandra;
-using NLog;
-using NLog.Config;
-using RecruitmentSystem.Logging;
+﻿using NLog;
 using System;
 using System.Web;
 using System.Web.Mvc;
@@ -18,14 +15,11 @@ namespace RecruitmentSystem
     /// </summary>
     public class MvcApplication : HttpApplication
     {
-        private static NLog.Logger logger = LogManager.GetCurrentClassLogger();
-        private CassandraTarget _cassandraTarget;
+        private static Logger logger = LogManager.GetCurrentClassLogger();
 
         protected void Application_Start()
         {
-           // CassandraTargetSetup();
-
-            logger.Debug("Starting application.");
+            logger.Info("Starting application");
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
@@ -34,31 +28,32 @@ namespace RecruitmentSystem
 
         protected void Application_Dispose()
         {
-            if (_cassandraTarget != null) _cassandraTarget.Dispose();
+            logger.Info("Stopping application");
         }
 
-        private void CassandraTargetSetup()
+        void Application_Error(object sender, EventArgs e)
         {
-            try {
-                _cassandraTarget = new CassandraTarget(
-                    new string[] { "localhost" }, "logging", "log_entries", 1, 0);
-
-                ConfigurationItemFactory.Default.Targets.RegisterDefinition("Cassandra", typeof(CassandraTarget));
-
-                LogManager.Configuration.LoggingRules.Add(new LoggingRule("*", LogLevel.Trace, _cassandraTarget));
-
-                LogManager.ReconfigExistingLoggers();
-
-                logger.Debug("Successfully configured Cassandra Target.");
-            } catch (NoHostAvailableException ex)
+            Exception exception = Server.GetLastError();
+            if (exception == null)
             {
-                logger.Error(ex, "Unable to connect to any of the provided Cassandra nodes,"
-                    + " proceeding with local file backup.");
+                exception = new HttpException(500, "Internal Server Error", exception);
             }
-            catch (NotSupportedException ex)
+
+            if (exception is HttpException)
             {
-                logger.Error(ex, "Unable to add logging rule for Cassandra target,"
-                    + " proceeding with local file backup.");
+                HttpException httpException = exception as HttpException;
+                Server.ClearError();
+                Response.Clear();
+
+                switch (httpException.GetHttpCode())
+                {
+                    case 404:
+                        Response.Redirect("~/Error/PageNotFound");
+                        break;
+                    case 500:
+                        Response.Redirect("~/Error/InternalServerError");
+                        break;
+                }
             }
         }
     }

@@ -197,10 +197,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\HandleException.cs" />
+    <Compile Include="Attributes\LogException.cs" />
     <Compile Include="Controllers\DownloadController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\LocaleController.cs" />
     <Compile Include="Controllers\RecruiterController.cs" />
     <Compile Include="DAL\Applications\ApplicationManager.cs" />
+    <Compile Include="DAL\Query\CreateApplication.cs" />
     <Compile Include="Downloads\PdfGenerator.cs" />
     <Compile Include="Localization\Models\ViewModels\LoginView.sv-SE.Designer.cs">
       <DependentUpon>LoginView.sv-SE.resx</DependentUpon>
@@ -320,8 +324,6 @@
     <Compile Include="Security\IFormsAuthenticationWrap.cs" />
     <Compile Include="DAL\Authorization\IUserManager.cs" />
     <Compile Include="Extensions\ArgumentCheck.cs" />
-    <Compile Include="Logging\CassandraQueries.cs" />
-    <Compile Include="Logging\CassandraTarget.cs" />
     <Compile Include="DAL\Authorization\UserManager.cs" />
     <Compile Include="DAL\DbInitializer.cs" />
     <Compile Include="DAL\RecruitmentContext.cs" />
@@ -438,6 +440,8 @@
     <Content Include="Views\Templates\Date.cshtml" />
     <Content Include="Views\Recruiter\ListApplications.cshtml" />
     <None Include="Views\Applicant\Success.cshtml" />
+    <Content Include="Views\Error\PageNotFound.cshtml" />
+    <Content Include="Views\Error\InternalServerError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -550,6 +554,9 @@
       <LastGenOutput>_Layout.sv-SE.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Localization.Views.Shared</CustomToolNamespace>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

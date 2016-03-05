@@ -61,7 +61,7 @@ namespace Localization.Views.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Applications.
+        ///   Looks up a localized string similar to Apply.
         /// </summary>
         public static string Applications {
             get {

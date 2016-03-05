@@ -105,8 +105,6 @@
     <Compile Include="DAL\Authorization\UserManagerTests.cs" />
     <Compile Include="DAL\RecruitmentContextTests.cs" />
     <Compile Include="Extensions\ArgumentCheckTests.cs" />
-    <Compile Include="Logging\CassandraQueriesTests.cs" />
-    <Compile Include="Logging\CassandraTargetTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
     <Compile Include="Security\PasswordHashTests.cs" />

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using RecruitmentSystem.Controllers.Base;
@@ -21,7 +19,9 @@ namespace RecruitmentSystem.Controllers
 
             HttpCookie cookie = Request.Cookies["_locale"];
             if (cookie != null)
+            {
                 cookie.Value = localeName;   // update cookie value
+            }
             else
             {
                 cookie = new HttpCookie("_locale");
