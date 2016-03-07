@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using RecruitmentSystem.Attributes;
+using System.Web.Mvc;
 
 namespace RecruitmentSystem
 {
@@ -7,6 +8,7 @@ namespace RecruitmentSystem
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+            filters.Add(new HandleException());
         }
     }
 }

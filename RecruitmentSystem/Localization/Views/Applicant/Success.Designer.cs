@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Localization.Views.Shared {
+namespace Localization.Views.Applicant {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Localization.Views.Shared {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class _Layout {
+    public class Success {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal _Layout() {
+        internal Success() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Localization.Views.Shared {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RecruitmentSystem.Localization.Views.Shared._Layout", typeof(_Layout).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RecruitmentSystem.Localization.Views.Applicant.Success", typeof(Success).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,65 +61,20 @@ namespace Localization.Views.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Apply.
+        ///   Looks up a localized string similar to Congratulations!.
         /// </summary>
-        public static string Applications {
+        public static string Jumbotron {
             get {
-                return ResourceManager.GetString("Applications", resourceCulture);
+                return ResourceManager.GetString("Jumbotron", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Language.
+        ///   Looks up a localized string similar to Your application has been registered. Thank you for your interest..
         /// </summary>
-        public static string Language {
+        public static string Message {
             get {
-                return ResourceManager.GetString("Language", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Log In.
-        /// </summary>
-        public static string LogIn {
-            get {
-                return ResourceManager.GetString("LogIn", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Register.
-        /// </summary>
-        public static string Register {
-            get {
-                return ResourceManager.GetString("Register", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Sign Out.
-        /// </summary>
-        public static string SignOut {
-            get {
-                return ResourceManager.GetString("SignOut", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Recruitment System.
-        /// </summary>
-        public static string SystemName {
-            get {
-                return ResourceManager.GetString("SystemName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Welcome,.
-        /// </summary>
-        public static string WelcomePhrase {
-            get {
-                return ResourceManager.GetString("WelcomePhrase", resourceCulture);
+                return ResourceManager.GetString("Message", resourceCulture);
             }
         }
     }

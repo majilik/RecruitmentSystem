@@ -1,9 +1,9 @@
 ﻿using RecruitmentSystem.Controllers.Base;
 using RecruitmentSystem.DAL;
+using RecruitmentSystem.DAL.Query;
 using RecruitmentSystem.Models;
 using RecruitmentSystem.Models.ViewModel;
 using RecruitmentSystem.Security;
-using RefactorThis.GraphDiff;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,6 +41,14 @@ namespace RecruitmentSystem.Controllers
         /// with the <see cref="ApplicationView"/> model.</returns>
         public ActionResult RegisterApplication()
         {
+            string username = HttpContext.User.Identity.Name;
+            Person applicant = _personQueryService.GetSingle(p => p.Username == username);
+            Application application = _applicationQueryService.GetSingle(a => a.Person.Id == applicant.Id, a => a.Person);
+            if (application != null)
+            {
+                return RedirectToAction("Success", "Applicant");
+            }
+
             return View(new ApplicationView(_competenceQueryService.GetAll()));
         }
 
@@ -54,49 +62,18 @@ namespace RecruitmentSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Apply(ApplicationView applicationView)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && HttpContext != null)
             {
                 string username = HttpContext.User.Identity.Name;
-                IList<Competence> competences = _competenceQueryService.GetAll();
-                Person applicant = _personQueryService.GetSingle(p => p.Username == username);
-
-                using (RecruitmentContext context = new RecruitmentContext())
-                {
-                    Application application =
-                        new Application
-                        {
-                            ApplicationDate = DateTime.Now,
-                            Availabilities = applicationView.SelectedAvailabilities
-                                .Aggregate(new List<Availability>(), (accumulator, entry) =>
-                                {
-                                    accumulator.Add(new Availability { FromDate = entry.Key, ToDate = entry.Value });
-                                    return accumulator;
-                                }),
-                            CompetenceProfiles = applicationView.SelectedCompetences
-                                .Aggregate(new List<CompetenceProfile>(), (accumulator, entry) =>
-                                {
-                                    accumulator.Add(new CompetenceProfile
-                                    {
-                                        Competence = competences.Single(c => c.Id == entry.Key),
-                                        YearsOfExperience = entry.Value
-                                    }
-                                        );
-                                    return accumulator;
-                                }),
-                            Person = applicant
-                        };
-
-                    context.UpdateGraph(application,
-                        map => map
-                            .OwnedCollection(a => a.CompetenceProfiles,
-                                with => with.AssociatedEntity(cp => cp.Competence))
-                            .OwnedCollection(a => a.Availabilities)
-                            .OwnedEntity(a => a.Person));
-                    context.SaveChanges();
-                }
+                CreateApplication.Invoke(username, applicationView.SelectedCompetences, applicationView.SelectedAvailabilities);
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Success", "Applicant");
+        }
+
+        public ActionResult Success()
+        {
+            return View();
         }
     }
 }

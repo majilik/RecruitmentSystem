@@ -68,24 +68,30 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jquery-ui")
+    @Scripts.Render("~/bundles/jquery-cookie")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 
     <script type="text/javascript">
         $(document).ready(function () {
+            $.fn.isNumeric = function (n) {
+                //alert($.cookie("_locale"));
+                return $.isNumeric(n.replace(",", "."));
+            }
+
             $('#competence-list').prepend('<option style="color: grey" value="" disabled selected hidden>@Localization.Views.Applicant.RegisterApplication.CompetencesPlaceholder</option>');
 
             $('#add-competence').on("click", function () {
                 var selected = $('#competence-list').children("option").filter(":selected");
                 var yearsOfExperience = $('#years-of-experience').val();
-                if (selected.val() === ""/* || !$.isNumeric(yearsOfExperience)*/) {
+                if (selected.val() === "" || !$.fn.isNumeric(yearsOfExperience)) {
                     return;
                 }
 
                 var index = $('#availability-table tr').length;
                 $('#competence-table').append('<tr><td class="col-lg-4">' + selected.text() + '</td>'
                     + '<td class="col-lg-4">' + yearsOfExperience + '</td>'
-                    + '<td class="col-lg-4"><button class="btn btn-link remove">remove</button></td>'
+                    + '<td class="col-lg-4"><button class="btn btn-link remove">@Localization.Views.Applicant.RegisterApplication.RemoveEntry</button></td>'
                     + '<td><input type="hidden" name="SelectedCompetences.Index" value="' + index + '"/>'
                     + '<input type="hidden" name="SelectedCompetences[' + index + '].Key" value="' + selected.val() + '"/>'
                     + '<input type="hidden" name="SelectedCompetences[' + index + '].Value" value="' + yearsOfExperience + '"/></td></tr>');
@@ -107,41 +113,53 @@
                 $('#datepicker-to').data("DateTimePicker").clear();
             };
 
-            $('#add-availability').on("click", function () {
-                var fromDate = $('#datepicker-from').val();
-                var toDate = $('#datepicker-to').val();
-                if (fromDate === undefined || toDate === undefined) {
-                    return;
-                }
-
-                var index = $('#availability-table tr').length;
-                $('#availability-table').append('<tr></td><td class="col-lg-4">' + fromDate + '</td><td class="col-lg-4">' + toDate + '</td>'
-                    + '<td class="col-lg-4"><button class="btn btn-link remove"">remove</button></td>'
-                    + '<td><input type="hidden" name="SelectedAvailabilities.Index" value="' + index + '"/>'
-                    + '<input type="hidden" name="SelectedAvailabilities[' + index + '].Key" value="' + fromDate + '"/>'
-                    + '<input type="hidden" name="SelectedAvailabilities[' + index + '].Value" value="' + toDate + '"/></tr>');
-
+            $.fn.resetDateTimePickers = function () {
                 $.fn.clearDateTimePickers();
                 $('#datepicker-from').data("DateTimePicker").minDate(defaultMinDate);
                 $('#datepicker-from').data("DateTimePicker").maxDate(defaultMaxDate);
                 $('#datepicker-to').data("DateTimePicker").minDate(defaultMinDate);
                 $('#datepicker-to').data("DateTimePicker").maxDate(defaultMaxDate);
                 $.fn.clearDateTimePickers();
+            };
+
+            $('#add-availability').on("click", function () {
+                var fromDate = $('#datepicker-from').val();
+                var toDate = $('#datepicker-to').val();
+                if (fromDate === undefined || fromDate === "" || toDate === undefined || toDate === "") {
+                    return;
+                }
+
+                var index = $('#availability-table tr').length;
+                $('#availability-table').append('<tr></td><td class="col-lg-4">' + fromDate + '</td><td class="col-lg-4">' + toDate + '</td>'
+                    + '<td class="col-lg-4"><button class="btn btn-link remove"">@Localization.Views.Applicant.RegisterApplication.RemoveEntry</button></td>'
+                    + '<td><input type="hidden" name="SelectedAvailabilities.Index" value="' + index + '"/>'
+                    + '<input type="hidden" name="SelectedAvailabilities[' + index + '].Key" value="' + fromDate + '"/>'
+                    + '<input type="hidden" name="SelectedAvailabilities[' + index + '].Value" value="' + toDate + '"/></tr>');
+
+                $.fn.resetDateTimePickers();
             });
 
             $('#availability-table').on("click", '.remove', function () {
                 $(this).parents('tr').remove();
             });
 
-            $('#datepicker-from').datetimepicker({ format: 'l', minDate: defaultMinDate, maxDate: defaultMaxDate });
-            $('#datepicker-to').datetimepicker({ format: 'l', minDate: defaultMinDate, maxDate: defaultMaxDate, useCurrent: false });
+            $('#datepicker-from').datetimepicker({ format: 'l', locale: $.cookie("_locale").split("-")[0], minDate: defaultMinDate, maxDate: defaultMaxDate });
+            $('#datepicker-to').datetimepicker({ format: 'l', locale: $.cookie("_locale").split("-")[0], minDate: defaultMinDate, maxDate: defaultMaxDate, useCurrent: false });
             $.fn.clearDateTimePickers();
 
             $('#datepicker-from').on('dp.change', function (e) {
+                if (e.date === undefined || e.date === "") {
+                    $.fn.resetDateTimePickers();
+                    return;
+                }
                 $('#datepicker-to').data("DateTimePicker").minDate(e.date);
             });
 
             $('#datepicker-to').on('dp.change', function (e) {
+                if (e.date === undefined || e.date === "") {
+                    $.fn.resetDateTimePickers();
+                    return;
+                }
                 $('#datepicker-from').data("DateTimePicker").maxDate(e.date);
             });
         });
