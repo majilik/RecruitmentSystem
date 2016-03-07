@@ -1,4 +1,5 @@
 ﻿using RecruitmentSystem.Controllers.Base;
+using RecruitmentSystem.DAL.Query;
 using RecruitmentSystem.Downloads;
 using RecruitmentSystem.Models;
 using System.Web.Mvc;
@@ -12,12 +13,13 @@ namespace RecruitmentSystem.Controllers
         /// </summary>
         /// <param name="application">Application to generate PDF with.</param>
         /// <returns>Adds a binary to the response header.</returns>
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult PdfDownload(Application application)
+        public ActionResult PdfDownload(int? id)
         {
+            Application application = GetApplication.Invoke(id);
+
             byte[] fileBinary = PdfGenerator.GenerateApplicationPdf(application);
-            string fileName = string.Format("application_{1}_{0}_{2}", application.Person.Name, application.Person.Surname, application.ApplicationDate.ToShortDateString());
+            string fileName = string.Format("application_{1}_{0}_{2}", application.Person.Name,
+                application.Person.Surname, application.ApplicationDate.ToShortDateString());
             Response.Clear();
             Response.ContentType = "application/pdf";
             Response.AddHeader("content-disposition", string.Format("attachment;filename={0}.pdf", fileName));

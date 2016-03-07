@@ -211,6 +211,7 @@
     <Compile Include="Controllers\RecruiterController.cs" />
     <Compile Include="DAL\Applications\ApplicationManager.cs" />
     <Compile Include="DAL\Query\CreateApplication.cs" />
+    <Compile Include="DAL\Query\GetApplication.cs" />
     <Compile Include="Downloads\PdfGenerator.cs" />
     <Compile Include="Localization\Models\ViewModels\LoginView.sv-SE.Designer.cs">
       <DependentUpon>LoginView.sv-SE.resx</DependentUpon>
