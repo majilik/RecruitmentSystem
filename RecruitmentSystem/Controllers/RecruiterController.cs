@@ -38,9 +38,9 @@ namespace RecruitmentSystem.Controllers
 
         }
 
-        public ActionResult View(long? id)
+        public ActionResult Check(long? id)
         {
-            return View();
+            return View(new RecruiterView());
         }
     }
 

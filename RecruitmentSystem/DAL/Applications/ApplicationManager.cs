@@ -11,7 +11,7 @@ namespace RecruitmentSystem.DAL.Applications
         public List<Application> FindApplications()
         {
             List<Application> result = new List<Application>();
-            IEnumerable<Application> applications = new QueryService<Application>().GetAll();
+            IEnumerable<Application> applications = new QueryService<Application>().GetAll((a => a.Availabilities), (a => a.Person), (a => a.CompetenceProfiles));
             foreach(Application a in applications)
             {
                 result.Add(a);
