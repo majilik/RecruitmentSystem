@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using RecruitmentSystem.Attributes;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -33,3 +34,6 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+
+// Enables tracing of the entire assembly specified
+[assembly: TraceLogger(AttributeTargetTypes = "RecruitmentSystem.*")]

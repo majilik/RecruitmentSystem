@@ -120,8 +120,6 @@ namespace RecruitmentSystem.Logging
                 () => _session.Value.Prepare(CassandraQueries.Insert(_keySpace, _columnFamily, _ttl)));
         }
 
-        public void Connect() { }
-
         protected override void Write(LogEventInfo logEvent)
         {
             if (!_initialized)

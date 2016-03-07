@@ -5,13 +5,13 @@ namespace RecruitmentSystem.Attributes
 {
     public class HandleException : HandleErrorAttribute
     {
-        private static Logger logger = LogManager.GetCurrentClassLogger();
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
 
         public override void OnException(ExceptionContext filterContext)
         {
             if (filterContext != null && filterContext.Exception != null)
             {
-                logger.Error(filterContext.Exception);
+                _logger.Error(filterContext.Exception);
 
                 filterContext.ExceptionHandled = true;
                 var model = new HandleErrorInfo(filterContext.Exception, "Controller", "Action");
