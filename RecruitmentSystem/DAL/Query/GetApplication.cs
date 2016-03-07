@@ -5,7 +5,7 @@ namespace RecruitmentSystem.DAL.Query
 {
     public class GetApplication
     {
-        public static Application Invoke(int id)
+        public static Application Invoke(int? id)
         {
             Application application;
 
