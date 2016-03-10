@@ -36,4 +36,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyFileVersion("1.0.0.0")]
 
 // Enables tracing of the entire assembly specified
-[assembly: TraceLogger(AttributeTargetTypes = "RecruitmentSystem.*")]
+//[assembly: TraceLogger(AttributeTargetTypes = "RecruitmentSystem.*")]

@@ -14,5 +14,8 @@ namespace RecruitmentSystem.Models
         [StringLength(50, MinimumLength = 1, ErrorMessage = "")]
         [Index(IsUnique = true)]
         public string Name { get; set; }
+
+        [Timestamp]
+        public byte[] Timestamp { get; set; }
     }
 }

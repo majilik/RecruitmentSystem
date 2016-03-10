@@ -13,7 +13,7 @@ namespace RecruitmentSystem.Controllers
         /// </summary>
         /// <param name="application">Application to generate PDF with.</param>
         /// <returns>Adds a binary to the response header.</returns>
-        public ActionResult PdfDownload(int? id)
+        public ActionResult PdfDownload(int id)
         {
             Application application = GetApplication.Invoke(id);
 
