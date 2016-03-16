@@ -16,9 +16,9 @@ using System.Web;
 
 namespace RecruitmentSystem.Downloads
 {
-    public class PdfGenerator
+    internal class PdfGenerator
     {
-        public static byte[] GenerateApplicationPdf(Application application)
+        internal static byte[] GenerateApplicationPdf(Application application)
         {
             //Create pdf document
             PdfDocument pdf = new PdfDocument();
@@ -115,10 +115,16 @@ namespace RecruitmentSystem.Downloads
             row.Cells[1].AddParagraph(string.Format("{1}, {0}", person.Name, person.Surname));
             row = tablePerson.AddRow();
             row.Cells[0].AddParagraph("Social Security Number");
-            row.Cells[1].AddParagraph(person.Ssn);
+            if(null == person.Ssn)
+                row.Cells[1].AddParagraph("-");
+            else
+                row.Cells[1].AddParagraph(person.Ssn);
             row = tablePerson.AddRow();
             row.Cells[0].AddParagraph("Email");
-            row.Cells[1].AddParagraph(person.Email);
+            if (null == person.Email)
+                row.Cells[1].AddParagraph("-");
+            else
+                row.Cells[1].AddParagraph(person.Email);
             tablePerson.Rows.Alignment = RowAlignment.Center;
 
             row = tablePerson.AddRow();
