@@ -4,9 +4,6 @@ using RecruitmentSystem.DAL.Query;
 using RecruitmentSystem.Models;
 using RecruitmentSystem.Models.ViewModel;
 using RecruitmentSystem.Security;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
 
 namespace RecruitmentSystem.Controllers

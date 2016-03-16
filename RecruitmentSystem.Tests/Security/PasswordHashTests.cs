@@ -1,76 +1,75 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using System;
 
 namespace RecruitmentSystem.Security.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class PasswordHashTests
     {
         private string _validArg;
         private string[] _invalidArgs;
 
-        [TestInitialize]
+        [SetUp]
         public void TestInitialize()
         {
             _validArg = "pass";
             _invalidArgs = new string[] { null, "", " " };
         }
 
-        [TestCleanup]
+        [TearDown]
         public void TestCleanp()
         {
             _validArg = null;
             _invalidArgs = null;
         }
 
-        [TestMethod]
+        [Test]
         public void CreateHashThrowsArgumentExceptionTest()
         {
             PasswordHash.CreateHash(_validArg);
 
             foreach (string invalidArg in _invalidArgs)
             {
-                NUnit.Framework.Assert.Throws<ArgumentException>(() => PasswordHash.CreateHash(invalidArg));
+                Assert.Throws<ArgumentException>(() => PasswordHash.CreateHash(invalidArg));
             }
         }
 
-        [TestMethod]
+        [Test]
         public void CreateHashReturnsProperlyFormattedHashTest()
         {
             string hash = PasswordHash.CreateHash(_validArg);
             string[] hashParts = hash.Split('$');
 
-            NUnit.Framework.Assert.AreEqual(hashParts.Length, 3);
-            NUnit.Framework.Assert.DoesNotThrow(() => int.Parse(hashParts[0]));
-            NUnit.Framework.Assert.DoesNotThrow(() => Convert.FromBase64String(hashParts[1]));
-            NUnit.Framework.Assert.DoesNotThrow(() => Convert.FromBase64String(hashParts[2]));
+            Assert.AreEqual(hashParts.Length, 3);
+            Assert.DoesNotThrow(() => int.Parse(hashParts[0]));
+            Assert.DoesNotThrow(() => Convert.FromBase64String(hashParts[1]));
+            Assert.DoesNotThrow(() => Convert.FromBase64String(hashParts[2]));
         }
 
-        [TestMethod]
+        [Test]
         public void ValidatePasswordThrowsArgumentExceptionTest()
         {
             foreach (string invalidArg in _invalidArgs)
             {
-                NUnit.Framework.Assert.Throws<ArgumentException>(() =>
+                Assert.Throws<ArgumentException>(() =>
                     PasswordHash.ValidatePassword(invalidArg, _validArg));
 
-                NUnit.Framework.Assert.Throws<ArgumentException>(() =>
+                Assert.Throws<ArgumentException>(() =>
                     PasswordHash.ValidatePassword(invalidArg, _validArg));
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ValidatePasswordReturnsTrueWhenComparingAHashedStringWithTheOriginalStringTest()
         {
             string hash = PasswordHash.CreateHash(_validArg);
 
             bool result = PasswordHash.ValidatePassword(_validArg, hash);
 
-            NUnit.Framework.Assert.IsTrue(result);
+            Assert.IsTrue(result);
         }
 
-        [TestMethod]
+        [Test]
         public void ValidatePasswordReturnsFalseWhenComparingAHashedStringWithOtherThanTheOriginalStringTest()
         {
             string otherValidArg = "otherPass";
@@ -78,21 +77,21 @@ namespace RecruitmentSystem.Security.Tests
 
             bool result = PasswordHash.ValidatePassword(otherValidArg, hash);
 
-            NUnit.Framework.Assert.IsFalse(result);
+            Assert.IsFalse(result);
         }
 
-        [TestMethod]
+        [Test]
         public void ValidatePasswordThrowsArgumentExceptionForImproperlyFormattedHashTest()
         {
             string properHash = PasswordHash.CreateHash(_validArg);
             string[] hashParts = properHash.Split('$');
 
             string improperLength = hashParts[0];
-            NUnit.Framework.Assert.Throws<ArgumentException>(() =>
+            Assert.Throws<ArgumentException>(() =>
                 PasswordHash.ValidatePassword(_validArg, improperLength));
         }
 
-        [TestMethod]
+        [Test]
         public void ValidatePasswordThrowsArgumentExceptionForImproperlyFormattedIterationsTest()
         {
             string properHash = PasswordHash.CreateHash(_validArg);
@@ -100,21 +99,21 @@ namespace RecruitmentSystem.Security.Tests
 
             hashParts[0] = "-10000";
             string negativeIterations = string.Join("$", hashParts);
-            NUnit.Framework.Assert.Throws<ArgumentException>(() =>
+            Assert.Throws<ArgumentException>(() =>
                 PasswordHash.ValidatePassword(_validArg, negativeIterations));
 
             hashParts[0] = int.MaxValue.ToString() + "0";
             string overflowIterations = string.Join("$", hashParts);
-            NUnit.Framework.Assert.Throws<ArgumentException>(() =>
+            Assert.Throws<ArgumentException>(() =>
                 PasswordHash.ValidatePassword(_validArg, overflowIterations));
 
             hashParts[0] = "NaN";
             string nanIterations = string.Join("$", hashParts);
-            NUnit.Framework.Assert.Throws<ArgumentException>(() =>
+            Assert.Throws<ArgumentException>(() =>
                 PasswordHash.ValidatePassword(_validArg, nanIterations));
         }
 
-        [TestMethod]
+        [Test]
         public void ValidatePasswordThrowsArgumentExceptionForImproperlyFormattedSaltAndHashTest()
         {
             string properHash = PasswordHash.CreateHash(_validArg);
@@ -122,12 +121,12 @@ namespace RecruitmentSystem.Security.Tests
 
             hashParts[1] = "notbase64";
             string negativeIterations = string.Join("$", hashParts);
-            NUnit.Framework.Assert.Throws<ArgumentException>(() =>
+            Assert.Throws<ArgumentException>(() =>
                 PasswordHash.ValidatePassword(_validArg, negativeIterations));
 
             hashParts[2] = "notbase64";
             string overflowIterations = string.Join("$", hashParts);
-            NUnit.Framework.Assert.Throws<ArgumentException>(() =>
+            Assert.Throws<ArgumentException>(() =>
                 PasswordHash.ValidatePassword(_validArg, overflowIterations));
         }
     }

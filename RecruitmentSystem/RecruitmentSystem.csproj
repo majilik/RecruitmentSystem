@@ -43,6 +43,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\RecruitmentSystem.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.1.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
@@ -209,7 +210,6 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\LocaleController.cs" />
     <Compile Include="Controllers\RecruiterController.cs" />
-    <Compile Include="DAL\Applications\ApplicationManager.cs" />
     <Compile Include="DAL\Query\CreateApplication.cs" />
     <Compile Include="DAL\Query\GetApplication.cs" />
     <Compile Include="Downloads\PdfGenerator.cs" />
@@ -326,6 +326,13 @@
     <Compile Include="Logging\EventLogger.cs" />
     <Compile Include="Models\Application.cs" />
     <Compile Include="Models\CompetenceTranslation.cs" />
+    <Compile Include="Models\Configuration\ApplicationConfiguration.cs" />
+    <Compile Include="Models\Configuration\AvailabilityConfiguration.cs" />
+    <Compile Include="Models\Configuration\CompetenceConfiguration.cs" />
+    <Compile Include="Models\Configuration\CompetenceProfileConfiguration.cs" />
+    <Compile Include="Models\Configuration\CompetenceTranslationConfiguration.cs" />
+    <Compile Include="Models\Configuration\PersonConfiguration.cs" />
+    <Compile Include="Models\Configuration\RoleConfiguration.cs" />
     <Compile Include="Models\ViewModel\ApplicationView.cs" />
     <Compile Include="Models\ViewModel\RecruiterView.cs" />
     <Compile Include="Resources\Locales.cs" />
@@ -453,15 +460,12 @@
     <Content Include="Views\Error\PageNotFound.cshtml" />
     <Content Include="Views\Error\InternalServerError.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
-    <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Localization\Models\ViewModels\LoginView.sv-SE.resx">
@@ -564,9 +568,6 @@
       <LastGenOutput>_Layout.sv-SE.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Localization.Views.Shared</CustomToolNamespace>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

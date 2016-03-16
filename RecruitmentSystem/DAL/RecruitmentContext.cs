@@ -17,7 +17,7 @@ namespace RecruitmentSystem.DAL
     /// it is no longer needed to avoid wasting resources. The preferred way
     /// should be the following:
     /// Use using if you want all the resources that the context controls to be
-    /// disposed at the end of the block. When you use using, the compiler
+    /// disposed at the end of the block. When you do this, the compiler
     /// automatically creates a try/finally block and calls dispose in the
     /// finally block.
     /// using (var context = new RecruitmentContext())
@@ -27,22 +27,20 @@ namespace RecruitmentSystem.DAL
     /// </summary>
     public class RecruitmentContext : DbContext
     {
-        public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<Person> Persons { get; set; }
-        public virtual DbSet<CompetenceProfile> CompetenceProfiles { get; set; }
-        public virtual DbSet<Competence> Competences { get; set; }
-        public virtual DbSet<Availability> Availabilites { get; set; }
-        public virtual DbSet<Application> Applications { get; set; }
-        public virtual DbSet<CompetenceTranslation> CompetenceTranslations { get; set; }
+        public virtual IDbSet<Application> Applications { get; set; }
+        public virtual IDbSet<Availability> Availabilites { get; set; }
+        public virtual IDbSet<Competence> Competences { get; set; }
+        public virtual IDbSet<CompetenceProfile> CompetenceProfiles { get; set; }
+        public virtual IDbSet<CompetenceTranslation> CompetenceTranslations { get; set; }
+        public virtual IDbSet<Person> Persons { get; set; }
+        public virtual IDbSet<Role> Roles { get; set; }
 
         /// <summary>
         /// Takes the connection string defined in web.config and instantiates
         /// a RecruitmentContext. This is less flexible since we can only
         /// define one data source at a time, however it is much easier to
         /// change the data source at a later point without having to refactor
-        /// the code dependent on RecruitmentContext. If flexibility is
-        /// crucial, simply define an interface IRecruitmentContext and have
-        /// the inheriting classes define different data sources.
+        /// the code dependent on RecruitmentContext.
         /// </summary>
         public RecruitmentContext() : base("RecruitmentContext")
         {
@@ -54,7 +52,9 @@ namespace RecruitmentSystem.DAL
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            //modelBuilder.Configurations.AddFromAssembly(Assembly.GetAssembly(GetType()));
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

@@ -15,5 +15,8 @@ namespace RecruitmentSystem.Models
 
         [Required]
         public string Translation { get; set; }
+
+        [Timestamp]
+        public byte[] Timestamp { get; set; }
     }
 }

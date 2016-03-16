@@ -1,7 +1,10 @@
 ﻿using System.Web.Mvc;
 using RecruitmentSystem.Controllers.Base;
 using RecruitmentSystem.Models.ViewModel;
-using RecruitmentSystem.DAL.Applications;
+using RecruitmentSystem.Models;
+using RecruitmentSystem.DAL;
+using System.Collections.Generic;
+using System.Linq;
 using RecruitmentSystem.Security;
 
 namespace RecruitmentSystem.Controllers
@@ -9,11 +12,16 @@ namespace RecruitmentSystem.Controllers
     [PersonAuthorization("recruiter")]
     public class RecruiterController : BaseController
     {
-        //  [PersonAuthorization]
+        private readonly QueryService<Application> _applicationQueryService;
+
+        public RecruiterController()
+        {
+            _applicationQueryService = new QueryService<Application>();
+        }
+
         // GET: ListApplication
         public ActionResult ListApplications()
         {
-
             return View(new RecruiterView());
         }
 
@@ -21,11 +29,15 @@ namespace RecruitmentSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ListApplications(RecruiterView rView)
         {
-            ApplicationManager am = new ApplicationManager();
-            rView.Result = (am.FindApplications());
+            IEnumerable<Application> applications =
+                _applicationQueryService.GetAll(a => a.Availabilities, a => a.Person, a => a.CompetenceProfiles);
+            rView.Result = (applications.ToList());
             return View("ListApplications", rView);
-
         }
 
+        public ActionResult Check(long? id)
+        {
+            return View(new RecruiterView());
+        }
     }
 }

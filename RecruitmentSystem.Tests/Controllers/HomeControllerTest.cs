@@ -1,13 +1,13 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using RecruitmentSystem.Controllers;
 using System.Web.Mvc;
 
 namespace RecruitmentSystem.Tests.Controllers
 {
-    [TestClass]
+    [TestFixture]
     public class HomeControllerTest
     {
-        [TestMethod]
+        [Test]
         public void IndexReturnsCorrectViewTest()
         {
             HomeController controller = new HomeController();
@@ -17,7 +17,7 @@ namespace RecruitmentSystem.Tests.Controllers
             Assert.IsNotNull(result);
         }
 
-        [TestMethod]
+        [Test]
         public void UnauthorizedReturnsCorrectViewTest()
         {
             HomeController controller = new HomeController();

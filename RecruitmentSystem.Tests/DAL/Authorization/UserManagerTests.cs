@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using RecruitmentSystem.DAL.Authorization;
 using System;
 using System.Collections.Generic;
@@ -9,28 +9,28 @@ using System.Threading.Tasks;
 namespace RecruitmentSystem.Controllers.Tests
 {
     //TODO: Look into this https://effort.codeplex.com/
-    [TestClass()]
+    [TestFixture]
     public class UserManagerTests
     {
-        [TestMethod()]
+        [Test]
         public void AddUserTest()
         {
 
         }
 
-        [TestMethod()]
+        [Test]
         public void IsUsernameInUseTest()
         {
 
         }
 
-        [TestMethod()]
+        [Test]
         public void IsUserInRoleTest()
         {
 
         }
 
-        [TestMethod()]
+        [Test]
         public void LoginCheckTest()
         {
 
