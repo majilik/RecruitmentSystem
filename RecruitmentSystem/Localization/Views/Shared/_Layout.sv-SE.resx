@@ -117,17 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Applications" xml:space="preserve">
-    <value>Ansök</value>
-  </data>
   <data name="Language" xml:space="preserve">
     <value>Språk</value>
+  </data>
+  <data name="ListApplications" xml:space="preserve">
+    <value>Lista Ansökningar</value>
   </data>
   <data name="LogIn" xml:space="preserve">
     <value>Logga In</value>
   </data>
   <data name="Register" xml:space="preserve">
     <value>Registrera</value>
+  </data>
+  <data name="RegisterApplication" xml:space="preserve">
+    <value>Ansök</value>
   </data>
   <data name="SignOut" xml:space="preserve">
     <value>Logga Ut</value>

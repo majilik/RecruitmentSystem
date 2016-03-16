@@ -28,11 +28,11 @@
                                 var um = new RecruitmentSystem.DAL.Authorization.UserManager();
                                 if (um.IsUserInRole(HttpContext.Current.User.Identity.Name, "applicant"))
                                 {
-                                    <li>@Html.ActionLink(Localization.Views.Shared._Layout.Applications, "RegisterApplication", "Applicant")</li>
+                                    <li>@Html.ActionLink(Localization.Views.Shared._Layout.RegisterApplication, "RegisterApplication", "Applicant")</li>
                                 }
                                 else
                                 {
-                                    <li>@Html.ActionLink(Localization.Views.Shared._Layout.Applications, "ListApplications", "Recruiter")</li>
+                                    <li>@Html.ActionLink(Localization.Views.Shared._Layout.ListApplications, "ListApplications", "Recruiter")</li>
                                 }
                             }
                         }

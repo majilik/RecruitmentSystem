@@ -61,20 +61,20 @@ namespace Localization.Views.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Apply.
-        /// </summary>
-        public static string Applications {
-            get {
-                return ResourceManager.GetString("Applications", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Language.
         /// </summary>
         public static string Language {
             get {
                 return ResourceManager.GetString("Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to List Applications.
+        /// </summary>
+        public static string ListApplications {
+            get {
+                return ResourceManager.GetString("ListApplications", resourceCulture);
             }
         }
         
@@ -93,6 +93,15 @@ namespace Localization.Views.Shared {
         public static string Register {
             get {
                 return ResourceManager.GetString("Register", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Register Application.
+        /// </summary>
+        public static string RegisterApplication {
+            get {
+                return ResourceManager.GetString("RegisterApplication", resourceCulture);
             }
         }
         
