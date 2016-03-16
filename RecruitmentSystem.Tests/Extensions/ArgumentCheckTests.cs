@@ -1,117 +1,116 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using System;
 
 namespace RecruitmentSystem.Extensions.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class ArgumentCheckTests
     {
-        [TestMethod]
+        [Test]
         public void ThrowIfNullOrWhiteSpaceDoesNotThrowArgumentExceptionIfValidTest()
         {
             string validArg = "pass";
 
-            NUnit.Framework.Assert.DoesNotThrow(() => validArg.ThrowIfNullOrWhiteSpace());
+            Assert.DoesNotThrow(() => validArg.ThrowIfNullOrWhiteSpace());
         }
 
-        [TestMethod]
+        [Test]
         public void ThrowIfNullOrWhiteSpaceThrowsArgumentExceptionIfInvalidTest()
         {
             string[] invalidArgs = new string[] { null, "", " " };
 
             foreach (string invalidArg in invalidArgs)
             {
-                NUnit.Framework.Assert.Throws<ArgumentException>(() => invalidArg.ThrowIfNullOrWhiteSpace());
+                Assert.Throws<ArgumentException>(() => invalidArg.ThrowIfNullOrWhiteSpace());
             }
         }
 
-        [TestMethod]
+        [Test]
         public void ThrowIfNullOrWhiteSpaceReturnsArgumentIfPassTest()
         {
             string validArg = "pass";
 
             string returnedValue = validArg.ThrowIfNullOrWhiteSpace();
 
-            NUnit.Framework.Assert.AreEqual(validArg, returnedValue);
+            Assert.AreEqual(validArg, returnedValue);
         }
 
-        [TestMethod]
+        [Test]
         public void ThrowIfLessThanZeroDoesNotThrowArgumentExceptionIfValidTest()
         {
             int validArg = 0;
 
-            NUnit.Framework.Assert.DoesNotThrow(() => validArg.ThrowIfLessThanZero());
+            Assert.DoesNotThrow(() => validArg.ThrowIfLessThanZero());
         }
 
-        [TestMethod]
+        [Test]
         public void ThrowIfLessThanZeroThrowsArgumentExceptionIfInvalidTest()
         {
             int invalidArg = -1;
 
-
-            NUnit.Framework.Assert.Throws<ArgumentException>(() => invalidArg.ThrowIfLessThanZero());
+            Assert.Throws<ArgumentException>(() => invalidArg.ThrowIfLessThanZero());
         }
 
-        [TestMethod]
+        [Test]
         public void ThrowIfLessThanZeroReturnsArgumentIfPassTest()
         {
             int validArg = 0;
 
             int returnedValue = validArg.ThrowIfLessThanZero();
 
-            NUnit.Framework.Assert.AreEqual(validArg, returnedValue);
+            Assert.AreEqual(validArg, returnedValue);
         }
 
-        [TestMethod]
+        [Test]
         public void ThrowIfLessThanOneIntDoesNotThrowArgumentExceptionIfValidTest()
         {
             int validArg = 1;
 
-            NUnit.Framework.Assert.DoesNotThrow(() => validArg.ThrowIfLessThanOne());
+            Assert.DoesNotThrow(() => validArg.ThrowIfLessThanOne());
         }
 
-        [TestMethod]
+        [Test]
         public void ThrowIfLessThanOneIntThrowsArgumentExceptionIfInvalidTest()
         {
             int invalidArg = 0;
 
-            NUnit.Framework.Assert.Throws<ArgumentException>(() => invalidArg.ThrowIfLessThanOne());
+            Assert.Throws<ArgumentException>(() => invalidArg.ThrowIfLessThanOne());
         }
 
-        [TestMethod]
+        [Test]
         public void ThrowIfLessThanOneIntReturnsArgumentIfPassTest()
         {
             int validArg = 1;
 
             int returnedValue = validArg.ThrowIfLessThanOne();
 
-            NUnit.Framework.Assert.AreEqual(validArg, returnedValue);
+            Assert.AreEqual(validArg, returnedValue);
         }
 
-        [TestMethod]
+        [Test]
         public void ThrowIfLessThanOneUintDoesNotThrowArgumentExceptionIfValidTest()
         {
             uint validArg = 1;
 
-            NUnit.Framework.Assert.DoesNotThrow(() => validArg.ThrowIfLessThanOne());
+            Assert.DoesNotThrow(() => validArg.ThrowIfLessThanOne());
         }
 
-        [TestMethod]
+        [Test]
         public void ThrowIfLessThanOneUintThrowsArgumentExceptionIfInvalidTest()
         {
             uint invalidArg = 0;
 
-            NUnit.Framework.Assert.Throws<ArgumentException>(() => invalidArg.ThrowIfLessThanOne());
+            Assert.Throws<ArgumentException>(() => invalidArg.ThrowIfLessThanOne());
         }
 
-        [TestMethod]
+        [Test]
         public void ThrowIfLessThanOneUintReturnsArgumentIfPassTest()
         {
             uint validArg = 1;
 
             uint returnedValue = validArg.ThrowIfLessThanOne();
 
-            NUnit.Framework.Assert.AreEqual(validArg, returnedValue);
+            Assert.AreEqual(validArg, returnedValue);
         }
     }
 }

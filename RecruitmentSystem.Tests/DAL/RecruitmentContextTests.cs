@@ -1,37 +1,38 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RecruitmentSystem.Models;
+﻿using RecruitmentSystem.Models;
 using RecruitmentSystem.DAL;
 using System.Data.Entity.Validation;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System;
+using NUnit.Framework;
 
 namespace RecruitmentSystem.Tests.DAL
 {
-    [TestClass]
+    [TestFixture]
     public class RecruitmentContextTests
     {
         private RecruitmentContext context;
 
-        [ClassInitialize]
-        public static void ClassInitialize(TestContext testContext)
+        [OneTimeSetUp]
+        public static void ClassInitialize()
         {
             Database.SetInitializer(new DropCreateDatabaseAlways<RecruitmentContext>());
         }
 
-        [TestInitialize]
+        [SetUp]
         public void TestInitialize()
         {
             context = new RecruitmentContext("TestRecruitmentContext");
         }
 
-        [TestCleanup]
+        [TearDown]
         public void TestCleanp()
         {
             context.Dispose();
         }
 
+        [Test]
         public void CanInsertValidAvailabilityTest()
         {
             Availability availability = new Availability
@@ -42,9 +43,10 @@ namespace RecruitmentSystem.Tests.DAL
 
             context.Entry(availability).State = EntityState.Added;
 
-            NUnit.Framework.Assert.DoesNotThrow(() => context.SaveChanges());
+            Assert.DoesNotThrow(() => context.SaveChanges());
         }
 
+        [Test]
         public void InsertingInvalidAvailabilityThrowsExceptionTest()
         {
             Availability availabilityNullFrom = new Availability
@@ -54,7 +56,7 @@ namespace RecruitmentSystem.Tests.DAL
 
             context.Entry(availabilityNullFrom).State = EntityState.Added;
 
-            NUnit.Framework.Assert.Throws<DbEntityValidationException>(() => context.SaveChanges());
+            Assert.Throws<DbEntityValidationException>(() => context.SaveChanges());
 
             Availability availabilityNullTo = new Availability
             {
@@ -64,61 +66,61 @@ namespace RecruitmentSystem.Tests.DAL
             context.Entry(availabilityNullFrom).State = EntityState.Detached;
             context.Entry(availabilityNullTo).State = EntityState.Added;
 
-            NUnit.Framework.Assert.Throws<DbEntityValidationException>(() => context.SaveChanges());
+            Assert.Throws<DbEntityValidationException>(() => context.SaveChanges());
         }
 
-        [TestMethod]
+        [Test]
         public void CanInsertValidRoleTest()
         {
             Role role = new Role { Name = "test_role" };
 
             context.Roles.Add(role);
 
-            NUnit.Framework.Assert.DoesNotThrow(() => context.SaveChanges());
-            NUnit.Framework.Assert.DoesNotThrow(() => context.Roles.Single(r => r.Name.Equals(role.Name)));
+            Assert.DoesNotThrow(() => context.SaveChanges());
+            Assert.DoesNotThrow(() => context.Roles.Single(r => r.Name.Equals(role.Name)));
         }
 
-        [TestMethod]
+        [Test]
         public void InsertingEmptyRoleThrowsExceptionTest()
         {
             Role role = new Role {};
 
             context.Entry(role).State = EntityState.Added;
 
-            NUnit.Framework.Assert.Throws<DbEntityValidationException>(() => context.SaveChanges());
+            Assert.Throws<DbEntityValidationException>(() => context.SaveChanges());
         }
 
-        [TestMethod]
+        [Test]
         public void CanInsertValidPersonTest()
         {
         }
 
-        [TestMethod]
+        [Test]
         public void InsertingEmptyPersonThrowsExceptionTest()
         {
         }
 
-        [TestMethod]
+        [Test]
         public void CanInsertValidCompetenceTest()
         {
             Competence competence = new Competence { DefaultName = "test_competence" };
 
             context.Entry(competence).State = EntityState.Added;
 
-            NUnit.Framework.Assert.DoesNotThrow(() => context.SaveChanges());
+            Assert.DoesNotThrow(() => context.SaveChanges());
         }
 
-        [TestMethod]
+        [Test]
         public void InsertingEmptyCompetenceThrowsExceptionTest()
         {
             Competence competence = new Competence { };
 
             context.Entry(competence).State = EntityState.Added;
 
-            NUnit.Framework.Assert.Throws<DbEntityValidationException>(() => context.SaveChanges());
+            Assert.Throws<DbEntityValidationException>(() => context.SaveChanges());
         }
 
-        [TestMethod]
+        [Test]
         public void InsertingNonUniqueCompetenceThrowsExceptionTest()
         {
             Competence competence = new Competence { DefaultName = "test_competence" };
@@ -127,7 +129,7 @@ namespace RecruitmentSystem.Tests.DAL
             context.Entry(competence).State = EntityState.Added;
             context.Entry(competenceShallowCopy).State = EntityState.Added;
 
-            NUnit.Framework.Assert.Throws<DbUpdateException>(() => context.SaveChanges());
+            Assert.Throws<DbUpdateException>(() => context.SaveChanges());
         }
     }
 }
