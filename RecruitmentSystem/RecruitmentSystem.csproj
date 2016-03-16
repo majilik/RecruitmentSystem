@@ -204,7 +204,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\HandleException.cs" />
-    <Compile Include="Attributes\LogException.cs" />
     <Compile Include="Attributes\TraceLogger.cs" />
     <Compile Include="Controllers\DownloadController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />

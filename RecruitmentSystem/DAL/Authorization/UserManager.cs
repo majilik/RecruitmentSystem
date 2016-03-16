@@ -7,16 +7,16 @@ using System;
 
 namespace RecruitmentSystem.DAL.Authorization
 {
-    //TODO: Document this class in Architecture Document
+    /// <summary>
+    /// Represents an implementation of <see cref="IUserManager"/>.
+    /// </summary>
     public class UserManager : IUserManager
     {
-        private readonly QueryService<Person> _personQueryService;
-        private readonly QueryService<Role> _roleQueryService;
+        private static readonly QueryService<Person> _personQueryService = new QueryService<Person>();
+        private static readonly QueryService<Role> _roleQueryService = new QueryService<Role>();
 
         public UserManager()
         {
-            _personQueryService = new QueryService<Person>();
-            _roleQueryService = new QueryService<Role>();
         }
 
         /// <summary>

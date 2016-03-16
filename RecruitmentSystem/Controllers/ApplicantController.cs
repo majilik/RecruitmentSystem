@@ -15,19 +15,15 @@ namespace RecruitmentSystem.Controllers
     [PersonAuthorization("applicant")]
     public class ApplicantController : BaseController
     {
-        private readonly QueryService<Application> _applicationQueryService;
-        private readonly QueryService<Competence> _competenceQueryService;
-        private readonly QueryService<Person> _personQueryService;
+        private static readonly QueryService<Application> _applicationQueryService = new QueryService<Application>();
+        private static readonly QueryService<Competence> _competenceQueryService = new QueryService<Competence>();
+        private static readonly QueryService<Person> _personQueryService = new QueryService<Person>();
 
         /// <summary>
-        /// Constructs the ApplicationController and initializes the database access objects
-        /// necessary to query the database.
+        /// Constructs the ApplicationController.
         /// </summary>
         public ApplicantController()
         {
-            _applicationQueryService = new QueryService<Application>();
-            _competenceQueryService = new QueryService<Competence>();
-            _personQueryService = new QueryService<Person>();
         }
 
         /// <summary>
@@ -54,7 +50,8 @@ namespace RecruitmentSystem.Controllers
         /// The application is then stored for the currently authorized user.
         /// </summary>
         /// <param name="view">The current <see cref="ApplicationView"/>.</param>
-        /// <returns>Returns a new <see cref="ApplicationView"/>.</returns>
+        /// <returns>Redirects the user to the view named Success upon a successful
+        /// application registration. Otherwise presents the current view.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Apply(ApplicationView applicationView)
@@ -62,12 +59,20 @@ namespace RecruitmentSystem.Controllers
             if (ModelState.IsValid && HttpContext != null)
             {
                 string username = HttpContext.User.Identity.Name;
-                CreateApplication.Invoke(username, applicationView.SelectedCompetences, applicationView.SelectedAvailabilities);
+                CreateApplication.Invoke(
+                    username,
+                    applicationView.SelectedCompetences,
+                    applicationView.SelectedAvailabilities);
+                return RedirectToAction("Success", "Applicant");
             }
 
-            return RedirectToAction("Success", "Applicant");
+            return View(applicationView);
         }
 
+        /// <summary>
+        /// HTTP Get for the view named Success.
+        /// </summary>
+        /// <returns>The view named Succes.</returns>
         public ActionResult Success()
         {
             return View();

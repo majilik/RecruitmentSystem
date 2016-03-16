@@ -1,6 +1,9 @@
 ﻿namespace RecruitmentSystem.Security
 {
-    //TODO: Document this class in Architecture Document
+    /// <summary>
+    /// Represents a manager that handles password security and validation
+    /// and abstracts the implementation details.
+    /// </summary>
     public class SecurityManager
     {
         /// <summary>
@@ -15,7 +18,7 @@
 
 
         /// <summary>
-        /// Validates a password against a hash
+        /// Validates a password against a hash.
         /// </summary>
         /// <param name="password"></param>
         /// <param name="hash"></param>
