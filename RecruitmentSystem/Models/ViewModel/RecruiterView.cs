@@ -8,9 +8,14 @@ using System.Web.Mvc;
 
 namespace RecruitmentSystem.Models.ViewModel
 {
+    /// <summary>
+    /// View model for recruiter view
+    /// </summary>
     public class RecruiterView
     {
-        
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public RecruiterView()
         {
             Competences = new List<SelectListItem>();
@@ -31,6 +36,11 @@ namespace RecruitmentSystem.Models.ViewModel
         private IEnumerable<Availability> _Availabilities { get; set; }
         private IEnumerable<Application> _Applications { get; set; }
         private List<SelectListItem> _Names = new List<SelectListItem>();
+
+        /// <summary>
+        /// GET/SET
+        /// Creatas a IEnumerable list of application dates 
+        /// </summary>
         public IEnumerable<SelectListItem> DatesOfApplication
         {
             get
@@ -51,6 +61,9 @@ namespace RecruitmentSystem.Models.ViewModel
             }
         }
 
+        /// <summary>
+        /// GET/SET
+        /// </summary>
         [DisplayName("Names")]
         public IEnumerable<SelectListItem> Names
         {
@@ -63,6 +76,10 @@ namespace RecruitmentSystem.Models.ViewModel
             }
         }
 
+        /// <summary>
+        /// GET/SET 
+        /// Creatas a IEnumerable list of competences.
+        /// </summary>
         [DisplayName("Competence")]
         public IEnumerable<SelectListItem> Competences
         {
@@ -82,6 +99,11 @@ namespace RecruitmentSystem.Models.ViewModel
             }
         }
 
+
+        /// <summary>
+        /// GET/SET
+        /// Creates a IEnumerable list of FromDate's.
+        /// </summary>
         [DisplayName("Available From")]
         public IEnumerable<SelectListItem> FromDate
         {
@@ -98,6 +120,9 @@ namespace RecruitmentSystem.Models.ViewModel
             set { }
         }
 
+        /// <summary>
+        /// Creates a IEnumerable list of ToDate's.
+        /// </summary>
         [DisplayName("Available To")]
         public IEnumerable<SelectListItem> ToDate
         {
@@ -116,12 +141,30 @@ namespace RecruitmentSystem.Models.ViewModel
 
         
 
+        /// <summary>
+        /// GET/SET
+        /// </summary>
         [DisplayName("Selected Competence")]
         public Competence SelectedCompetence { get; set; }
+        /// <summary>
+        /// GET/SET
+        /// </summary>
         public DateTime SelectedFromDate { get; set; }
+        /// <summary>
+        /// GET/SET
+        /// </summary>
         public DateTime SelectedToDate { get; set; }
+        /// <summary>
+        /// GET/SET
+        /// </summary>
         public DateTime SelectedDateOfRegistration { get; set; }
+        /// <summary>
+        /// GET/SET
+        /// </summary>
         public string SelectedName { get; set; }
+        /// <summary>
+        /// GET/SET
+        /// </summary>
         public List<Application> Result { get; set; }
 
         
