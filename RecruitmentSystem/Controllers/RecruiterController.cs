@@ -2,12 +2,14 @@
 using RecruitmentSystem.Controllers.Base;
 using RecruitmentSystem.Models.ViewModel;
 using RecruitmentSystem.DAL.Applications;
+using RecruitmentSystem.Security;
 
 namespace RecruitmentSystem.Controllers
 {
+    [PersonAuthorization("recruiter")]
     public class RecruiterController : BaseController
     {
-      //  [PersonAuthorization]
+        //  [PersonAuthorization]
         // GET: ListApplication
         public ActionResult ListApplications()
         {
@@ -25,9 +27,5 @@ namespace RecruitmentSystem.Controllers
 
         }
 
-        public ActionResult Check(long? id)
-        {
-            return View(new RecruiterView());
-        }
     }
 }
