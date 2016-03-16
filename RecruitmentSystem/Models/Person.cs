@@ -16,7 +16,6 @@ namespace RecruitmentSystem.Models
         public string Email { get; set; }
         public string Password { get; set; }
         public string Username { get; set; }
-        //[DefaultValue(2)]
         public virtual Role Role { get; set; }
 
         [Timestamp]

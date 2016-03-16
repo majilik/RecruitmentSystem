@@ -18,7 +18,7 @@ namespace RecruitmentSystem.Attributes
 
             if (methodInfo != null && args != null)
             {
-                EventLogger logger = new EventLogger(methodInfo.ReflectedType.FullName);
+                string loggerName = methodInfo.ReflectedType.FullName;
 
                 Arguments arguments = args.Arguments;
                 ParameterInfo[] parameters = methodInfo.GetParameters();
@@ -26,12 +26,13 @@ namespace RecruitmentSystem.Attributes
 
                 for (int i = 0; i < args.Arguments.Count; i++)
                 {
-                    logger.Log(LogLevel.Trace, eventID, parameters[i] + " " + arguments[i]);
+                    EventLogger.Log(loggerName, LogLevel.Trace, eventID, parameters[i] + " " + arguments[i]);
                 }
 
-                if (methodInfo.ReturnType != typeof(void) && args.ReturnValue != null)
+                if (methodInfo.ReturnType != typeof(void))
                 {
-                    logger.Log(LogLevel.Trace, eventID, args.ReturnValue.ToString());
+                    EventLogger.Log(loggerName, LogLevel.Trace, eventID, args.ReturnValue.GetType().FullName + " " +
+                        args.ReturnValue == null ? "null" : args.ReturnValue.ToString());
                 }
             }
 

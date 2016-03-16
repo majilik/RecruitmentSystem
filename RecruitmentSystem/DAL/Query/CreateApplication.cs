@@ -1,7 +1,6 @@
 ﻿using RecruitmentSystem.Models;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 
@@ -9,12 +8,12 @@ namespace RecruitmentSystem.DAL.Query
 {
     internal class CreateApplication
     {
-        private static IDbContextFactory<DbContext> _contextFactory = new RecruitmentContextFactory();
+        private static IDbContextFactory<RecruitmentContext> _contextFactory = new RecruitmentContextFactory();
 
         internal static void Invoke(string username, Dictionary<int, decimal> selectedCompetences,
             Dictionary<DateTime, DateTime> selectedAvailabilities)
         {
-            using (RecruitmentContext context = _contextFactory.Create() as RecruitmentContext)
+            using (RecruitmentContext context = _contextFactory.Create())
             {
                 IList<Competence> competences = context.Competences.ToList();
                 Person applicant = context.Persons.Single(p => p.Username == username);

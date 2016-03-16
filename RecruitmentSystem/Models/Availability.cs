@@ -10,11 +10,7 @@ namespace RecruitmentSystem.Models
     {
         public long Id { get; set; }
         public virtual Application Application { get; set; }
-
-        [DataType(DataType.Date)]
         public DateTime FromDate { get; set; }
-
-        [DataType(DataType.Date)]
         public DateTime ToDate { get; set; }
 
         [Timestamp]

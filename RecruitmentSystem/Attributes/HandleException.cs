@@ -3,6 +3,7 @@ using System.Web.Mvc;
 
 namespace RecruitmentSystem.Attributes
 {
+    [TraceLogger(AttributeExclude = true)]
     public class HandleException : HandleErrorAttribute
     {
         private static Logger _logger = LogManager.GetCurrentClassLogger();

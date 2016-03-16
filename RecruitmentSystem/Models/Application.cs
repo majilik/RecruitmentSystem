@@ -22,5 +22,8 @@ namespace RecruitmentSystem.Models
         public ICollection<Availability> Availabilities { get; set; }
 
         public bool Status { get; set; }
+
+        [Timestamp]
+        public byte[] Timestamp { get; set; }
     }
 }
