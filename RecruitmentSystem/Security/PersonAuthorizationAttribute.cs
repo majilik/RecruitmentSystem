@@ -67,10 +67,10 @@ namespace RecruitmentSystem.Security
 
             if (_roles.Any(role => _userManager.IsUserInRole(user, role)))
             {
-                return true;
+                return httpContext.User.Identity.IsAuthenticated;
             }
 
-            return httpContext.User.Identity.IsAuthenticated;
+            return false;
         }
 
         /// <summary>

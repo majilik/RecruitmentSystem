@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using RecruitmentSystem.Controllers.Base;
+using System.Web.Mvc;
 
 namespace RecruitmentSystem.Controllers
 {
@@ -7,7 +8,7 @@ namespace RecruitmentSystem.Controllers
     /// ASP.NET MVC Web application and responds to this action.
     /// Controller handles requests that fails, and responds with an Error Page.
     /// </summary>
-    public class ErrorController : Controller
+    public class ErrorController : BaseController
     {
         /// <summary>
         /// Http GET for 'Page Not Found Error' page.

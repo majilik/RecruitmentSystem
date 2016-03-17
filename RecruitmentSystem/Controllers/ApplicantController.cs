@@ -50,7 +50,7 @@ namespace RecruitmentSystem.Controllers
         /// Takes the current ApplicationView when submitted and processes the data.
         /// The application is then stored for the currently authorized user.
         /// </summary>
-        /// <param name="view">The current <see cref="ApplicationView"/>.</param>
+        /// <param name="applicationView">The current <see cref="ApplicationView"/>.</param>
         /// <returns>Redirects the user to the view named Success upon a successful
         /// application registration. Otherwise presents the current view.</returns>
         [HttpPost]
@@ -70,6 +70,10 @@ namespace RecruitmentSystem.Controllers
             return View(applicationView);
         }
 
+        /// <summary>
+        /// Http GET for Success view.
+        /// </summary>
+        /// <returns>Success view.</returns>
         public ActionResult Success()
         {
             return View();
