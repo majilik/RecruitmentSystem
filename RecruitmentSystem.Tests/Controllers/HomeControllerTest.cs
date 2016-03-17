@@ -17,14 +17,5 @@ namespace RecruitmentSystem.Tests.Controllers
             Assert.IsNotNull(result);
         }
 
-        [Test]
-        public void UnauthorizedReturnsCorrectViewTest()
-        {
-            HomeController controller = new HomeController();
-
-            ViewResult result = controller.Unauthorized() as ViewResult;
-
-            Assert.IsNotNull(result);
-        }
     }
 }
