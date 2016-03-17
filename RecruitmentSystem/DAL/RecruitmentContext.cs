@@ -46,12 +46,18 @@ namespace RecruitmentSystem.DAL
         {
         }
 
+        /// <summary>
+        /// Takes the connection string defined in web.config and instantiates a RecruitmentContext.
+        /// </summary>
+        /// <param name="connectionString">The name of the configured connection string for a database.</param>
         public RecruitmentContext(string connectionString) : base(connectionString)
         {
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            // Uncomment this line if the configuration files found in RecruitmentContext.Models.Configuration
+            // are to be used instead of data annotations.
             //modelBuilder.Configurations.AddFromAssembly(Assembly.GetAssembly(GetType()));
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             base.OnModelCreating(modelBuilder);

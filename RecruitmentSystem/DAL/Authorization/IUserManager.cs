@@ -2,6 +2,9 @@
 
 namespace RecruitmentSystem.DAL.Authorization.Interfaces
 {
+    /// <summary>
+    /// Represents a set of methods for authenticating a users existence and status.
+    /// </summary>
     public interface IUserManager
     {
         void AddUser(RegisterView registerView);

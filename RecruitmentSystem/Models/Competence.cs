@@ -14,16 +14,29 @@ namespace RecruitmentSystem.Models
     /// </summary>
     public class Competence
     {
+        /// <summary>
+        /// GET/SET
+        /// </summary>
         public long Id { get; set; }
 
+        /// <summary>
+        /// GET/SET
+        /// Must be unique.
+        /// </summary>
         [Required]
         [StringLength(50, MinimumLength = 1, ErrorMessage = "")]
         [Index(IsUnique = true)]
         public string DefaultName { get; set; }
 
+        /// <summary>
+        /// GET/SET
+        /// </summary>
         [Timestamp]
         public byte[] Timestamp { get; set; }
 
+        /// <summary>
+        /// Localization of the competence name.
+        /// </summary>
         [NotMapped]
         public string LocalizedName
         {
@@ -36,6 +49,9 @@ namespace RecruitmentSystem.Models
             }
         }
 
+        /// <summary>
+        /// GET/SET
+        /// </summary>
         public virtual ICollection<CompetenceTranslation> Translations { get; set; }
     }
 }

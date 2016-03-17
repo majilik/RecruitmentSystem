@@ -38,7 +38,9 @@ namespace RecruitmentSystem.DAL
         }
 
         /// <summary>
-        /// 
+        /// Returns a list of the queried entities with the given navigation properties
+        /// <paramref name="navigationProperties"/> (virtual references) loaded eagerly.
+        /// The entities will not be tracked by <see cref="DbContext"/>.
         /// </summary>
         /// <param name="navigationProperties">A lambda expression tree representing a query.</param>
         /// <returns>A collection of the result of the query, or an empty collection.</returns>
@@ -61,7 +63,9 @@ namespace RecruitmentSystem.DAL
         }
 
         /// <summary>
-        /// 
+        /// Returns a list of the queried entities restricted by <paramref name="where"/> with the given
+        /// navigation properties <paramref name="navigationProperties"/> (virtual references) loaded eagerly.
+        /// The entities will not be tracked by <see cref="DbContext"/>.
         /// </summary>
         /// <param name="where"></param>
         /// <param name="navigationProperties">A lambda expression tree representing a query.</param>
@@ -85,7 +89,9 @@ namespace RecruitmentSystem.DAL
         }
 
         /// <summary>
-        /// Usage: QueryService.getSingle(e => e.Id.Equals(someId));
+        /// Returns the queried entity restricted by <paramref name="where"/> with the given navigation
+        /// properties <paramref name="navigationProperties"/> (virtual references) loaded eagerly.
+        /// The entities will not be tracked by <see cref="DbContext"/>.
         /// </summary>
         /// <param name="where">A lamda expression returning true or false depending on 
         /// the result of evaluating the expression.</param>
@@ -112,11 +118,11 @@ namespace RecruitmentSystem.DAL
 
         /// <summary>
         /// Adds the <paramref name="items"/> to the DbContext returned by
-        /// <see cref="IDbContextFactory{TContext}"/> injected in the constructor
+        /// <see cref="IDbContextFactory{T}"/> injected in the constructor
         /// for this instance. The changes are then persisted to the underlying
-        /// databse.
+        /// databse. The entities will not be tracked by <see cref="DbContext"/>.
         /// </summary>
-        /// <param name="items">A variable number of arguments of type <typeparamref name="T"/>,
+        /// <param name="entities">A variable number of arguments of type <see cref="T"/>,
         /// or an array.</param>
         public virtual void Add(params T[] entities)
         {
@@ -133,11 +139,11 @@ namespace RecruitmentSystem.DAL
 
         /// <summary>
         /// Modifies the <paramref name="items"/> in the DbContext returned by
-        /// <see cref="IDbContextFactory{TContext}"/> injected in the constructor
+        /// <see cref="IDbContextFactory{T}"/> injected in the constructor
         /// for this instance. The changes are then persisted to the underlying
-        /// database.
+        /// database. The entities will not be tracked by <see cref="DbContext"/>.
         /// </summary>
-        /// <param name="items">A variable number of arguments of type <typeparamref name="T"/>,
+        /// <param name="entities">A variable number of arguments of type <see cref="T"/>,
         /// or an array.</param>
         public virtual void Update(params T[] entities)
         {
@@ -153,11 +159,11 @@ namespace RecruitmentSystem.DAL
 
         /// <summary>
         /// Deletes the <paramref name="items"/> in the DbContext returned by
-        /// <see cref="IDbContextFactory{TContext}"/> injected in the constructor
+        /// <see cref="IDbContextFactory{T}"/> injected in the constructor
         /// for this instance. The changes are then persisted to the underlying
-        /// database.
+        /// database. The entities will not be tracked by <see cref="DbContext"/>.
         /// </summary>
-        /// <param name="items">A variable number of arguments of type <typeparamref name="T"/>,
+        /// <param name="entities">A variable number of arguments of type <see cref="T"/>,
         /// or an array.</param>
         public virtual void Remove(params T[] entities)
         {

@@ -9,7 +9,7 @@ namespace RecruitmentSystem.DAL
 {
     /// <summary>
     /// DbInitializer is implicitly an implementation of IDatabaseInitializer
-    /// by extending DropCreateDatabaseIfModelChanges<TContext>, where TContext
+    /// by extending <see cref="DropCreateDatabaseIfModelChanges{T}"/>, where TContext
     /// is RecruitmentContext. This class overrides the Seed method of its
     /// parent and provides the data that should replace the dropped data of
     /// the database specified by RecruitmentContext.

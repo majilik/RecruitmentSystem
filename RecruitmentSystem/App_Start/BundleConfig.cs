@@ -2,9 +2,16 @@
 
 namespace RecruitmentSystem
 {
+    /// <summary>
+    /// Represents the logic for configuring bundles for this assembly.
+    /// </summary>
     public class BundleConfig
     {
-        // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
+        /// <summary>
+        /// Adds any bundles specified in the method body to <paramref name="bundles"/>.
+        /// For more information on bundling, visit <see cref="http://go.microsoft.com/fwlink/?LinkId=301862"/>.
+        /// </summary>
+        /// <param name="bundles">The global collection of bundles.</param>
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery", "https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js")

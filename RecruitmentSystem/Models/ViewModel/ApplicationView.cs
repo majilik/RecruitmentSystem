@@ -6,14 +6,25 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web.Mvc;
 
+
 namespace RecruitmentSystem.Models.ViewModel
 {
+    /// <summary>
+    /// View model for application views
+    /// </summary>
     public class ApplicationView
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public ApplicationView() : this(new QueryService<Competence>().GetAll())
         {
         }
 
+        /// <summary>
+        /// Constructor. Takes a list of competences.
+        /// </summary>
+        /// <param name="competences"></param>
         public ApplicationView(IList<Competence> competences)
         {
             _competences = competences;
@@ -21,9 +32,15 @@ namespace RecruitmentSystem.Models.ViewModel
             SelectedAvailabilities = new Dictionary<DateTime, DateTime>();
         }
 
+        /// <summary>
+        /// GET/SET
+        /// </summary>
         [DisplayFormat(ApplyFormatInEditMode = true)]
         public decimal SelectedYearsOfExperience { get; set; }
 
+        /// <summary>
+        /// GET/SET. Returns a IEnumerable list of competences from _competences
+        /// </summary>
         public IEnumerable<SelectListItem> Competences
         {
             get
@@ -41,10 +58,19 @@ namespace RecruitmentSystem.Models.ViewModel
             set {}
         }
 
+        /// <summary>
+        /// GET/SET
+        /// </summary>
         public Dictionary<int, decimal> SelectedCompetences { get; set; }
 
+        /// <summary>
+        /// GET/SET
+        /// </summary>
         private IEnumerable<Competence> _competences { get; set; }
 
+        /// <summary>
+        /// GET/SET
+        /// </summary>
         public Dictionary<DateTime, DateTime> SelectedAvailabilities { get; set; }
     }
 }
