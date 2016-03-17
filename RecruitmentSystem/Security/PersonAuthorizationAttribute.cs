@@ -26,7 +26,7 @@ namespace RecruitmentSystem.Security
         /// Constructor, specified with a IUserManager implementation
         /// </summary>
         /// <param name="userManager">IUserManager to create Attribute with</param>
-        public PersonAuthorizationAttribute(UserManager userManager)
+        public PersonAuthorizationAttribute(IUserManager userManager)
         {
             _userManager = userManager;
             _roles = new string[0];
@@ -43,9 +43,9 @@ namespace RecruitmentSystem.Security
         /// <summary>
         /// Constructor, takes roles as a parameterlist, and a IUserManager implementation.
         /// </summary>
-        /// <param name="userManager"></param>
+        /// <param name="userManager">IUserManager implementation to use.</param>
         /// <param name="roles"></param>
-        public PersonAuthorizationAttribute(UserManager userManager, params string[] roles)
+        public PersonAuthorizationAttribute(IUserManager userManager, params string[] roles)
         {
             _userManager = userManager;
             _roles = roles;
