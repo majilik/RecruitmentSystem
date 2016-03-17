@@ -1,10 +1,10 @@
 ﻿@model RecruitmentSystem.Models.ViewModel.RecruiterView
 
 @{
-    ViewBag.Title = "ListApplications";
+    ViewBag.Title = Localization.Views.Recruiter.ListApplications.Title;
 }
 
-<h2>List Applications</h2>
+<h2>@Localization.Views.Recruiter.ListApplications.Title</h2>
 <hr />
 
 @using (Html.BeginForm())
@@ -57,13 +57,13 @@
 <table class="table">
     <tr>
         <td class="col-lg-4">
-            <b>Surname</b>
+            <b>@Localization.Views.Recruiter.ListApplications.NameHeader</b>
         </td>
         <td class="col-lg-4">
-            <b>Lastname</b>
+            <b>@Localization.Views.Recruiter.ListApplications.SurnameHeader</b>
         </td>
         <td class="col-lg-1">
-            <b>Application Date</b>
+            <b>@Localization.Views.Recruiter.ListApplications.ApplicationDateHeader</b>
         </td>
     </tr>
     @foreach (RecruitmentSystem.Models.Application entry in Model.Result)

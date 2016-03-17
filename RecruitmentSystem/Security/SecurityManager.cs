@@ -1,6 +1,8 @@
 ﻿namespace RecruitmentSystem.Security
 {
-    //TODO: Document this class in Architecture Document
+    /// <summary>
+    /// Manages Security related methods.
+    /// </summary>
     public class SecurityManager
     {
         /// <summary>

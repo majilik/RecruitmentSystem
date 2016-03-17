@@ -11,6 +11,7 @@ namespace RecruitmentSystem.Controllers
     /// <summary>
     /// Represents a controller that handles user actions through an
     /// ASP.NET MVC Web application and responds to this action.
+    /// Controller handles requests for 'applicant' users.
     /// </summary>
     [PersonAuthorization("applicant")]
     public class ApplicantController : BaseController
@@ -53,7 +54,7 @@ namespace RecruitmentSystem.Controllers
         /// Takes the current ApplicationView when submitted and processes the data.
         /// The application is then stored for the currently authorized user.
         /// </summary>
-        /// <param name="view">The current <see cref="ApplicationView"/>.</param>
+        /// <param name="applicationView">The current <see cref="ApplicationView"/>.</param>
         /// <returns>Returns a new <see cref="ApplicationView"/>.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -68,6 +69,10 @@ namespace RecruitmentSystem.Controllers
             return RedirectToAction("Success", "Applicant");
         }
 
+        /// <summary>
+        /// Http GET for the Success view shown after a successful application has been created.
+        /// </summary>
+        /// <returns>The success view.</returns>
         public ActionResult Success()
         {
             return View();

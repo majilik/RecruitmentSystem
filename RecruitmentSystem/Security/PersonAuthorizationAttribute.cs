@@ -57,7 +57,7 @@ namespace RecruitmentSystem.Security
             filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new
             {
                 action = "Unauthorized",
-                controller = "Home",
+                controller = "Error",
                 area = ""
             }));
         }

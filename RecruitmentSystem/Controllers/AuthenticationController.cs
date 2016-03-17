@@ -7,16 +7,26 @@ using RecruitmentSystem.Controllers.Base;
 
 namespace RecruitmentSystem.Controllers
 {
-    //TODO: Document this class in Architecture Document
+    /// <summary>
+    /// Represents a controller that handles user actions through an
+    /// ASP.NET MVC Web application and responds to this action.
+    /// Controller handles Authentication related requests.
+    /// </summary>
     public class AuthenticationController : BaseController
     {
         private readonly IUserManager _userManager;
         private readonly IFormsAuthenticationWrap _formsAuthentication;
-
+        /// <summary>
+        /// Default constructor, initializes manager objects for authentication and user management.
+        /// </summary>
         public AuthenticationController() : this(new UserManager(), new FormsAuthenticationWrap())
         {
         }
-
+        /// <summary>
+        /// Constructor with ability to set the IUserManager and IFormsAuthenticationWrap implementations.
+        /// </summary>
+        /// <param name="userManager"></param>
+        /// <param name="formsAuthentication"></param>
         public AuthenticationController(IUserManager userManager, IFormsAuthenticationWrap formsAuthentication)
         {
             _userManager = userManager;

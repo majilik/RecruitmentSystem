@@ -6,12 +6,18 @@ using RecruitmentSystem.Resources;
 
 namespace RecruitmentSystem.Controllers
 {
+    /// <summary>
+    /// Represents a controller that handles user actions through an
+    /// ASP.NET MVC Web application and responds to this action.
+    /// Controller handles requests about Localization.
+    /// </summary>
     public class LocaleController : BaseController
     {
         /// <summary>
-        /// Changes the locale. Defaults to EN_US.
-        /// Assumes route data 'locale' as a Locales enum.
+        /// Http GET to change the locale. 
+        /// Defaults to EN_US.
         /// </summary>
+        /// <param name="locale">Locales enum.</param>
         /// <returns>Redirects to Home.</returns>
         public ActionResult ChangeLocale(Locales? locale)
         {

@@ -291,15 +291,25 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Index.sv-SE.resx</DependentUpon>
     </Compile>
-    <Compile Include="Localization\Views\Home\Unauthorized.Designer.cs">
+    <Compile Include="Localization\Views\Error\Unauthorized.Designer.cs">
       <DependentUpon>Unauthorized.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Localization\Views\Home\Unauthorized.sv-SE.Designer.cs">
+    <Compile Include="Localization\Views\Error\Unauthorized.sv-SE.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Unauthorized.sv-SE.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Localization\Views\Recruiter\ListApplications.sv-SE.Designer.cs">
+      <DependentUpon>ListApplications.sv-SE.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Localization\Views\Recruiter\ListApplications.Designer.cs">
+      <DependentUpon>ListApplications.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Localization\Views\Shared\Error.Designer.cs">
       <DependentUpon>Error.resx</DependentUpon>
@@ -451,7 +461,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Authentication\Register.cshtml" />
-    <Content Include="Views\Home\Unauthorized.cshtml" />
+    <Content Include="Views\Error\Unauthorized.cshtml" />
     <Content Include="Views\Authentication\Login.cshtml" />
     <Content Include="Views\Applicant\RegisterApplication.cshtml" />
     <Content Include="Views\Templates\Date.cshtml" />
@@ -538,15 +548,25 @@
       <LastGenOutput>Index.sv-SE.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Localization.Views.Home</CustomToolNamespace>
     </EmbeddedResource>
-    <EmbeddedResource Include="Localization\Views\Home\Unauthorized.resx">
+    <EmbeddedResource Include="Localization\Views\Error\Unauthorized.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Unauthorized.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>Localization.Views.Home</CustomToolNamespace>
+      <CustomToolNamespace>Localization.Views.Error</CustomToolNamespace>
     </EmbeddedResource>
-    <EmbeddedResource Include="Localization\Views\Home\Unauthorized.sv-SE.resx">
+    <EmbeddedResource Include="Localization\Views\Error\Unauthorized.sv-SE.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Unauthorized.sv-SE.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>Localization.Views.Home</CustomToolNamespace>
+      <CustomToolNamespace>Localization.Views.Error</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Views\Recruiter\ListApplications.sv-SE.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ListApplications.sv-SE.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Localization.Views.Recruiter</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\Views\Recruiter\ListApplications.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ListApplications.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Localization.Views.Recruiter</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Localization\Views\Shared\Error.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Localization.Views.Home {
+namespace Localization.Views.Error {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Localization.Views.Home {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RecruitmentSystem.Localization.Views.Home.Unauthorized", typeof(Unauthorized).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RecruitmentSystem.Localization.Views.Error.Unauthorized", typeof(Unauthorized).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,6 +61,15 @@ namespace Localization.Views.Home {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 401 Unauthorized, Oops!.
+        /// </summary>
+        public static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You are not authorized to access this resource..
         /// </summary>
         public static string Message {
@@ -70,7 +79,7 @@ namespace Localization.Views.Home {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Oops!.
+        ///   Looks up a localized string similar to 401 Unauthorized.
         /// </summary>
         public static string Title {
             get {

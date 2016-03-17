@@ -11,6 +11,13 @@ namespace RecruitmentSystem.Controllers.Base
     /// </summary>
     public abstract class BaseController : Controller
     {
+        /// <summary>
+        /// Begins to invoke the action in the current controller context.
+        /// Handles the setting of localization for each call to controller.
+        /// </summary>
+        /// <param name="callback">The callback to pass on to the chain.</param>
+        /// <param name="state">The state to pass on to the chain.</param>
+        /// <returns></returns>
         protected override IAsyncResult BeginExecuteCore(AsyncCallback callback, object state)
         {
             string culture = null;

@@ -117,10 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Message" xml:space="preserve">
-    <value>You are not authorized to access this resource.</value>
+  <data name="ApplicationDateHeader" xml:space="preserve">
+    <value>Application Date</value>
+  </data>
+  <data name="NameHeader" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="PdfViewButton" xml:space="preserve">
+    <value>View as PDF</value>
+  </data>
+  <data name="SurnameHeader" xml:space="preserve">
+    <value>Surname</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>Oops!</value>
+    <value>List Applications</value>
   </data>
 </root>

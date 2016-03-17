@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Web;
+﻿using System.Globalization;
 
 namespace RecruitmentSystem.Resources
 {
@@ -11,7 +7,14 @@ namespace RecruitmentSystem.Resources
     /// </summary>
     public enum Locales
     {
-        EN_US, SV_SE
+        /// <summary>
+        /// English, USA
+        /// </summary>
+        EN_US,
+        /// <summary>
+        /// Swedish, Sweden
+        /// </summary>
+        SV_SE
     }
 
     /// <summary>
@@ -19,6 +22,11 @@ namespace RecruitmentSystem.Resources
     /// </summary>
     public class LocalesExtension
     {
+        /// <summary>
+        /// Returns a Locales enum parsed from a string.
+        /// </summary>
+        /// <param name="locale">string to parse</param>
+        /// <returns>parsed Locales. Defaults to EN_US.</returns>
         public static Locales LocalesFromString(string locale)
         {
             if (locale == null)
