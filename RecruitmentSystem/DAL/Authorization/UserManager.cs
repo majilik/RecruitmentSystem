@@ -15,6 +15,9 @@ namespace RecruitmentSystem.DAL.Authorization
         private static readonly QueryService<Person> _personQueryService = new QueryService<Person>();
         private static readonly QueryService<Role> _roleQueryService = new QueryService<Role>();
 
+        /// <summary>
+        /// Default Constructor.
+        /// </summary>
         public UserManager()
         {
         }
